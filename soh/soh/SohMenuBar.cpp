@@ -20,6 +20,7 @@
 #include "Enhancements/game-interactor/GameInteractor_Sail.h"
 #endif
 
+ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\simhei.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
 
 #include "Enhancements/audio/AudioEditor.h"
 #include "Enhancements/controls/InputViewer.h"
@@ -509,7 +510,7 @@ void DrawSettingsMenu() {
 
         UIWidgets::Spacer(0);
 
-        if (ImGui::BeginMenu("语言")) {
+        if (ImGui::BeginMenu(u8"语言")) {
             UIWidgets::PaddedEnhancementCheckbox("Translate Title Screen", CVAR_SETTING("TitleScreenTranslation"));
             if (UIWidgets::EnhancementRadioButton("English", CVAR_SETTING("Languages"), LANGUAGE_ENG)) {
                 GameInteractor::Instance->ExecuteHooks<GameInteractor::OnSetGameLanguage>();
