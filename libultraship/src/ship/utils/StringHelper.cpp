@@ -1,4 +1,5 @@
 #include "ship/utils/StringHelper.h"
+#include <functional>
 
 #if (_MSC_VER)
 #pragma optimize("2", on)
@@ -157,4 +158,19 @@ bool StringHelper::IsValidOffset(const std::string& str) {
 
 bool StringHelper::IEquals(const std::string& a, const std::string& b) {
     return std::equal(a.begin(), a.end(), b.begin(), b.end(), [](char a, char b) { return tolower(a) == tolower(b); });
+}
+
+namespace {
+static std::function<std::string(const std::string&)> gTranslator = nullptr;
+}
+
+std::string StringHelper::Translate(const std::string& text) {
+    if (gTranslator) {
+        return gTranslator(text);
+    }
+    return text;
+}
+
+void StringHelper::SetTranslator(std::function<std::string(const std::string&)> translator) {
+    gTranslator = translator;
 }

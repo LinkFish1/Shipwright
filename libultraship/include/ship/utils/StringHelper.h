@@ -8,6 +8,7 @@
 #include <string_view>
 #include <vector>
 #include <cstdint>
+#include <functional>
 
 class StringHelper {
   public:
@@ -29,4 +30,10 @@ class StringHelper {
     static bool IsValidOffset(std::string_view str);
     static bool IsValidOffset(const std::string& str);
     static bool IEquals(const std::string& a, const std::string& b);
+
+    // UI text localization hook. When a translator is registered (e.g. by soh for
+    // Simplified Chinese), Translate() routes the text through it; otherwise the
+    // original string is returned unchanged.
+    static std::string Translate(const std::string& text);
+    static void SetTranslator(std::function<std::string(const std::string&)> translator);
 };

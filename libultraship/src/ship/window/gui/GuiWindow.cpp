@@ -1,4 +1,5 @@
 #include "ship/window/gui/GuiWindow.h"
+#include "ship/utils/StringHelper.h"
 #include "ship/Context.h"
 #include "ship/config/ConsoleVariable.h"
 #include "ship/window/Window.h"
@@ -69,7 +70,7 @@ void GuiWindow::Draw() {
     if (mOriginalSize != ImVec2{ -1, -1 }) {
         ImGui::SetNextWindowSize(mOriginalSize, ImGuiCond_FirstUseEver);
     }
-    if (!ImGui::Begin(mName.c_str(), &mIsVisible, mWindowFlags)) {
+    if (!ImGui::Begin(StringHelper::Translate(mName).c_str(), &mIsVisible, mWindowFlags)) {
         ImGui::End();
     } else {
         DrawElement();
