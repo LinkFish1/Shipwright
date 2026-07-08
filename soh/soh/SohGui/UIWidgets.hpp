@@ -729,7 +729,7 @@ bool Combobox(std::string label, T* value, const std::map<T, const char*>& combo
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(10.0f, 10.0f));
         for (const auto& pair : comboMap) {
             if (strlen(pair.second) > 1) {
-                if (ImGui::Selectable(StringHelper::Translate(pair.second), pair.first == *value)) {
+                if (ImGui::Selectable(StringHelper::Translate(pair.second).c_str(), pair.first == *value)) {
                     *value = pair.first;
                     dirty = true;
                 }
@@ -813,7 +813,7 @@ bool Combobox(std::string label, T* value, const std::vector<const char*>& combo
         for (size_t i = 0; i < comboVector.size(); ++i) {
             auto newValue = static_cast<T>(i);
             if (strlen(comboVector.at(i)) > 1) {
-                if (ImGui::Selectable(StringHelper::Translate(comboVector.at(i)), newValue == *value)) {
+                if (ImGui::Selectable(StringHelper::Translate(comboVector.at(i)).c_str(), newValue == *value)) {
                     *value = newValue;
                     dirty = true;
                 }

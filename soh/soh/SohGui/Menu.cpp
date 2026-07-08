@@ -526,7 +526,7 @@ void Menu::MenuDrawItem(WidgetInfo& widget, uint32_t width, UIWidgets::Colors me
             } break;
             case WIDGET_SEARCH: {
                 UIWidgets::PushStyleButton(menuThemeIndex);
-                if (ImGui::Button(StringHelper::Translate("Clear"))) {
+                if (ImGui::Button(StringHelper::Translate("Clear").c_str())) {
                     menuSearch.Clear();
                 }
                 ImGui::SameLine();
@@ -764,7 +764,8 @@ void Menu::DrawElement() {
     UIWidgets::ButtonOptions options3 = {};
     options3.color = UIWidgets::Colors::Red;
     options3.size = UIWidgets::Sizes::Inline;
-    options3.tooltip = StringHelper::Translate("Quit SoH");
+    std::string quitTooltip = StringHelper::Translate("Quit SoH");
+    options3.tooltip = quitTooltip.c_str();
     if (UIWidgets::Button(ICON_FA_POWER_OFF, options3)) {
         SohGui::mModalWindow->RegisterPopup(
             StringHelper::Translate("Quit SoH"), StringHelper::Translate("Are you sure you want to quit SoH?"), StringHelper::Translate("Quit"), StringHelper::Translate("Cancel"),
@@ -783,15 +784,13 @@ void Menu::DrawElement() {
     UIWidgets::ButtonOptions options2 = {};
     options2.color = UIWidgets::Colors::Red;
     options2.size = UIWidgets::Sizes::Inline;
-    options2.tooltip = StringHelper::Translate("Reset")
+    std::string resetTooltip = StringHelper::Translate("Reset");
 #ifdef __APPLE__
-                       " (Command-R)"
+    resetTooltip += " (Command-R)";
 #elif !defined(__SWITCH__) && !defined(__WIIU__)
-                       " (Ctrl+R)"
-#else
-                       ""
+    resetTooltip += " (Ctrl+R)";
 #endif
-        ;
+    options2.tooltip = resetTooltip.c_str();
     if (UIWidgets::Button(ICON_FA_UNDO, options2)) {
         std::reinterpret_pointer_cast<Ship::ConsoleWindow>(
             Ship::Context::GetInstance()->GetWindow()->GetGui()->GetGuiWindow("Console"))
@@ -800,7 +799,8 @@ void Menu::DrawElement() {
     ImGui::SameLine();
     UIWidgets::ButtonOptions options = {};
     options.size = UIWidgets::Sizes::Inline;
-    options.tooltip = StringHelper::Translate("Close Menu (Esc)");
+    std::string closeMenuTooltip = StringHelper::Translate("Close Menu (Esc)");
+    options.tooltip = closeMenuTooltip.c_str();
     if (UIWidgets::Button(ICON_FA_TIMES_CIRCLE, options)) {
         ToggleVisibility();
 
