@@ -19,10 +19,6 @@
 #include "libultraship/window/gui/GfxDebuggerWindow.h"
 #include "fast/Fast3dWindow.h"
 
-// Forward declaration for the CJK-font callback registry (defined later in this file).
-namespace {
-std::vector<std::function<void()>>& GetFontSetupCallbacks();
-} // namespace
 #ifdef __APPLE__
 #include <SDL_hints.h>
 #include <SDL_video.h>
@@ -96,6 +92,12 @@ Gui::Gui() : Gui(std::vector<std::shared_ptr<GuiWindow>>()) {
 Gui::~Gui() {
     SPDLOG_TRACE("destruct gui");
 }
+
+// Forward declaration for the CJK-font callback registry (defined later in this file,
+// still inside namespace Ship so it matches the definition below).
+namespace {
+std::vector<std::function<void()>>& GetFontSetupCallbacks();
+} // namespace
 
 void Gui::Init(GuiWindowInitData windowImpl) {
     mImpl = windowImpl;

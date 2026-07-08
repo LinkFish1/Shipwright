@@ -9,6 +9,7 @@
 #include <vector>
 #include <functional>
 #include <filesystem>
+#include <fstream>
 #include <imgui.h>
 #include <spdlog/spdlog.h>
 
@@ -1283,26 +1284,47 @@ static void MergeCjkFont() {
     }
     sFontMerged = true;
 
-    // Look for the font next to the executable, then in the app directory, then cwd.
+    // Candidate locations, in priority order:
+    //   1. next to the executable (most reliable — GetModuleFileName based)
+    //   2. the app/working directory
+    //   3. the current working directory (bare name)
+    // GetAppDirectoryPath() returns "." on Windows, so we must NOT rely on it alone;
+    // GetAppBundlePath() resolves to the real exe directory.
+    std::vector<std::string> candidates = {
+        Ship::Context::GetPathRelativeToAppBundle("DroidSansFallback.ttf"),
+        Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf"),
+        "DroidSansFallback.ttf",
+    };
+
     std::string fontPath;
     std::error_code ec;
-    if (std::filesystem::exists(
-            fontPath = Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf"), ec)) {
-        // found
-    } else if (std::filesystem::exists(fontPath = "DroidSansFallback.ttf", ec)) {
-        // found in cwd
-    } else {
-        SPDLOG_WARN("[Localization] DroidSansFallback.ttf not found next to the executable; "
-                    "Simplified-Chinese menu text will render as boxes. Copy the font next to soh.exe.");
+    bool found = false;
+    for (const auto& cand : candidates) {
+        if (std::filesystem::exists(fontPath = cand, ec)) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        SPDLOG_WARN("[Localization] DroidSansFallback.ttf not found (searched next to soh.exe, the "
+                    "app directory, and the working directory); Simplified-Chinese menu text will "
+                    "render as boxes. Copy the font next to soh.exe.");
         return;
     }
+    SPDLOG_INFO("[Localization] Loading CJK font from '{}'", fontPath);
 
     std::set<uint32_t> codepoints;
     for (const auto& pair : gChineseTable) {
         CollectCodepoints(pair.second, codepoints);
     }
 
-    std::vector<ImWchar> ranges;
+    // IMPORTANT: ImGui's AddFont* only stores a *pointer* to the glyph-ranges array in the
+    // ImFontConfig; it does NOT copy the data. The atlas is actually built later, on the first
+    // frame (after this function returns). If we used a local vector here it would be destroyed
+    // and the ranges pointer would dangle, so the CJK glyphs would silently fail to be packed
+    // and Chinese would render as boxes. Keep the array alive in static storage.
+    static std::vector<ImWchar> ranges;
+    ranges.clear();
     for (uint32_t cp : codepoints) {
         ranges.push_back(static_cast<ImWchar>(cp));
         ranges.push_back(static_cast<ImWchar>(cp));
@@ -1319,7 +1341,79 @@ static void MergeCjkFont() {
         SPDLOG_WARN("[Localization] Failed to load DroidSansFallback.ttf from '{}'; "
                     "Simplified-Chinese menu text will render as boxes.",
                     fontPath);
+    } else {
+        SPDLOG_INFO("[Localization] Merged {} Simplified-Chinese glyphs from '{}' into the default font.",
+                    codepoints.size(), fontPath);
     }
+}
+
+// Resolve the CJK font location (next to the exe is most reliable). Returns false if not found.
+static bool FindCjkFontPath(std::string& outPath) {
+    std::vector<std::string> candidates = {
+        Ship::Context::GetPathRelativeToAppBundle("DroidSansFallback.ttf"),
+        Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf"),
+        "DroidSansFallback.ttf",
+    };
+    std::error_code ec;
+    for (const auto& cand : candidates) {
+        if (std::filesystem::exists(outPath = cand, ec)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Merge Simplified-Chinese glyphs into a specific UI font (the menu renders with the
+// Montserrat/Inconsolata fonts created in OTRGlobals, NOT ImGui's built-in default font),
+// so Chinese text actually shows. The glyph range is ImGui's common-simplified-Chinese set,
+// which covers any Chinese UI string (not just our translation table). The font data is read
+// once and cached in static storage, and the atlas is told to own its own copy so the buffer
+// can be released. The merge is sized to `size` so the glyphs match the target font's metrics.
+bool MergeSimplifiedChineseInto(ImFont* dstFont, float size) {
+    if (dstFont == nullptr) {
+        SPDLOG_WARN("[Localization] MergeSimplifiedChineseInto called with a null font.");
+        return false;
+    }
+
+    std::string fontPath;
+    if (!FindCjkFontPath(fontPath)) {
+        SPDLOG_WARN("[Localization] DroidSansFallback.ttf not found (searched next to soh.exe, the "
+                    "app directory, and the working directory); Simplified-Chinese menu text will "
+                    "render as boxes. Copy the font next to soh.exe.");
+        return false;
+    }
+
+    // Read the TTF into static storage so it stays alive for as long as the atlas needs it.
+    static std::vector<unsigned char> sFontData;
+    if (sFontData.empty()) {
+        std::ifstream f(fontPath, std::ios::binary);
+        if (!f) {
+            SPDLOG_WARN("[Localization] Could not open DroidSansFallback.ttf at '{}'.", fontPath);
+            return false;
+        }
+        sFontData.assign(std::istreambuf_iterator<char>(f), std::istreambuf_iterator<char>());
+        if (sFontData.empty()) {
+            SPDLOG_WARN("[Localization] DroidSansFallback.ttf at '{}' is empty.", fontPath);
+            return false;
+        }
+        SPDLOG_INFO("[Localization] Loaded CJK font '{}' ({} bytes).", fontPath, sFontData.size());
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    ImFontConfig cfg;
+    cfg.MergeMode = true;
+    cfg.DstFont = dstFont;       // merge into the SPECIFIC UI font, not just the default
+    cfg.FontDataOwnedByAtlas = false; // atlas makes its own copy, so sFontData need not persist
+    cfg.PixelSnapH = true;
+    const ImWchar* ranges = io.Fonts->GetGlyphRangesChineseSimplifiedCommon();
+    ImFont* result =
+        io.Fonts->AddFontFromMemoryTTF(sFontData.data(), static_cast<int>(sFontData.size()), size, &cfg, ranges);
+    if (result == nullptr) {
+        SPDLOG_WARN("[Localization] Failed to merge CJK glyphs into a UI font (size {}).", size);
+        return false;
+    }
+    SPDLOG_INFO("[Localization] Merged Simplified-Chinese glyphs into a UI font (size {}).", size);
+    return true;
 }
 
 // Register the font merge as early as possible (static init), so libultraship can call
