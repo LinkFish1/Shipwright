@@ -1,0 +1,10 @@
+[submodule "libultraship"]
+	path = libultraship
+	url = https://github.com/roborich/libultraship.git
+	branch = wind-waker-style-cel-shading
+[submodule "ZAPDTR"]
+	path = ZAPDTR
+	url = https://github.com/harbourmasters/ZAPDTR
+[submodule "OTRExporter"]
+	path = OTRExporter
+	url = https://github.com/harbourmasters/OTRExporter
