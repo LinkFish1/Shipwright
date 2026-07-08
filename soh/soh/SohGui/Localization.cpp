@@ -1363,10 +1363,60 @@ static bool FindCjkFontPath(std::string& outPath) {
     return false;
 }
 
+// Build (once, cached) a glyph-range array covering ImGui's common simplified-Chinese set
+// UNIONed with every character that actually appears in our Simplified-Chinese translation
+// table. The "common" set alone is only ~2500 chars and is missing many real characters
+// (e.g. U+9891 频, which appears in our table), which is exactly why some Chinese text showed
+// as boxes. Unioning the table's own codepoints guarantees every translated string has its
+// glyphs packed into the atlas. The result is kept in static storage because ImGui only stores
+// the pointer, and the atlas is not built until the first frame.
+static const ImWchar* BuildCjkRanges(ImFontAtlas* atlas) {
+    static std::vector<ImWchar> ranges;
+    if (!ranges.empty()) {
+        return ranges.data();
+    }
+
+    std::set<ImWchar> cps;
+    // 1) ImGui's common simplified-Chinese set (covers any Chinese text, not just our table).
+    if (atlas != nullptr) {
+        const ImWchar* common = atlas->GetGlyphRangesChineseSimplifiedCommon();
+        for (int i = 0; common[i]; i += 2)
+            for (ImWchar c = common[i]; c <= common[i + 1]; ++c) cps.insert(c);
+    }
+    // 2) Every codepoint used in our Simplified-Chinese translation table, so even chars the
+    //    common set omits (like 频) are guaranteed to have a glyph.
+    std::set<uint32_t> tableCps;
+    for (const auto& pair : gChineseTable) {
+        CollectCodepoints(pair.second, tableCps);
+    }
+    for (uint32_t cp : tableCps) {
+        if (cp <= 0xFFFF) {
+            cps.insert(static_cast<ImWchar>(cp));
+        }
+    }
+    // 3) Pack into (lo,hi) runs, merging adjacent codepoints to keep the array compact.
+    auto it = cps.begin();
+    while (it != cps.end()) {
+        ImWchar lo = *it;
+        ImWchar hi = lo;
+        auto nxt = std::next(it);
+        while (nxt != cps.end() && *nxt <= hi + 1) {
+            hi = *nxt;
+            ++nxt;
+        }
+        ranges.push_back(lo);
+        ranges.push_back(hi);
+        it = nxt;
+    }
+    ranges.push_back(0);
+    SPDLOG_INFO("[Localization] CJK glyph range built: {} distinct codepoints.", cps.size());
+    return ranges.data();
+}
+
 // Merge Simplified-Chinese glyphs into a specific UI font (the menu renders with the
 // Montserrat/Inconsolata fonts created in OTRGlobals, NOT ImGui's built-in default font),
-// so Chinese text actually shows. The glyph range is ImGui's common-simplified-Chinese set,
-// which covers any Chinese UI string (not just our translation table). The font data is read
+// so Chinese text actually shows. The glyph range is the common-simplified-Chinese set UNIONed
+// with every character used in our translation table (see BuildCjkRanges). The font data is read
 // once and cached in static storage, and the atlas is told to own its own copy so the buffer
 // can be released. The merge is sized to `size` so the glyphs match the target font's metrics.
 bool MergeSimplifiedChineseInto(ImFont* dstFont, float size) {
@@ -1405,7 +1455,7 @@ bool MergeSimplifiedChineseInto(ImFont* dstFont, float size) {
     cfg.DstFont = dstFont;       // merge into the SPECIFIC UI font, not just the default
     cfg.FontDataOwnedByAtlas = false; // atlas makes its own copy, so sFontData need not persist
     cfg.PixelSnapH = true;
-    const ImWchar* ranges = io.Fonts->GetGlyphRangesChineseSimplifiedCommon();
+    const ImWchar* ranges = BuildCjkRanges(io.Fonts);
     ImFont* result =
         io.Fonts->AddFontFromMemoryTTF(sFontData.data(), static_cast<int>(sFontData.size()), size, &cfg, ranges);
     if (result == nullptr) {
