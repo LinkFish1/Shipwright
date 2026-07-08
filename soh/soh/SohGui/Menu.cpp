@@ -754,7 +754,7 @@ void Menu::DrawElement() {
         menuSearchText.erase(std::remove(menuSearchText.begin(), menuSearchText.end(), ' '), menuSearchText.end());
         if (menuSearchText.length() < 1) {
             ImGui::SameLine(headerWidth - 200.0f + style.ItemSpacing.x);
-            ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.4f), "Search...");
+            ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.4f), StringHelper::Translate("Search...").c_str());
         }
         ImGui::PopStyleVar();
         ImGui::PopStyleColor();

@@ -226,6 +226,16 @@ set(ALL_FILES
 ################################################################################
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
+# Copy the Simplified-Chinese UI font next to the executable so it can be loaded at runtime.
+set(SOH_CJK_FONT "${CMAKE_CURRENT_SOURCE_DIR}/SohGui/fonts/DroidSansFallback.ttf")
+if (EXISTS "${SOH_CJK_FONT}")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${SOH_CJK_FONT}"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/DroidSansFallback.ttf"
+        COMMENT "Copying DroidSansFallback.ttf next to ${PROJECT_NAME}")
+endif()
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 endif()

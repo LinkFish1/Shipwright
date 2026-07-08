@@ -4,6 +4,10 @@
 #include <libultraship/libultraship.h>
 #include <unordered_map>
 #include <string>
+#include <set>
+#include <vector>
+#include <filesystem>
+#include <imgui.h>
 
 namespace SohGui {
 
@@ -1093,6 +1097,122 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "With Shuffle Speak, jabber nut model & color will be generic.", "使用洗牌对话时，喋喋坚果的模型和颜色将是通用的。" },
     { "X-Large", "特大" },
     { "https://github.com/HarbourMasters/sail", "https://github.com/HarbourMasters/sail" },
+    // ---- batch 2: menu structure (top-level sections & sidebars) ----
+    { "Settings", "设置" },
+    { "Randomizer", "随机化" },
+    { "Enhancements", "增强功能" },
+    { "Network", "网络" },
+    { "Dev Tools", "开发者工具" },
+    { "Wind Waker Style", "风之杖风格" },
+    { "General", "通用" },
+    { "Audio", "音频" },
+    { "Graphics", "图形" },
+    { "Controls", "控制" },
+    { "Input Viewer", "输入查看器" },
+    { "Notifications", "通知" },
+    { "Mod Menu", "模组菜单" },
+    { "Locations", "地点" },
+    { "Tricks/Glitches", "技巧/故障" },
+    { "Plandomizer", "计划随机化" },
+    { "Item Tracker", "物品追踪器" },
+    { "Entrance Tracker", "入口追踪器" },
+    { "Check Tracker", "检查追踪器" },
+    { "Skips & Speed-ups", "跳过与加速" },
+    { "Items", "物品" },
+    { "Fixes", "修复" },
+    { "Difficulty", "难度" },
+    { "Minigames", "迷你游戏" },
+    { "Extra Modes", "额外模式" },
+    { "Cheats", "作弊" },
+    { "Cosmetics Editor", "外观编辑器" },
+    { "Audio Editor", "音频编辑器" },
+    { "Gameplay Stats", "游戏统计" },
+    { "Time Splits", "时间分段" },
+    { "Timers", "计时器" },
+    { "Crowd Control", "人群控制" },
+    { "Anchor", "锚点" },
+    { "Stats", "统计" },
+    { "Console", "控制台" },
+    { "Save Editor", "存档编辑器" },
+    { "Hook Debugger", "钩子调试器" },
+    { "Cel Shading", "卡通渲染" },
+    { "Lights", "光照" },
+    { "Sky", "天空" },
+
+    // ---- batch 3: common actions & labels ----
+    { "Save", "保存" },
+    { "Load", "加载" },
+    { "Reset", "重置" },
+    { "Reset All", "全部重置" },
+    { "Apply", "应用" },
+    { "Cancel", "取消" },
+    { "OK", "确定" },
+    { "Close", "关闭" },
+    { "Close Menu (Esc)", "关闭菜单 (Esc)" },
+    { "Quit", "退出" },
+    { "Quit SoH", "退出 SoH" },
+    { "Default", "默认" },
+    { "Defaults", "默认值" },
+    { "Enable", "启用" },
+    { "Disable", "禁用" },
+    { "Enabled", "已启用" },
+    { "Disabled", "已禁用" },
+    { "On", "开" },
+    { "Off", "关" },
+    { "True", "真" },
+    { "False", "假" },
+    { "None", "无" },
+    { "Custom", "自定义" },
+    { "All", "全部" },
+    { "Search", "搜索" },
+    { "Search...", "搜索..." },
+    { "Clear", "清除" },
+    { "Yes", "是" },
+    { "No", "否" },
+    { "Pause", "暂停" },
+    { "Play", "播放" },
+    { "Stop", "停止" },
+    { "Back", "返回" },
+    { "Next", "下一步" },
+    { "Previous", "上一步" },
+    { "Add", "添加" },
+    { "Remove", "移除" },
+    { "Delete", "删除" },
+    { "Edit", "编辑" },
+    { "Open", "打开" },
+    { "Volume", "音量" },
+    { "Resolution", "分辨率" },
+    { "Fullscreen", "全屏" },
+    { "Windowed", "窗口化" },
+    { "VSync", "垂直同步" },
+    { "Width", "宽度" },
+    { "Height", "高度" },
+    { "FPS", "帧率" },
+    { "Menu Settings", "菜单设置" },
+    { "Menu Theme", "菜单主题" },
+    { "Interface Language", "界面语言" },
+    { "Select the display language for the menu interface.", "选择菜单界面的显示语言。" },
+    { "Are you sure you want to quit SoH?", "确定要退出 SoH 吗？" },
+    { "This setting is disabled because: \n", "此设置已禁用，原因是：\n" },
+    { "English", "英语" },
+    { "简体中文", "简体中文" },
+
+    // ---- batch 4: disabled-reason tooltips ----
+    { "Disabling VSync not supported", "不支持禁用垂直同步" },
+    { "Windowed Fullscreen not supported", "不支持窗口化全屏" },
+    { "Multi-viewports not supported", "不支持多视口" },
+    { "Available Only on DirectX", "仅在 DirectX 上可用" },
+    { "Not Available on DirectX", "在 DirectX 上不可用" },
+    { "Match Refresh Rate is Enabled", "已启用匹配刷新率" },
+    { "Advanced Resolution Enabled", "已启用高级分辨率" },
+    { "Vertical Resolution Toggle Enabled", "已启用垂直分辨率切换" },
+    { "N64 Mode Enabled", "已启用 N64 模式" },
+    { "Save Not Loaded", "未加载存档" },
+    { "Debug Mode is Disabled", "调试模式已禁用" },
+    { "Frame Advance is Disabled", "帧前进已禁用" },
+    { "Advanced Resolution is Disabled", "高级分辨率已禁用" },
+    { "Vertical Resolution Toggle is Off", "垂直分辨率切换已关闭" },
+
     // __TRANSLATION_TAIL__
 };
 
@@ -1100,8 +1220,9 @@ static std::string TranslateImpl(const std::string& text) {
     if (text.empty()) {
         return text;
     }
-    std::string lang = CVarGetString(CVAR_SETTING("Menu.InterfaceLanguage"), "English");
-    if (lang == "简体中文") {
+    // The Interface Language combo box stores an integer key (0 = English, 1 = Simplified Chinese).
+    int32_t lang = CVarGetInteger(CVAR_SETTING("Menu.InterfaceLanguage"), 0);
+    if (lang == 1) {
         auto it = gChineseTable.find(text);
         if (it != gChineseTable.end()) {
             return it->second;
@@ -1110,8 +1231,73 @@ static std::string TranslateImpl(const std::string& text) {
     return text;
 }
 
+// Decode a UTF-8 string and collect every non-ASCII codepoint it uses.
+static void CollectCodepoints(const std::string& s, std::set<uint32_t>& out) {
+    const unsigned char* p = reinterpret_cast<const unsigned char*>(s.data());
+    size_t i = 0;
+    while (i < s.size()) {
+        unsigned char c = p[i];
+        uint32_t cp;
+        if (c < 0x80) {
+            cp = c;
+            i += 1;
+        } else if ((c & 0xE0) == 0xC0) {
+            cp = ((c & 0x1F) << 6) | (p[i + 1] & 0x3F);
+            i += 2;
+        } else if ((c & 0xF0) == 0xE0) {
+            cp = ((c & 0x0F) << 12) | ((p[i + 1] & 0x3F) << 6) | (p[i + 2] & 0x3F);
+            i += 3;
+        } else if ((c & 0xF8) == 0xF0) {
+            cp = ((c & 0x07) << 18) | ((p[i + 1] & 0x3F) << 12) | ((p[i + 2] & 0x3F) << 6) |
+                 (p[i + 3] & 0x3F);
+            i += 4;
+        } else {
+            i += 1;
+            continue;
+        }
+        // Keep everything that isn't plain ASCII so the default font (which already
+        // covers ASCII) is not duplicated, but CJK / fullwidth / curly quotes are.
+        if (cp >= 0x80) {
+            out.insert(cp);
+        }
+    }
+}
+
 void RegisterLocalization() {
     StringHelper::SetTranslator(TranslateImpl);
+
+    // Merge a Simplified-Chinese font into ImGui's default font so the menu can
+    // actually render Chinese glyphs. We only add the codepoints that appear in our
+    // translation table, which keeps the atlas small and startup fast.
+    static bool sFontMerged = false;
+    if (sFontMerged) {
+        return;
+    }
+    sFontMerged = true;
+
+    std::string fontPath = Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf");
+    if (!std::filesystem::exists(fontPath)) {
+        return;
+    }
+
+    std::set<uint32_t> codepoints;
+    for (const auto& pair : gChineseTable) {
+        CollectCodepoints(pair.second, codepoints);
+    }
+
+    std::vector<ImWchar> ranges;
+    for (uint32_t cp : codepoints) {
+        ranges.push_back(static_cast<ImWchar>(cp));
+        ranges.push_back(static_cast<ImWchar>(cp));
+    }
+    ranges.push_back(0);
+
+    ImGuiIO& io = ImGui::GetIO();
+    ImFontConfig cfg;
+    cfg.MergeMode = true;
+    cfg.PixelSnapH = true;
+    // Match the default menu font size (13.0f, see libultraship Gui.cpp).
+    io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 13.0f, &cfg, ranges.data());
 }
 
 } // namespace SohGui
