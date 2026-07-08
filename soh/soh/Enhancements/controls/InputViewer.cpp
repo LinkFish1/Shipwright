@@ -471,7 +471,7 @@ void InputViewerSettingsWindow::DrawElement() {
     UIWidgets::PaddedSeparator(true, true);
 
     PushStyleHeader(THEME_COLOR);
-    if (ImGui::CollapsingHeader("Buttons")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Buttons").c_str())) {
 
         // gInputViewer.ButtonOutlineMode
         CVarCombobox(
@@ -612,7 +612,7 @@ void InputViewerSettingsWindow::DrawElement() {
         UIWidgets::PaddedSeparator(true, true);
     }
 
-    if (ImGui::CollapsingHeader("Analog Stick")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Analog Stick").c_str())) {
         // gInputViewer.AnalogStick.VisibilityMode
         CVarCombobox(
             "Analog Stick Visibility", CVAR_INPUT_VIEWER("AnalogStick.VisibilityMode"), stickModeOptions,
@@ -645,7 +645,7 @@ void InputViewerSettingsWindow::DrawElement() {
         UIWidgets::PaddedSeparator(true, true);
     }
 
-    if (ImGui::CollapsingHeader("Additional (\"Right\") Stick")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Additional (\"Right\") Stick").c_str())) {
         // gInputViewer.RightStick.VisibilityMode
         CVarCombobox(
             "Right Stick Visibility", CVAR_INPUT_VIEWER("RightStick.VisibilityMode"), stickModeOptions,

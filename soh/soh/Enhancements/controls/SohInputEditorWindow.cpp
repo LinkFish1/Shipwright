@@ -665,8 +665,8 @@ void SohInputEditorWindow::DrawStickSection(uint8_t port, uint8_t stick, int32_t
                            Ship::RIGHT, color);
     ImGui::EndGroup();
     ImGui::SetNextItemOpen(true, ImGuiCond_Once);
-    if (ImGui::TreeNode(StringHelper::Sprintf("Analog Stick Options##%d", id).c_str())) {
-        ImGui::Text("Sensitivity:");
+    if (ImGui::TreeNode(StringHelper::Sprintf((StringHelper::Translate("Analog Stick Options") + "##%d").c_str(), id).c_str())) {
+        ImGui::Text(StringHelper::Translate("Sensitivity:").c_str());
 
         int32_t sensitivityPercentage = controllerStick->GetSensitivityPercentage();
         if (sensitivityPercentage == 0) {
@@ -705,7 +705,7 @@ void SohInputEditorWindow::DrawStickSection(uint8_t port, uint8_t stick, int32_t
             }
         }
 
-        ImGui::Text("Deadzone:");
+        ImGui::Text(StringHelper::Translate("Deadzone:").c_str());
 
         int32_t deadzonePercentage = controllerStick->GetDeadzonePercentage();
         if (deadzonePercentage == 0) {
@@ -744,7 +744,7 @@ void SohInputEditorWindow::DrawStickSection(uint8_t port, uint8_t stick, int32_t
             }
         }
 
-        ImGui::Text("Notch Snap Angle:");
+        ImGui::Text(StringHelper::Translate("Notch Snap Angle:").c_str());
         int32_t notchSnapAngle = controllerStick->GetNotchSnapAngle();
         if (notchSnapAngle == 0) {
             ImGui::BeginDisabled();
@@ -846,7 +846,7 @@ void SohInputEditorWindow::DrawAddRumbleMappingButton(uint8_t port) {
 
     if (ImGui::BeginPopup(popupId.c_str())) {
         mInputEditorPopupOpen = true;
-        ImGui::Text("Press any button\nor move any axis\nto add rumble device");
+        ImGui::Text(StringHelper::Translate("Press any button\nor move any axis\nto add rumble device").c_str());
         if (ImGui::Button("Cancel")) {
             mInputEditorPopupOpen = false;
             ImGui::CloseCurrentPopup();
@@ -911,7 +911,7 @@ void SohInputEditorWindow::DrawRumbleSection(uint8_t port) {
             }
         }
         if (open) {
-            ImGui::Text("Small Motor Intensity:");
+            ImGui::Text(StringHelper::Translate("Small Motor Intensity:").c_str());
 
             int32_t smallMotorIntensity = mapping->GetHighFrequencyIntensityPercentage();
             if (smallMotorIntensity == 0) {
@@ -954,7 +954,7 @@ void SohInputEditorWindow::DrawRumbleSection(uint8_t port) {
                 }
             }
 
-            ImGui::Text("Large Motor Intensity:");
+            ImGui::Text(StringHelper::Translate("Large Motor Intensity:").c_str());
 
             int32_t largeMotorIntensity = mapping->GetLowFrequencyIntensityPercentage();
             if (largeMotorIntensity == 0) {
@@ -1003,7 +1003,7 @@ void SohInputEditorWindow::DrawRumbleSection(uint8_t port) {
     }
 
     ImGui::AlignTextToFramePadding();
-    ImGui::BulletText("Add rumble device");
+    ImGui::BulletText(StringHelper::Translate("Add rumble device").c_str());
     DrawAddRumbleMappingButton(port);
 }
 
@@ -1029,7 +1029,7 @@ void SohInputEditorWindow::DrawAddLEDMappingButton(uint8_t port) {
 
     if (ImGui::BeginPopup(popupId.c_str())) {
         mInputEditorPopupOpen = true;
-        ImGui::Text("Press any button\nor move any axis\nto add LED device");
+        ImGui::Text(StringHelper::Translate("Press any button\nor move any axis\nto add LED device").c_str());
         if (ImGui::Button("Cancel")) {
             mInputEditorPopupOpen = false;
             ImGui::CloseCurrentPopup();
@@ -1057,7 +1057,7 @@ void SohInputEditorWindow::DrawLEDSection(uint8_t port) {
         DrawRemoveLEDMappingButton(port, id);
         if (open) {
             ImGui::AlignTextToFramePadding();
-            ImGui::Text("LED Color:");
+            ImGui::Text(StringHelper::Translate("LED Color:").c_str());
             ImGui::SameLine();
             ImGui::SetNextItemWidth(SCALE_IMGUI_SIZE(80.0f));
             int32_t colorSource = mapping->GetColorSource();
@@ -1108,7 +1108,7 @@ void SohInputEditorWindow::DrawLEDSection(uint8_t port) {
                         Ship::Context::GetInstance()->GetWindow()->GetGui()->SaveConsoleVariablesNextFrame();
                     }
                     ImGui::SameLine();
-                    ImGui::Text("Custom Color");
+                    ImGui::Text(StringHelper::Translate("Custom Color").c_str());
                 }
                 CVarSliderFloat("Brightness: %.1f %%", CVAR_SETTING("LEDBrightness"),
                                 FloatSliderOptions()
@@ -1132,7 +1132,7 @@ void SohInputEditorWindow::DrawLEDSection(uint8_t port) {
     }
 
     ImGui::AlignTextToFramePadding();
-    ImGui::BulletText("Add LED device");
+    ImGui::BulletText(StringHelper::Translate("Add LED device").c_str());
     DrawAddLEDMappingButton(port);
 }
 
@@ -1158,7 +1158,7 @@ void SohInputEditorWindow::DrawAddGyroMappingButton(uint8_t port) {
 
     if (ImGui::BeginPopup(popupId.c_str())) {
         mInputEditorPopupOpen = true;
-        ImGui::Text("Press any button\nor move any axis\nto add gyro device");
+        ImGui::Text(StringHelper::Translate("Press any button\nor move any axis\nto add gyro device").c_str());
         if (ImGui::Button("Cancel")) {
             mInputEditorPopupOpen = false;
             ImGui::CloseCurrentPopup();
@@ -1203,7 +1203,7 @@ void SohInputEditorWindow::DrawGyroSection(uint8_t port) {
             ImVec2(ImGui::GetCursorPos().x + SCALE_IMGUI_SIZE(8), ImGui::GetCursorPos().y + SCALE_IMGUI_SIZE(8)));
 
         ImGui::BeginGroup();
-        ImGui::Text("Sensitivity:");
+        ImGui::Text(StringHelper::Translate("Sensitivity:").c_str());
 
         int32_t sensitivity = mapping->GetSensitivityPercent();
         if (sensitivity == 0) {
@@ -1247,7 +1247,7 @@ void SohInputEditorWindow::DrawGyroSection(uint8_t port) {
         }
 
         ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPos().x, ImGui::GetCursorPos().y + SCALE_IMGUI_SIZE(8)));
-        if (ImGui::Button("Recalibrate")) {
+        if (ImGui::Button(StringHelper::Translate("Recalibrate").c_str())) {
             mapping->Recalibrate();
             mapping->SaveToConfig();
         }
@@ -1255,7 +1255,7 @@ void SohInputEditorWindow::DrawGyroSection(uint8_t port) {
         ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPos().x, ImGui::GetCursorPos().y - SCALE_IMGUI_SIZE(8)));
     } else {
         ImGui::AlignTextToFramePadding();
-        ImGui::BulletText("Add gyro device");
+        ImGui::BulletText(StringHelper::Translate("Add gyro device").c_str());
         DrawAddGyroMappingButton(port);
     }
 }
@@ -1554,7 +1554,7 @@ void SohInputEditorWindow::DrawLinkTab() {
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
         ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
 
-        if (ImGui::CollapsingHeader("Buttons", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Buttons").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawButtonLine("A", portIndex, BTN_A, CHIP_COLOR_N64_BLUE);
             DrawButtonLine("B", portIndex, BTN_B, CHIP_COLOR_N64_GREEN);
             DrawButtonLine("Start", portIndex, BTN_START, CHIP_COLOR_N64_RED);
@@ -1578,7 +1578,7 @@ void SohInputEditorWindow::DrawLinkTab() {
             DrawButtonLine(StringHelper::Sprintf("D %s", ICON_FA_ARROW_RIGHT).c_str(), portIndex, BTN_DRIGHT);
         }
 
-        if (ImGui::CollapsingHeader("Analog Stick", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Analog Stick").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawStickSection(portIndex, Ship::LEFT, 0);
         }
 
@@ -1586,15 +1586,15 @@ void SohInputEditorWindow::DrawLinkTab() {
             DrawStickSection(portIndex, Ship::RIGHT, 1, CHIP_COLOR_N64_YELLOW);
         }
 
-        if (ImGui::CollapsingHeader("Rumble")) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Rumble").c_str())) {
             DrawRumbleSection(portIndex);
         }
 
-        if (ImGui::CollapsingHeader("Gyro")) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Gyro").c_str())) {
             DrawGyroSection(portIndex);
         }
 
-        if (ImGui::CollapsingHeader("LEDs")) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("LEDs").c_str())) {
             DrawLEDSection(portIndex);
         }
 
@@ -1653,7 +1653,7 @@ void SohInputEditorWindow::DrawIvanTab() {
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
         ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
 
-        if (ImGui::CollapsingHeader("Buttons", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Buttons").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawButtonLine("A", portIndex, BTN_A, CHIP_COLOR_N64_BLUE);
             DrawButtonLine("B", portIndex, BTN_B, CHIP_COLOR_N64_GREEN);
             DrawButtonLine("Z", portIndex, BTN_Z);
@@ -1674,7 +1674,7 @@ void SohInputEditorWindow::DrawIvanTab() {
             DrawButtonLine(StringHelper::Sprintf("%s", ICON_FA_ARROW_RIGHT).c_str(), portIndex, BTN_DRIGHT);
         }
 
-        if (ImGui::CollapsingHeader("Analog Stick", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Analog Stick").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawStickSection(portIndex, Ship::LEFT, 0);
         }
 
@@ -1698,7 +1698,7 @@ void SohInputEditorWindow::DrawDebugPortTab(uint8_t portIndex, std::string custo
 
         PushStyleHeader(THEME_COLOR);
 
-        if (ImGui::CollapsingHeader("Buttons", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Buttons").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawButtonLine("A", portIndex, BTN_A, CHIP_COLOR_N64_BLUE);
             DrawButtonLine("B", portIndex, BTN_B, CHIP_COLOR_N64_GREEN);
             DrawButtonLine("Start", portIndex, BTN_START, CHIP_COLOR_N64_RED);
@@ -1721,7 +1721,7 @@ void SohInputEditorWindow::DrawDebugPortTab(uint8_t portIndex, std::string custo
             DrawButtonLine(StringHelper::Sprintf("%s", ICON_FA_ARROW_RIGHT).c_str(), portIndex, BTN_DRIGHT);
         }
 
-        if (ImGui::CollapsingHeader("Analog Stick", NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Analog Stick").c_str(), NULL, ImGuiTreeNodeFlags_DefaultOpen)) {
             DrawStickSection(portIndex, Ship::LEFT, 0);
         }
 
