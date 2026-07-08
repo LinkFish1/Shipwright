@@ -1,13 +1,16 @@
 #include "Localization.h"
 #include "ship/utils/StringHelper.h"
+#include "ship/window/gui/Gui.h"
 #include "soh/cvar_prefixes.h"
 #include <libultraship/libultraship.h>
 #include <unordered_map>
 #include <string>
 #include <set>
 #include <vector>
+#include <functional>
 #include <filesystem>
 #include <imgui.h>
+#include <spdlog/spdlog.h>
 
 namespace SohGui {
 
@@ -1265,18 +1268,32 @@ static void CollectCodepoints(const std::string& s, std::set<uint32_t>& out) {
 
 void RegisterLocalization() {
     StringHelper::SetTranslator(TranslateImpl);
+}
 
-    // Merge a Simplified-Chinese font into ImGui's default font so the menu can
-    // actually render Chinese glyphs. We only add the codepoints that appear in our
-    // translation table, which keeps the atlas small and startup fast.
+// Merge a Simplified-Chinese font into ImGui's default font so the menu can actually
+// render Chinese glyphs. This is invoked from libultraship's Gui::Init (via the
+// RegisterFontSetupCallback below), which runs AFTER the default + icon fonts are queued
+// but BEFORE the atlas is built on the first frame — so the merged glyphs are included.
+// We only merge the codepoints that appear in our translation table, which keeps the
+// atlas small and startup fast.
+static void MergeCjkFont() {
     static bool sFontMerged = false;
     if (sFontMerged) {
         return;
     }
     sFontMerged = true;
 
-    std::string fontPath = Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf");
-    if (!std::filesystem::exists(fontPath)) {
+    // Look for the font next to the executable, then in the app directory, then cwd.
+    std::string fontPath;
+    std::error_code ec;
+    if (std::filesystem::exists(
+            fontPath = Ship::Context::GetPathRelativeToAppDirectory("DroidSansFallback.ttf"), ec)) {
+        // found
+    } else if (std::filesystem::exists(fontPath = "DroidSansFallback.ttf", ec)) {
+        // found in cwd
+    } else {
+        SPDLOG_WARN("[Localization] DroidSansFallback.ttf not found next to the executable; "
+                    "Simplified-Chinese menu text will render as boxes. Copy the font next to soh.exe.");
         return;
     }
 
@@ -1297,7 +1314,23 @@ void RegisterLocalization() {
     cfg.MergeMode = true;
     cfg.PixelSnapH = true;
     // Match the default menu font size (13.0f, see libultraship Gui.cpp).
-    io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 13.0f, &cfg, ranges.data());
+    ImFont* font = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 13.0f, &cfg, ranges.data());
+    if (font == nullptr) {
+        SPDLOG_WARN("[Localization] Failed to load DroidSansFallback.ttf from '{}'; "
+                    "Simplified-Chinese menu text will render as boxes.",
+                    fontPath);
+    }
 }
+
+// Register the font merge as early as possible (static init), so libultraship can call
+// it from Gui::Init before the font atlas is built.
+namespace {
+struct FontSetupRegistrar {
+    FontSetupRegistrar() {
+        Ship::Gui::RegisterFontSetupCallback(&MergeCjkFont);
+    }
+};
+static FontSetupRegistrar sFontSetupRegistrar;
+} // namespace
 
 } // namespace SohGui

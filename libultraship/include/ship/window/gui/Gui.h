@@ -9,6 +9,7 @@
 #include <map>
 #include <unordered_map>
 #include <vector>
+#include <functional>
 #include <SDL2/SDL.h>
 #include "ship/window/gui/ConsoleWindow.h"
 #include "ship/window/gui/InputEditorWindow.h"
@@ -107,6 +108,11 @@ class Gui {
     void BlockGamepadNavigation();
     void UnblockGamepadNavigation();
     void ShutDownImGui(Ship::Window* window);
+
+    // Lets downstream projects (e.g. soh) merge extra fonts (CJK, etc.) into the
+    // default ImGui font. Callbacks are invoked from Gui::Init, after the default
+    // font and icon font are set up but before the atlas is built on the first frame.
+    static void RegisterFontSetupCallback(std::function<void()> cb);
 
   protected:
     void StartFrame();

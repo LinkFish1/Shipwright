@@ -18,6 +18,11 @@
 
 #include "libultraship/window/gui/GfxDebuggerWindow.h"
 #include "fast/Fast3dWindow.h"
+
+// Forward declaration for the CJK-font callback registry (defined later in this file).
+namespace {
+std::vector<std::function<void()>>& GetFontSetupCallbacks();
+} // namespace
 #ifdef __APPLE__
 #include <SDL_hints.h>
 #include <SDL_video.h>
@@ -113,6 +118,13 @@ void Gui::Init(GuiWindowInitData windowImpl) {
     mImGuiIo->Fonts->AddFontFromMemoryCompressedBase85TTF(fontawesome_compressed_data_base85, iconFontSize,
                                                           &iconsConfig, sIconsRanges);
 
+    // Let downstream projects (e.g. soh) merge additional fonts (CJK, etc.) into the
+    // default font. This runs after the default + icon fonts are queued but before the
+    // atlas is actually built on the first frame, so merged glyphs are included.
+    for (auto& cb : GetFontSetupCallbacks()) {
+        cb();
+    }
+
 #if defined(__ANDROID__)
     // Scale everything by 2 for Android
     ImGui::GetStyle().ScaleAllSizes(2.0f);
@@ -179,6 +191,19 @@ void Gui::ImGuiWMInit() {
         default:
             break;
     }
+}
+
+namespace {
+// Function-local static avoids any static-initialization-order issues with downstream
+// registrars that may run before this translation unit's statics are constructed.
+std::vector<std::function<void()>>& GetFontSetupCallbacks() {
+    static std::vector<std::function<void()>> sCallbacks;
+    return sCallbacks;
+}
+} // namespace
+
+void Gui::RegisterFontSetupCallback(std::function<void()> cb) {
+    GetFontSetupCallbacks().push_back(std::move(cb));
 }
 
 void Gui::ShutDownImGui(Ship::Window* window) {
