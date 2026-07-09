@@ -1805,9 +1805,9 @@ void DrawLocation(RandomizerCheck rc) {
 
     // Main Text
     if (checkNameOverrides.contains(loc->GetRandomizerCheck())) {
-        txt = checkNameOverrides[loc->GetRandomizerCheck()];
+        txt = StringHelper::Translate(checkNameOverrides[loc->GetRandomizerCheck()]);
     } else {
-        txt = loc->GetShortName();
+        txt = StringHelper::Translate(loc->GetShortName());
     }
 
     if (lastLocationChecked == loc->GetRandomizerCheck()) {
@@ -1863,7 +1863,7 @@ void DrawLocation(RandomizerCheck rc) {
     }
 
     ImGui::PushStyleColor(ImGuiCol_Text, styleColor);
-    ImGui::Text(StringHelper::Translate("%s").c_str(), txt.c_str());
+    ImGui::Text("%s", txt.c_str());
     ImGui::PopStyleColor();
 
     // Draw the extra info
@@ -1923,7 +1923,7 @@ void DrawLocation(RandomizerCheck rc) {
         }
     }
     if (txt == "" && skipped) {
-        txt = "Skipped"; // TODO language
+        txt = StringHelper::Translate("Skipped"); // TODO language
     }
 
     if (txt != "") {
@@ -1990,7 +1990,7 @@ void ImGuiDrawTwoColorPickerSection(const char* text, const char* cvarMainName, 
     extra_color = cvarExtraColor;
 
     UIWidgets::PushStyleCombobox(theme);
-    if (ImGui::CollapsingHeader(text)) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate(text).c_str())) {
         if (*cvarHideName != '\0') {
             std::string label = cvarHideName;
             label += "##Hidden";

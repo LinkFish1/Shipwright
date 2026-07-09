@@ -20,7 +20,7 @@ void DrawHookRegisteringInfos(const char* hookName) {
     size_t numHooks = (*hookData[hookName]).size();
 
     if (numHooks == 0) {
-        ImGui::TextColored(grey, "No hooks found");
+        ImGui::TextColored(grey, StringHelper::Translate("No hooks found").c_str());
         return;
     }
 
@@ -115,7 +115,7 @@ void HookDebuggerWindow::DrawElement() {
             ImGui::SetNextItemOpen(collapseLogic, ImGuiCond_Always);
         }
 
-        if (ImGui::TreeNode(hookName)) {
+        if (ImGui::TreeNode(StringHelper::Translate(hookName).c_str())) {
             DrawHookRegisteringInfos(hookName);
             ImGui::TreePop();
         }

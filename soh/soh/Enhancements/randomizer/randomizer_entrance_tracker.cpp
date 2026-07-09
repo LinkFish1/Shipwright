@@ -809,10 +809,10 @@ void EntranceTrackerSettingsWindow::DrawElement() {
     }
 
     ImGui::SetNextItemOpen(false, ImGuiCond_Once);
-    if (ImGui::TreeNode("Legend")) {
-        ImGui::TextColored(ImColor(COLOR_ORANGE), "Last Entrance");
-        ImGui::TextColored(ImColor(COLOR_GREEN), "Available Entrances");
-        ImGui::TextColored(ImColor(COLOR_GRAY), "Undiscovered Entrances");
+    if (ImGui::TreeNode(StringHelper::Translate("Legend").c_str())) {
+        ImGui::TextColored(ImColor(COLOR_ORANGE), StringHelper::Translate("Last Entrance").c_str());
+        ImGui::TextColored(ImColor(COLOR_GREEN), StringHelper::Translate("Available Entrances").c_str());
+        ImGui::TextColored(ImColor(COLOR_GRAY), StringHelper::Translate("Undiscovered Entrances").c_str());
         ImGui::TreePop();
     }
 }

@@ -312,7 +312,7 @@ void DrawInfoTab() {
     }
 
     int32_t magic = (int32_t)gSaveContext.magic;
-    if (SliderInt("Magic", &magic,
+    if (SliderInt(StringHelper::Translate("Magic").c_str(), &magic,
                   intSliderOptionsBase.Min(0)
                       .Max(gSaveContext.magicCapacity)
                       .Tooltip(StringHelper::Translate("Current magic. 48 units per magic level").c_str()))) {
@@ -320,88 +320,88 @@ void DrawInfoTab() {
     }
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Rupees", ImGuiDataType_S16, &gSaveContext.rupees);
+    ImGui::InputScalar(StringHelper::Translate("Rupees").c_str(), ImGuiDataType_S16, &gSaveContext.rupees);
     Tooltip("Current rupees");
     PopStyleInput();
 
-    SliderInt("Time", (int32_t*)&gSaveContext.dayTime, intSliderOptionsBase.Min(0).Max(0xFFFF).Tooltip(StringHelper::Translate("Time of day").c_str()));
-    if (Button("Dawn", buttonOptionsBase)) {
+    SliderInt(StringHelper::Translate("Time").c_str(), (int32_t*)&gSaveContext.dayTime, intSliderOptionsBase.Min(0).Max(0xFFFF).Tooltip(StringHelper::Translate("Time of day").c_str()));
+    if (Button(StringHelper::Translate("Dawn").c_str(), buttonOptionsBase)) {
         gSaveContext.dayTime = 0x4000;
     }
     ImGui::SameLine();
-    if (Button("Noon", buttonOptionsBase)) {
+    if (Button(StringHelper::Translate("Noon").c_str(), buttonOptionsBase)) {
         gSaveContext.dayTime = 0x8000;
     }
     ImGui::SameLine();
-    if (Button("Sunset", buttonOptionsBase)) {
+    if (Button(StringHelper::Translate("Sunset").c_str(), buttonOptionsBase)) {
         gSaveContext.dayTime = 0xC001;
     }
     ImGui::SameLine();
-    if (Button("Midnight", buttonOptionsBase)) {
+    if (Button(StringHelper::Translate("Midnight").c_str(), buttonOptionsBase)) {
         gSaveContext.dayTime = 0;
     }
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Total Days", ImGuiDataType_S32, &gSaveContext.totalDays);
+    ImGui::InputScalar(StringHelper::Translate("Total Days").c_str(), ImGuiDataType_S32, &gSaveContext.totalDays);
     Tooltip("Total number of days elapsed since the start of the game");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Deaths", ImGuiDataType_U16, &gSaveContext.deaths);
+    ImGui::InputScalar(StringHelper::Translate("Deaths").c_str(), ImGuiDataType_U16, &gSaveContext.deaths);
     Tooltip("Total number of deaths");
     PopStyleInput();
 
-    Checkbox("Has BGS", (bool*)&gSaveContext.bgsFlag,
+    Checkbox(StringHelper::Translate("Has BGS").c_str(), (bool*)&gSaveContext.bgsFlag,
              checkboxOptionsBase.Tooltip(StringHelper::Translate("Is Biggoron sword unlocked? Replaces Giant's knife").c_str()));
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Sword Health", ImGuiDataType_U16, &gSaveContext.swordHealth);
+    ImGui::InputScalar(StringHelper::Translate("Sword Health").c_str(), ImGuiDataType_U16, &gSaveContext.swordHealth);
     Tooltip("Giant's knife health. Default is 8. Must be >0 for Biggoron sword to work");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Bgs Day Count", ImGuiDataType_S32, &gSaveContext.bgsDayCount);
+    ImGui::InputScalar(StringHelper::Translate("Bgs Day Count").c_str(), ImGuiDataType_S32, &gSaveContext.bgsDayCount);
     Tooltip("Total number of days elapsed since receiving claim check from Biggoron");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Entrance Index", ImGuiDataType_S32, &gSaveContext.entranceIndex);
+    ImGui::InputScalar(StringHelper::Translate("Entrance Index").c_str(), ImGuiDataType_S32, &gSaveContext.entranceIndex);
     Tooltip("From which entrance did Link arrive?");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Cutscene Index", ImGuiDataType_S32, &gSaveContext.cutsceneIndex);
+    ImGui::InputScalar(StringHelper::Translate("Cutscene Index").c_str(), ImGuiDataType_S32, &gSaveContext.cutsceneIndex);
     Tooltip("Which cutscene is this?");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Navi Timer", ImGuiDataType_U16, &gSaveContext.naviTimer);
+    ImGui::InputScalar(StringHelper::Translate("Navi Timer").c_str(), ImGuiDataType_U16, &gSaveContext.naviTimer);
     Tooltip("Navi wants to talk at 600 units, decides not to at 3000.");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Timer State", ImGuiDataType_S16, &gSaveContext.timerState);
+    ImGui::InputScalar(StringHelper::Translate("Timer State").c_str(), ImGuiDataType_S16, &gSaveContext.timerState);
     Tooltip("Heat timer, race timer, etc. Has white font");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Timer Seconds", ImGuiDataType_S16, &gSaveContext.timerSeconds, &one, NULL);
+    ImGui::InputScalar(StringHelper::Translate("Timer Seconds").c_str(), ImGuiDataType_S16, &gSaveContext.timerSeconds, &one, NULL);
     Tooltip("Time, in seconds");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Sub-Timer State", ImGuiDataType_S16, &gSaveContext.subTimerState);
+    ImGui::InputScalar(StringHelper::Translate("Sub-Timer State").c_str(), ImGuiDataType_S16, &gSaveContext.subTimerState);
     Tooltip("Trade timer, Ganon collapse timer, etc. Has yellow font");
     PopStyleInput();
 
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Sub-Timer Seconds", ImGuiDataType_S16, &gSaveContext.subTimerSeconds, &one, NULL);
+    ImGui::InputScalar(StringHelper::Translate("Sub-Timer Seconds").c_str(), ImGuiDataType_S16, &gSaveContext.subTimerSeconds, &one, NULL);
     Tooltip("Time, in seconds");
     PopStyleInput();
 
     Combobox("Audio", &gSaveContext.audioSetting, audioMap, comboboxOptionsBase.Tooltip(StringHelper::Translate("Sound setting").c_str()));
 
-    Checkbox("64 DD file?", (bool*)&gSaveContext.n64ddFlag,
+    Checkbox(StringHelper::Translate("64 DD file?").c_str(), (bool*)&gSaveContext.n64ddFlag,
              checkboxOptionsBase.Tooltip(StringHelper::Translate("WARNING! If you save, your file may be locked! Use caution!").c_str()));
 
     Combobox("Z Target Mode", &gSaveContext.zTargetSetting, zTargetMap,
@@ -422,7 +422,7 @@ void DrawInfoTab() {
                                                      "Running Man Race",  "?",
                                                      "Dampe's Race" };
 
-    if (ImGui::TreeNode("Minigames")) {
+    if (ImGui::TreeNode(StringHelper::Translate("Minigames").c_str())) {
         for (int i = 0; i < 7; i++) {
             if (i == 2 && ImGui::TreeNode("Fishing")) { // fishing has a few more flags to it
                 u8 fishSize = gSaveContext.highScores[i] & 0x7F;

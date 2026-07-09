@@ -870,7 +870,7 @@ void ActorViewerWindow::DrawElement() {
     ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
     static ActorInfo newActor = { 0, 0, { 0, 0, 0 }, { 0, 0, 0 } };
     static ImU16 one = 1;
-    static std::string filler = "Please select";
+    static std::string filler = StringHelper::Translate("Please select");
     static std::string searchString = "";
     static s16 currentSelectedInDropdown = -1;
     static std::vector<u16> actorSearchResults;
@@ -880,9 +880,9 @@ void ActorViewerWindow::DrawElement() {
             bool toggled = false;
             bool optionChange = false;
 
-            ImGui::SeparatorText("Options");
+            ImGui::SeparatorText(StringHelper::Translate("Options").c_str());
 
-            toggled = UIWidgets::CVarCheckbox("Actor Name Tags", CVAR_ACTOR_NAME_TAGS("Enabled"),
+            toggled = UIWidgets::CVarCheckbox(StringHelper::Translate("Actor Name Tags").c_str(), CVAR_ACTOR_NAME_TAGS("Enabled"),
                                               { { .tooltip = "Adds \"name tags\" above actors for identification" } });
 
             ImGui::SameLine();
@@ -899,7 +899,7 @@ void ActorViewerWindow::DrawElement() {
             }
 
             optionChange |= UIWidgets::CVarCheckbox(
-                "Name tags with Z-Buffer", CVAR_ACTOR_NAME_TAGS("WithZBuffer"),
+                StringHelper::Translate("Name tags with Z-Buffer").c_str(), CVAR_ACTOR_NAME_TAGS("WithZBuffer"),
                 { { .tooltip = StringHelper::Translate("Allow name tags to be obstructed when behind geometry and actors").c_str() } });
 
             if (toggled || optionChange) {
@@ -928,9 +928,9 @@ void ActorViewerWindow::DrawElement() {
         ImGui::EndChild();
 
         PushStyleCombobox(THEME_COLOR);
-        if (ImGui::BeginCombo("Actor Type", acMapping[category])) {
+        if (ImGui::BeginCombo(StringHelper::Translate("Actor Type").c_str(), StringHelper::Translate(acMapping[category]).c_str())) {
             for (int i = 0; i < acMapping.size(); i++) {
-                if (ImGui::Selectable(acMapping[i])) {
+                if (ImGui::Selectable(StringHelper::Translate(acMapping[i]).c_str())) {
                     category = i;
                     PopulateActorDropdown(category, list);
                     break;
@@ -940,10 +940,10 @@ void ActorViewerWindow::DrawElement() {
         }
 
         if (display == nullptr) {
-            filler = "Please select";
+            filler = StringHelper::Translate("Please select");
         }
 
-        if (ImGui::BeginCombo("Actor", filler.c_str())) {
+        if (ImGui::BeginCombo(StringHelper::Translate("Actor").c_str(), filler.c_str())) {
             for (int i = 0; i < list.size(); i++) {
                 std::string label = std::to_string(i) + ": " + ActorDB::Instance->RetrieveEntry(list[i]->id).name;
                 std::string description = GetActorDescription(list[i]->id);
@@ -961,18 +961,18 @@ void ActorViewerWindow::DrawElement() {
         PopStyleCombobox();
 
         PushStyleHeader(THEME_COLOR);
-        if (ImGui::TreeNode("Selected Actor")) {
+        if (ImGui::TreeNode(StringHelper::Translate("Selected Actor").c_str())) {
             if (display != nullptr) {
                 DrawGroupWithBorder(
                     [&]() {
                         ImGui::Text(StringHelper::Translate("Name: %s").c_str(), ActorDB::Instance->RetrieveEntry(display->id).name.c_str());
                         ImGui::Text(StringHelper::Translate("Description: %s").c_str(), GetActorDescription(display->id).c_str());
-                        ImGui::Text(StringHelper::Translate("Category: %s").c_str(), acMapping[display->category]);
+                        ImGui::Text(StringHelper::Translate("Category: %s").c_str(), StringHelper::Translate(acMapping[display->category]).c_str());
                         ImGui::Text(StringHelper::Translate("ID: %d").c_str(), display->id);
                         ImGui::Text(StringHelper::Translate("Parameters: %d").c_str(), display->params);
                         ImGui::Text(StringHelper::Translate("Actor List Index: %d").c_str(), GetActorListIndex(display));
                     },
-                    "Selected Actor");
+                    StringHelper::Translate("Selected Actor"));
                 ImGui::SameLine();
                 ImGui::PushItemWidth(ImGui::GetFontSize() * 6);
 
@@ -1034,7 +1034,7 @@ void ActorViewerWindow::DrawElement() {
                 ImGui::Text(StringHelper::Translate("Select an actor to display information.").c_str());
             }
 
-            if (Button("Fetch from Target",
+            if (Button(StringHelper::Translate("Fetch from Target").c_str(),
                        ButtonOptions()
                            .Color(THEME_COLOR)
                            .Tooltip(StringHelper::Translate("Grabs actor with target arrow above it. You might need C-Up for enemies").c_str()))) {
@@ -1045,7 +1045,7 @@ void ActorViewerWindow::DrawElement() {
                     PopulateActorDropdown(category, list);
                 }
             }
-            if (Button("Fetch from Held",
+            if (Button(StringHelper::Translate("Fetch from Held").c_str(),
                        ButtonOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Grabs actor that Link is holding").c_str()))) {
                 Player* player = GET_PLAYER(gPlayState);
                 if (player->heldActor != NULL) {
@@ -1054,8 +1054,8 @@ void ActorViewerWindow::DrawElement() {
                     PopulateActorDropdown(category, list);
                 }
             }
-            if (Button("Fetch from Interaction",
-                       ButtonOptions().Color(THEME_COLOR).Tooltip("Grabs actor from \"interaction range\""))) {
+            if (Button(StringHelper::Translate("Fetch from Interaction").c_str(),
+                       ButtonOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Grabs actor from \"interaction range\"").c_str()))) {
                 Player* player = GET_PLAYER(gPlayState);
                 if (player->interactRangeActor != NULL) {
                     display = player->interactRangeActor;
@@ -1067,10 +1067,10 @@ void ActorViewerWindow::DrawElement() {
             ImGui::TreePop();
         }
 
-        if (ImGui::TreeNode("New...")) {
+        if (ImGui::TreeNode(StringHelper::Translate("New...").c_str())) {
             // ImGui::PushItemWidth(ImGui::GetFontSize() * 10);
 
-            if (InputString("Search Actor", &searchString, InputOptions().Color(THEME_COLOR))) {
+            if (InputString(StringHelper::Translate("Search Actor").c_str(), &searchString, InputOptions().Color(THEME_COLOR))) {
                 actorSearchResults = GetActorsWithDescriptionContainingString(searchString);
                 currentSelectedInDropdown = -1;
             }
@@ -1078,7 +1078,7 @@ void ActorViewerWindow::DrawElement() {
             if (!SohUtils::IsStringEmpty(searchString) && !actorSearchResults.empty()) {
                 std::string preview =
                     currentSelectedInDropdown == -1
-                        ? "Please Select"
+                        ? StringHelper::Translate("Please Select").c_str()
                         : ActorDB::Instance->RetrieveEntry(actorSearchResults[currentSelectedInDropdown]).desc;
                 PushStyleCombobox(THEME_COLOR);
                 if (ImGui::BeginCombo("Results", preview.c_str())) {
@@ -1099,18 +1099,18 @@ void ActorViewerWindow::DrawElement() {
                 newActor.params = 0;
             }
 
-            CVarCheckbox("Advanced mode", CVAR_DEVELOPER_TOOLS("ActorViewer.AdvancedParams"),
+            CVarCheckbox(StringHelper::Translate("Advanced mode").c_str(), CVAR_DEVELOPER_TOOLS("ActorViewer.AdvancedParams"),
                          CheckboxOptions().Tooltip(StringHelper::Translate("Changes the actor specific param menus with a direct input").c_str()));
 
             if (CVarGetInteger(CVAR_DEVELOPER_TOOLS("ActorViewer.AdvancedParams"), 0)) {
                 PushStyleInput(THEME_COLOR);
-                ImGui::InputScalar("params", ImGuiDataType_S16, &newActor.params, &one);
+                ImGui::InputScalar(StringHelper::Translate("params").c_str(), ImGuiDataType_S16, &newActor.params, &one);
                 PopStyleInput();
             } else if (std::find(noParamsActors.begin(), noParamsActors.end(), newActor.id) == noParamsActors.end()) {
                 CreateActorSpecificData();
                 if (actorSpecificData.find(newActor.id) == actorSpecificData.end()) {
                     PushStyleInput(THEME_COLOR);
-                    ImGui::InputScalar("params", ImGuiDataType_S16, &newActor.params, &one);
+                    ImGui::InputScalar(StringHelper::Translate("params").c_str(), ImGuiDataType_S16, &newActor.params, &one);
                     PopStyleInput();
                 } else {
                     DrawGroupWithBorder(
@@ -1150,7 +1150,7 @@ void ActorViewerWindow::DrawElement() {
                 },
                 "New Actor Rotation");
 
-            if (Button("Fetch from Link", ButtonOptions().Color(THEME_COLOR))) {
+            if (Button(StringHelper::Translate("Fetch from Link").c_str(), ButtonOptions().Color(THEME_COLOR))) {
                 Player* player = GET_PLAYER(gPlayState);
                 Vec3f newPos = player->actor.world.pos;
                 Vec3s newRot = player->actor.world.rot;
@@ -1158,7 +1158,7 @@ void ActorViewerWindow::DrawElement() {
                 newActor.rot = newRot;
             }
 
-            if (Button("Spawn", ButtonOptions().Color(THEME_COLOR))) {
+            if (Button(StringHelper::Translate("Spawn").c_str(), ButtonOptions().Color(THEME_COLOR))) {
                 if (ActorDB::Instance->RetrieveEntry(newActor.id).entry.valid) {
                     Actor_Spawn(&gPlayState->actorCtx, gPlayState, newActor.id, newActor.pos.x, newActor.pos.y,
                                 newActor.pos.z, newActor.rot.x, newActor.rot.y, newActor.rot.z, newActor.params);
@@ -1167,7 +1167,7 @@ void ActorViewerWindow::DrawElement() {
                 }
             }
 
-            if (Button("Spawn as Child", ButtonOptions().Color(THEME_COLOR))) {
+            if (Button(StringHelper::Translate("Spawn as Child").c_str(), ButtonOptions().Color(THEME_COLOR))) {
                 Actor* parent = display;
                 if (parent != NULL) {
                     if (newActor.id >= 0 && newActor.id < ACTOR_ID_MAX &&
@@ -1181,7 +1181,7 @@ void ActorViewerWindow::DrawElement() {
                 }
             }
 
-            if (Button("Reset", ButtonOptions().Color(THEME_COLOR))) {
+            if (Button(StringHelper::Translate("Reset").c_str(), ButtonOptions().Color(THEME_COLOR))) {
                 newActor = { 0, 0, { 0, 0, 0 }, { 0, 0, 0 } };
             }
 
