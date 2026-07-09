@@ -1,4 +1,4 @@
-#include "debugSaveEditor.h"
+﻿#include "debugSaveEditor.h"
 #include <ship/utils/StringHelper.h>
 #include "soh/Enhancements/randomizer/randomizerTypes.h"
 #include "soh/util.h"

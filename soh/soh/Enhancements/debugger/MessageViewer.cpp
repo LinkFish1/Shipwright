@@ -1,4 +1,4 @@
-#include "MessageViewer.h"
+﻿#include "MessageViewer.h"
 #include <ship/utils/StringHelper.h>
 
 #include "soh/SohGui/UIWidgets.hpp"

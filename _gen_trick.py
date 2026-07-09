@@ -8,7 +8,8 @@ td = mod.td  # dict rt -> {'name': zh, 'desc': zh}
 
 loc = r'soh/soh/SohGui/Localization.cpp'
 text = open(loc, encoding='utf-8').read()
-marker = '    // __TRANSLATION_TAIL__'
+tail = '    // __TRANSLATION_TAIL__'
+trick_start = '    // ---- trick names ----'
 
 name_map = {}
 desc_map = {}
@@ -25,6 +26,10 @@ for rt, v in trick.items():
         missing.append(rt)
 
 def esc(s):
+    import re
+    # Collapse ANY run of backslashes directly before 'n' into a single REAL
+    # newline, then emit a single C++ "\n" escape. Handles 1..N backslashes.
+    s = re.sub(r'\\+n', '\n', s)
     s = s.replace('\\', '\\\\')
     s = s.replace('\n', '\\n')
     s = s.replace('"', '\\"')
@@ -37,8 +42,13 @@ lines.append('    // ---- trick descriptions ----')
 for en, zh in desc_map.items():
     lines.append('    { "%s", "%s" },' % (esc(en), esc(zh)))
 
-block = '    // ---- trick names ----\n' + '\n'.join(lines) + '\n'
-text = text.replace(marker, block + marker, 1)
+block = trick_start + '\n' + '\n'.join(lines) + '\n'
+j = text.index(tail)
+if trick_start in text:
+    i = text.index(trick_start)
+    text = text[:i] + block + text[j:]
+else:
+    text = text[:j] + block + text[j:]
 open(loc, 'w', encoding='utf-8').write(text)
 print('written', len(name_map), 'trick names,', len(desc_map), 'trick desc')
 print('MISSING translations for', len(missing), 'tricks')
