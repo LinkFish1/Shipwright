@@ -35,7 +35,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "About", "关于" },
     { "About Crowd Control", "关于人群控制" },
     { "Accessibility", "辅助功能" },
-    { "Activates MSAA (multi-sample anti-aliasing) from 2x up to 8x, to smooth the edges of ", "启用 MSAA（多重采样抗锯齿），从 2x 到 8x，以平滑边缘" },
+    { "Activates MSAA (multi-sample anti-aliasing) from 2x up to 8x, to smooth the edges of rendered geometry.\nHigher sample count will result in smoother edges on models, but may reduce performance.", "启用 MSAA（多重采样抗锯齿），范围从 2x 到 8x，用于平滑渲染几何体的边缘。\n采样数越高，模型边缘越平滑，但可能降低性能。" },
     { "Actor Shadows", "角色阴影" },
     { "Add a button to the combination", "向组合中添加一个按钮" },
     { "Additional Settings", "附加设置" },
@@ -215,7 +215,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Close Menu (Esc)", "关闭菜单（Esc）" },
     { "Clouds", "云" },
     { "Color Temple of Time's Medallions", "为时之庙的勋章上色" },
-    { "Configure what happens when starting or resetting the game.\n\n", "配置开始或重置游戏时发生的情况。\n\n" },
+    { "Configure what happens when starting or resetting the game.\n\nDefault: LUS logo -> N64 logo\nAuthentic: N64 logo only\nFile Select: Skip to file select menu\nDebug Warp Screen: Skip to the debug warp screen\nWarp Point: Skip to active warp point (if set), see Dev Tools -> General", "配置开始或重置游戏时发生的情况。\n\n默认：LUS 标志 -> N64 标志\n原版：仅 N64 标志\n文件选择：跳到文件选择菜单\n调试传送屏幕：跳到调试传送屏幕\n传送点：跳到当前激活的传送点（若已设置），见开发工具 -> 常规" },
     { "Connect to Crowd Control", "连接到人群控制" },
     { "Connecting...", "连接中……" },
     { "Connecting...##Sail", "连接中……##Sail" },
@@ -673,7 +673,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "More Info in File Select", "文件选择中更多信息" },
     { "MoreResolutionSettings", "更多分辨率设置" },
     { "Multiplier:", "倍数：" },
-    { "Multiplies your output resolution by the value inputted, as a more intensive but effective ", "将输出分辨率乘以输入的值，作为一种更密集但有效的" },
+    { "Multiplies your output resolution by the value inputted, as a more intensive but effective form of anti-aliasing.", "将输出分辨率乘以所输入的值，作为一种更耗费性能但效果更好的抗锯齿方式。" },
     { "Mute Notification Sound", "静音通知声音" },
     { "Mysterious Shuffled Items", "神秘的洗牌物品" },
     { "N64 Mode", "N64 模式" },
@@ -1471,6 +1471,161 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Speed Modifier", "速度修改器" },
     { "Save States", "存档状态" },
     { "These are NOT like emulator states. They do not save your game progress and they WILL break across transitions and load zones (like doors). Support for related issues will not be provided.", "这些不同于模拟器存档。它们不会保存你的游戏进度，并且在过场与加载区（如门）切换时会损坏。我们不提供相关问题的支持。" },
+
+    // ---- batch 12: Settings -> Graphics (Current FPS tooltip) & Resolution Editor ----
+    { "Uses Matrix Interpolation to create extra frames, resulting in smoother graphics. This is purely visual and does not impact game logic, execution of glitches etc.\n\nA higher target FPS than your monitor's refresh rate will waste resources, and might give a worse result.", "使用矩阵插值生成额外的帧，从而使画面更流畅。这纯粹是视觉上的，不影响游戏逻辑、漏洞的执行等。\n\n目标 FPS 高于显示器刷新率会浪费资源，并可能导致更差的效果。" },
+    { "Integer Scaling Settings", "整数缩放设置" },
+
+    // ---- batch 13: Resolution Editor (advanced graphics) bare strings ----
+    // Pixel count preset labels
+    { "Native N64 (240p)", "原生 N64（240p）" },
+    { "2x (480p)", "2x（480p）" },
+    { "3x (720p)", "3x（720p）" },
+    { "4x (960p)", "4x（960p）" },
+    { "5x (1200p)", "5x（1200p）" },
+    { "6x (1440p)", "6x（1440p）" },
+    { "Full HD (1080p)", "全高清（1080p）" },
+    { "4K (2160p)", "4K（2160p）" },
+    // Advanced settings panel
+    { "Set fixed vertical resolution (disables resolution slider)", "设定固定垂直分辨率（禁用分辨率滑块）" },
+    { "Pixel Count Presets", "像素数量预设" },
+    { "Horiz. Pixel Count", "水平像素数量" },
+    { "Vertical Pixel Count", "垂直像素数量" },
+    { "Pixel Perfect Mode", "像素完美模式" },
+    { "Integer scale factor: {}", "整数缩放系数：{}" },
+    { "Automatically scale image to fit viewport", "自动缩放图像以适配视口" },
+    { "Additional Settings", "附加设置" },
+    { "Show a horizontal resolution field, instead of aspect ratio.", "显示水平分辨率字段，而非宽高比。" },
+    { "Prevent integer scaling from exceeding screen bounds.\n(Makes screen bounds take priority over specified factor.)", "阻止整数缩放超出屏幕边界。\n（使屏幕边界优先于指定的缩放系数。）" },
+    { "Allow integer scale factor to go +1 above maximum screen bounds.", "允许整数缩放系数超出屏幕边界上限 1 倍。" },
+    { "(Select \"Off\" to disable.)", "（选择“关闭”以禁用。）" },
+
+    // ---- batch 14: Input Editor (controls) bare strings ----
+    { "%s Keyboard", "%s 键盘" },
+    { "%s Mouse", "%s 鼠标" },
+    { "Clear All", "清除全部" },
+    { "Set Defaults", "恢复默认" },
+    { "Set defaults", "恢复默认" },
+    { "Set Defaults for Keyboard", "键盘的默认设置" },
+    { "This will clear all existing mappings for\nKeyboard on port %d.\n\nContinue?",
+      "这将清除端口 %d 上键盘的全部现有映射。\n\n继续？" },
+
+    // ---- batch 15: Input Editor (controls) panel strings ----
+    // Group panels (BeginGroupPanel)
+    { "Aiming/First-Person Camera", "瞄准/第一人称摄像机" },
+    { "Third-Person Camera", "第三人称摄像机" },
+    { "D-Pad Options", "十字键选项" },
+    // Collapsing headers
+    { "Additional (\"Right\") Stick", "附加（“右”）摇杆" },
+    { "Modifier Buttons", "修饰键" },
+    { "Ocarina Controls", "陶笛控制" },
+    { "D-Pad Controls", "十字键控制" },
+    // Modifier button labels
+    { "M1", "M1" },
+    { "M2", "M2" },
+    // Ocarina notes bullet
+    { "Notes", "音符" },
+    // MenuDrawItem widgets (auto-translated via widget.name)
+    { "Enable Mouse Controls", "启用鼠标控制" },
+    { "Auto Capture Mouse Input", "自动捕获鼠标输入" },
+    { "D-pad Support on Pause Screen", "暂停界面支持十字键" },
+    { "D-pad Support in Text Boxes", "文本框内支持十字键" },
+    { "Free Look", "自由视角" },
+    { "Dpad Ocarina Playback", "十字键陶笛回放" },
+    { "Right Stick Ocarina Playback", "右摇杆陶笛回放" },
+    { "Customize Ocarina Controls", "自定义陶笛控制" },
+    // Aiming/First-Person checkboxes
+    { "Right Stick Aiming", "右摇杆瞄准" },
+    { "Allow moving while in first-person mode", "允许在第一人称模式下移动" },
+    { "Invert Aiming X Axis", "反转瞄准 X 轴" },
+    { "Invert Aiming Y Axis", "反转瞄准 Y 轴" },
+    { "Invert Shield Aiming X Axis", "反转盾牌瞄准 X 轴" },
+    { "Invert Shield Aiming Y Axis", "反转盾牌瞄准 Y 轴" },
+    { "Invert Z-Weapon Aiming Y Axis", "反转 Z 武器瞄准 Y 轴" },
+    { "Disable Auto-Centering in First-Person View", "禁用第一人称视角自动居中" },
+    { "Enable Custom Aiming/First-Person sensitivity", "启用自定义瞄准/第一人称灵敏度" },
+    { "Aiming/First-Person Horizontal Sensitivity: %.0f %%", "瞄准/第一人称水平灵敏度：%.0f%%" },
+    { "Aiming/First-Person Vertical Sensitivity: %.0f %%", "瞄准/第一人称垂直灵敏度：%.0f%%" },
+    // Third-person checkboxes / sliders
+    { "Invert Camera X Axis", "反转摄像机 X 轴" },
+    { "Invert Camera Y Axis", "反转摄像机 Y 轴" },
+    { "Third-Person Horizontal Sensitivity: %.0f %%", "第三人称水平灵敏度：%.0f%%" },
+    { "Third-Person Vertical Sensitivity: %.0f %%", "第三人称垂直灵敏度：%.0f%%" },
+    { "Camera Distance: %d", "摄像机距离：%d" },
+    { "Camera Transition Speed: %d", "摄像机过渡速度：%d" },
+    // D-Pad options
+    { "D-pad hold change", "按住十字键时逐格移动" },
+    // Rumble test button
+    { "Test", "测试" },
+
+    // ---- batch 16: Input Viewer settings ----
+    { "Input Viewer Scale: %.2f", "输入显示器缩放：%.2f" },
+    { "Enable Dragging", "启用拖拽" },
+    { "Show Background Layer", "显示背景图层" },
+
+    { "Analog Angle Values", "模拟摇杆角度数值" },
+    { "Show Analog Stick Angle Values", "显示模拟摇杆角度数值" },
+
+    { "Mods are currently not reloaded at runtime. Close and re-open Ship for the changes to take effect.\n"
+      "Drag ordering for the enabled list is available.\nMod priority is top to bottom. They override mods listed "
+      "below them.",
+      "模组目前在运行时不会重新加载。请关闭并重新打开 Ship 以使更改生效。\n"
+      "已启用列表支持拖拽排序。\n模组优先级从上到下排列，会覆盖其下方的模组。" },
+
+    { "New Preset", "新建预设" },
+    { "Hide built-in presets", "隐藏内置预设" },
+    { "Name", "名称" },
+    { "No presets found.", "未找到预设。" },
+
+    { "Save the game automatically on a 3 minute interval and when soft-resetting the game. The interval "
+      "autosave will wait if the game is paused in any way (dialogue, pause screen up, cutscenes, "
+      "etc.).\n\n"
+      "The soft-reset save will *not* trigger in cutscene maps like the Chamber of Sages!",
+      "每隔 3 分钟自动存档，并在软重置游戏时存档。间隔自动存档会在游戏以任何方式暂停时等待"
+      "（对话、暂停界面开启、过场动画等）。\n\n"
+      "软重置存档*不会*在贤者之间等过场地图中触发！" },
+
+    { "When loading a save, places Link at the last entrance he went through.\n"
+      "This doesn't work if the save was made in grottos, fairy fountains, or dungeons.",
+      "加载存档时，将林克放在他通过的最后一个入口。\n"
+      "若存档是在洞穴、妖精泉或地牢中创建的，则此功能无效。" },
+
+    { "Toggle to change container textures to match their contents in randomizer games.\n"
+      "Categories: Major items, Lesser items, Junk items, Small keys, Boss keys, Skulltula Tokens.",
+      "切换以更改容器纹理，使其匹配随机化游戏中的内容。\n"
+      "类别：主要道具、次要道具、垃圾道具、小钥匙、Boss 钥匙、骷髅代币。" },
+
+    { "Allows exiting Hyrule Castle Market Town to Hyrule Field at night by speaking to the guard "
+      "next to the gate.",
+      "允许在夜晚通过与大门旁的卫兵对话，从海拉鲁城下町离开前往海拉鲁平原。" },
+
+    { "Allows the cursor on the pause menu to be over any slot. Sometimes required in Randomizer "
+      "to select certain items.",
+      "允许暂停菜单上的光标位于任意槽位。随机化中有时需要以选择特定道具。" },
+
+    { "Removes the Input Requirement on Text boxes after defeating Ganon, allowing the Credits "
+      "Sequence to continue to progress.",
+      "击败加农后移除文本框的输入要求，使制作人员名单序列能够继续推进。" },
+
+    { "Typically, inputs that are held prior to the buffer window are not included in the buffer. This "
+      "setting changes that behavior to include them. This may cause some inputs to be re-triggered "
+      "undesireably, for instance Z-Targeting something you might not want to.",
+      "通常，缓冲窗口之前按住的输入不包含在缓冲中。此设置改变了该行为以将其包含在内。这可能会导致某些输入被"
+      "意外重新触发，例如锁定了你本不想锁定的目标。" },
+
+    { "Adds back in a delay after unpausing before the game resumes playing again, "
+      "where inputs can be held prematurely to be input immediately after the game resumes. "
+      "This essentially brings back behaviour from console releases which are lost on default "
+      "because SoH isn't limited to N64 hardware.",
+      "恢复在取消暂停后、游戏继续前的延迟，在此期间可提前按住输入，使其在游戏继续后立即被输入。"
+      "这本质上恢复了主机版本中的行为，而该行为在默认情况下因 SoH 不受 N64 硬件限制而丢失。" },
+
+    { "Reworks targeting functionality\n"
+      "- Press Z while locked always untargets (in Toggle mode)\n"
+      "- Use the configured button combo to switch between targets",
+      "重做瞄准功能\n"
+      "- 锁定状态下按 Z 始终取消瞄准（切换模式下）\n"
+      "- 使用配置好的按键组合在目标间切换" },
 
     // __TRANSLATION_TAIL__
 };
