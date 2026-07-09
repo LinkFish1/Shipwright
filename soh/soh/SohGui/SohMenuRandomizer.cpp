@@ -422,8 +422,8 @@ void DrawTricksMenu(WidgetInfo& info) {
                                 UIWidgets::PopStyleButton();
                                 Rando::Tricks::DrawTagChips(option.GetTags(), option.GetName());
                                 ImGui::SameLine();
-                                ImGui::Text(StringHelper::Translate("%s").c_str(), option.GetName().c_str());
-                                UIWidgets::Tooltip(option.GetDescription().c_str());
+                                ImGui::Text("%s", StringHelper::Translate(option.GetName()).c_str());
+                                UIWidgets::Tooltip(StringHelper::Translate(option.GetDescription()).c_str());
                             }
                         }
                         areaTreeDisabled[area] = true;
@@ -499,8 +499,8 @@ void DrawTricksMenu(WidgetInfo& info) {
                                 UIWidgets::PopStyleButton();
                                 Rando::Tricks::DrawTagChips(option.GetTags(), option.GetName());
                                 ImGui::SameLine();
-                                ImGui::Text(StringHelper::Translate("%s").c_str(), option.GetName().c_str());
-                                UIWidgets::Tooltip(option.GetDescription().c_str());
+                                ImGui::Text("%s", StringHelper::Translate(option.GetName()).c_str());
+                                UIWidgets::Tooltip(StringHelper::Translate(option.GetDescription()).c_str());
                             }
                         }
                         areaTreeEnabled[area] = true;

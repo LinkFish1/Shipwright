@@ -1354,7 +1354,7 @@ void SohInputEditorWindow::DrawOcarinaControlPanel() {
     DrawButtonLine(ICON_FA_ARROW_UP " (D5)", 0, BTN_CUSTOM_OCARINA_NOTE_D5);
 
     ImGui::AlignTextToFramePadding();
-    ImGui::BulletText("Disable song detection");
+    ImGui::BulletText(StringHelper::Translate("Disable song detection").c_str());
     DrawButtonLine(ICON_FA_BAN "##DisableSongDetection", 0, BTN_CUSTOM_OCARINA_DISABLE_SONGS);
 
     ImGui::AlignTextToFramePadding();
@@ -1617,11 +1617,11 @@ void SohInputEditorWindow::DrawLinkTab() {
             DrawButtonLine(StringHelper::Translate("M2").c_str(), portIndex, BTN_CUSTOM_MODIFIER2);
         }
 
-        if (ImGui::CollapsingHeader("Ocarina Controls")) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Ocarina Controls").c_str())) {
             DrawOcarinaControlPanel();
         }
 
-        if (ImGui::CollapsingHeader("Camera Controls")) {
+        if (ImGui::CollapsingHeader(StringHelper::Translate("Camera Controls").c_str())) {
             ImGui::PopStyleColor();
             ImGui::PopStyleColor();
             ImGui::PopStyleColor();
@@ -1868,7 +1868,7 @@ void SohInputEditorWindow::DrawElement() {
 void RegisterInputEditorWidgets() {
     dpadOcarina = { .name = "Dpad Ocarina Playback", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     dpadOcarina.CVar(CVAR_SETTING("CustomOcarina.Dpad")).Options(CheckboxOptions().Color(THEME_COLOR));
-    SohGui::mSohMenu->AddSearchWidget({ dpadOcarina, "Settings", "Controls", "Ocarina Controls", "" });
+    SohGui::mSohMenu->AddSearchWidget({ dpadOcarina, "Settings", "Controls", StringHelper::Translate("Ocarina Controls").c_str(), "" });
 
     freeLook = { .name = "Free Look", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     freeLook.CVar(CVAR_SETTING("FreeLook.Enabled"))
@@ -1880,7 +1880,7 @@ void RegisterInputEditorWidgets() {
                     "controller config menu, and map the camera stick to the right stick.\n"
                     "Doesn't work in areas were the game locks the camera.\n"
                     "Scene reload may be necessary to enable."));
-    SohGui::mSohMenu->AddSearchWidget({ freeLook, "Settings", "Controls", "Camera Controls" });
+    SohGui::mSohMenu->AddSearchWidget({ freeLook, "Settings", "Controls", StringHelper::Translate("Camera Controls").c_str() });
 
     mouseControl = { .name = "Enable Mouse Controls", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     mouseControl.CVar(CVAR_SETTING("EnableMouse"))
@@ -1896,7 +1896,7 @@ void RegisterInputEditorWidgets() {
                 .Tooltip("Allows for using the mouse to control the camera (must enable Free Look), "
                          "aim with the shield, and perform quickspin attacks (quickly rotate the mouse then press B)\n"
                          "Press F2 to toggle mouse capture manually."));
-    SohGui::mSohMenu->AddSearchWidget({ mouseControl, "Settings", "Controls", "Camera Controls" });
+    SohGui::mSohMenu->AddSearchWidget({ mouseControl, "Settings", "Controls", StringHelper::Translate("Camera Controls").c_str() });
 
     mouseAutoCapture = { .name = "Auto Capture Mouse Input", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     mouseAutoCapture.CVar(CVAR_SETTING("AutoCaptureMouse"))
@@ -1911,11 +1911,11 @@ void RegisterInputEditorWidgets() {
                      .Tooltip(StringHelper::Translate("When Mouse Controls are enabled, this toggles whether the program will automatically "
                               "hide the cursor "
                               "and capture mouse input when closing the menu.").c_str()));
-    SohGui::mSohMenu->AddSearchWidget({ mouseAutoCapture, "Settings", "Controls", "Camera Controls" });
+    SohGui::mSohMenu->AddSearchWidget({ mouseAutoCapture, "Settings", "Controls", StringHelper::Translate("Camera Controls").c_str() });
 
     rightStickOcarina = { .name = "Right Stick Ocarina Playback", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     rightStickOcarina.CVar(CVAR_SETTING("CustomOcarina.RightStick")).Options(CheckboxOptions().Color(THEME_COLOR));
-    SohGui::mSohMenu->AddSearchWidget({ rightStickOcarina, "Settings", "Controls", "Ocarina Controls" });
+    SohGui::mSohMenu->AddSearchWidget({ rightStickOcarina, "Settings", "Controls", StringHelper::Translate("Ocarina Controls").c_str() });
 
     dpadPause = { .name = "D-pad Support on Pause Screen", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     dpadPause.CVar(CVAR_SETTING("DPadOnPause"))
