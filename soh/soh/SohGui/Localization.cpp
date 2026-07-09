@@ -2892,6 +2892,31 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming",
       "反转摄像机 Y 轴：\n-第一人称/C-Up 视角\n-武器瞄准" },
 
+    // ---- reported untranslated batch: cosmetics option labels + save editor ----
+    { "Body", "身体" },
+    { "Boomerang Body", "回旋镖身体" },
+    { "Bow Body", "弓身" },
+    { "Hammer Head", "锤头" },
+    { "Hookshotable Reticle", "可钩物准星" },
+    { "Non-Hookshotable Reticle", "不可钩物准星" },
+    { "Biggoron Sword Blade", "比格刚剑刃" },
+    { "Kokiri Sword Blade", "科克里剑刃" },
+    { "Master Sword Blade", "大师剑刃" },
+    { "Hearts", "心" },
+    { "DD Hearts", "DD 心" },
+    { "Inventory", "物品" },
+    { "Quest Status", "任务状态" },
+    { "Player", "玩家" },
+    { "File Number", "文件编号" },
+    { "File 1", "文件 1" },
+    { "File 2", "文件 2" },
+    { "File 3", "文件 3" },
+    { "Max Health", "最大生命" },
+    { "NTSC ENG", "NTSC 英文" },
+    { "PAL", "PAL" },
+    { "NTSC JPN", "NTSC 日文" },
+    { "Player Name Language", "玩家名称语言" },
+
     // __TRANSLATION_TAIL__
 };
 

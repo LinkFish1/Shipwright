@@ -210,7 +210,7 @@ void DrawInfoTab() {
     } else if (gPlayState == nullptr) {
         ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Game Inactive");
     } else if (gSaveContext.fileNum >= 0 && gSaveContext.fileNum <= 2) {
-        Combobox("File Number", &gSaveContext.fileNum, fileNumMap, comboboxOptionsBase.Tooltip(StringHelper::Translate("Current File Number").c_str()));
+        Combobox(StringHelper::Translate("File Number").c_str(), &gSaveContext.fileNum, fileNumMap, comboboxOptionsBase.Tooltip(StringHelper::Translate("Current File Number").c_str()));
     } else {
         ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Debug File");
     }
@@ -259,16 +259,16 @@ void DrawInfoTab() {
     const bool hasNTSC = (sJpnMessageEntryTablePtr != nullptr);
     if (hasPAL && hasNTSC) {
         // Full
-        Combobox("Player Name Language", &gSaveContext.ship.filenameLanguage, filenameLanguageMap,
+        Combobox(StringHelper::Translate("Player Name Language").c_str(), &gSaveContext.ship.filenameLanguage, filenameLanguageMap,
                  comboboxOptionsBase.Tooltip(StringHelper::Translate("Encoding used for Player Name").c_str()));
     } else if (hasNTSC && (gSaveContext.ship.filenameLanguage != NAME_LANGUAGE_PAL)) {
         // NTSC only
-        Combobox("Player Name Language", &gSaveContext.ship.filenameLanguage, filenameLanguageMapNTSCOnly,
+        Combobox(StringHelper::Translate("Player Name Language").c_str(), &gSaveContext.ship.filenameLanguage, filenameLanguageMapNTSCOnly,
                  comboboxOptionsBase.Tooltip(StringHelper::Translate("Encoding used for Player Name").c_str()));
     } else {
         // PAL only (read only)
         ImGui::BeginDisabled();
-        Combobox("Player Name Language", &gSaveContext.ship.filenameLanguage, filenameLanguageMap,
+        Combobox(StringHelper::Translate("Player Name Language").c_str(), &gSaveContext.ship.filenameLanguage, filenameLanguageMap,
                  comboboxOptionsBase.Tooltip(StringHelper::Translate("Encoding used for Player Name").c_str()));
         ImGui::EndDisabled();
     }
@@ -277,7 +277,7 @@ void DrawInfoTab() {
     // until it is done being edited
     int16_t healthIntermediary = gSaveContext.healthCapacity;
     PushStyleInput(THEME_COLOR);
-    ImGui::InputScalar("Max Health", ImGuiDataType_S16, &healthIntermediary);
+    ImGui::InputScalar(StringHelper::Translate("Max Health").c_str(), ImGuiDataType_S16, &healthIntermediary);
     PopStyleInput();
     if (ImGui::IsItemDeactivated()) {
         gSaveContext.healthCapacity = healthIntermediary;
@@ -287,7 +287,7 @@ void DrawInfoTab() {
         gSaveContext.health = gSaveContext.healthCapacity; // Clamp health to new max
     }
     int32_t health = (int32_t)gSaveContext.health;
-    if (SliderInt("Health", &health,
+    if (SliderInt(StringHelper::Translate("Health").c_str(), &health,
                   intSliderOptionsBase.Tooltip(StringHelper::Translate("Current health. 16 units per full heart").c_str())
                       .Min(0)
                       .Max(gSaveContext.healthCapacity))) {
@@ -1931,37 +1931,37 @@ void SaveEditorWindow::DrawElement() {
 
     if (ImGui::BeginTabBar("SaveContextTabBar", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Info")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Info").c_str())) {
             DrawInfoTab();
             ImGui::EndTabItem();
         }
 
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Inventory")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Inventory").c_str())) {
             DrawInventoryTab();
             ImGui::EndTabItem();
         }
 
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Flags")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Flags").c_str())) {
             DrawFlagsTab();
             ImGui::EndTabItem();
         }
 
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Equipment")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Equipment").c_str())) {
             DrawEquipmentTab();
             ImGui::EndTabItem();
         }
 
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Quest Status")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Quest Status").c_str())) {
             DrawQuestStatusTab();
             ImGui::EndTabItem();
         }
 
         ResetBaseOptions();
-        if (ImGui::BeginTabItem("Player")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Player").c_str())) {
             DrawPlayerTab();
             ImGui::EndTabItem();
         }
