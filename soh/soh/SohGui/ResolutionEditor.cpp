@@ -168,7 +168,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
                                ICON_FA_QUESTION_CIRCLE " \"Force aspect ratio\" required.");
             // ImGui::Text(" ");
             ImGui::SameLine();
-            if (UIWidgets::Button("Click to resolve", UIWidgets::ButtonOptions().Color(THEME_COLOR))) {
+            if (UIWidgets::Button(StringHelper::Translate("Click to resolve").c_str(), UIWidgets::ButtonOptions().Color(THEME_COLOR))) {
                 item_aspectRatio = default_aspectRatio; // Set it to Custom
                 aspectRatioX = aspectRatioPresetsX[2];  // but use the 4:3 defaults
                 aspectRatioY = aspectRatioPresetsY[2];

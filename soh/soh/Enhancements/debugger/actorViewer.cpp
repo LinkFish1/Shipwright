@@ -887,7 +887,7 @@ void ActorViewerWindow::DrawElement() {
 
             ImGui::SameLine();
 
-            UIWidgets::Button("Display Items", { { .tooltip = StringHelper::Translate("Click to add display items on the name tags").c_str() } });
+            UIWidgets::Button(StringHelper::Translate("Display Items").c_str(), { { .tooltip = StringHelper::Translate("Click to add display items on the name tags").c_str() } });
 
             if (ImGui::BeginPopupContextItem(nullptr, ImGuiPopupFlags_MouseButtonLeft | ImGuiPopupFlags_NoReopen)) {
                 optionChange |= UIWidgets::CVarCheckbox("ID", CVAR_ACTOR_NAME_TAGS("DisplayID"));

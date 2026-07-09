@@ -749,8 +749,8 @@ void EntranceTrackerSettingsWindow::DrawElement() {
 
     if (ImGui::BeginTable("entranceTrackerSubSettings", 2,
                           ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_SizingStretchProp)) {
-        ImGui::TableSetupColumn("column 1", ImGuiTableColumnFlags_WidthStretch, 150.0f);
-        ImGui::TableSetupColumn("column 2", ImGuiTableColumnFlags_WidthStretch, 150.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("column 1").c_str(), ImGuiTableColumnFlags_WidthStretch, 150.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("column 2").c_str(), ImGuiTableColumnFlags_WidthStretch, 150.0f);
 
         ImGui::TableNextColumn();
 
@@ -870,13 +870,13 @@ void EntranceTrackerWindow::DrawElement() {
         static ImGuiTextFilter locationSearch;
 
         uint8_t nextTreeState = 0;
-        if (Button("Collapse All", ButtonOptions({ { .tooltip = StringHelper::Translate("Collapse all entrance groups").c_str() } })
+        if (Button(StringHelper::Translate("Collapse All").c_str(), ButtonOptions({ { .tooltip = StringHelper::Translate("Collapse all entrance groups").c_str() } })
                                        .Color(THEME_COLOR)
                                        .Size(Sizes::Inline))) {
             nextTreeState = 1;
         }
         ImGui::SameLine();
-        if (Button("Expand All", ButtonOptions({ { .tooltip = StringHelper::Translate("Expand all entrance groups").c_str() } })
+        if (Button(StringHelper::Translate("Expand All").c_str(), ButtonOptions({ { .tooltip = StringHelper::Translate("Expand all entrance groups").c_str() } })
                                      .Color(THEME_COLOR)
                                      .Size(Sizes::Inline))) {
             nextTreeState = 2;

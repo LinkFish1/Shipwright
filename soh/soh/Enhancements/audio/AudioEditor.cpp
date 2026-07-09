@@ -256,7 +256,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
     const std::string lockAllButton = "Lock All" + hiddenTabId;
     const std::string unlockAllButton = "Unlock All" + hiddenTabId;
 
-    ImGui::SeparatorText(tabName.c_str());
+    ImGui::SeparatorText(StringHelper::Translate(tabName).c_str());
     if (UIWidgets::Button(resetAllButton.c_str(),
                           UIWidgets::ButtonOptions().Size(UIWidgets::Sizes::Inline).Color(THEME_COLOR))) {
         auto currentBGM = func_800FA0B4(SEQ_PLAYER_BGM_MAIN);
@@ -539,7 +539,7 @@ void AudioEditor::DrawElement() {
     AudioCollection::Instance->InitializeShufflePool();
 
     UIWidgets::Separator();
-    if (UIWidgets::Button("Randomize All Groups",
+    if (UIWidgets::Button(StringHelper::Translate("Randomize All Groups").c_str(),
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(230.0f, 0.0f))
                               .Color(THEME_COLOR)
@@ -547,7 +547,7 @@ void AudioEditor::DrawElement() {
         AudioEditor_RandomizeAll();
     }
     ImGui::SameLine();
-    if (UIWidgets::Button("Reset All Groups",
+    if (UIWidgets::Button(StringHelper::Translate("Reset All Groups").c_str(),
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(230.0f, 0.0f))
                               .Color(THEME_COLOR)
@@ -555,14 +555,14 @@ void AudioEditor::DrawElement() {
         AudioEditor_ResetAll();
     }
     ImGui::SameLine();
-    if (UIWidgets::Button("Lock All Groups", UIWidgets::ButtonOptions()
+    if (UIWidgets::Button(StringHelper::Translate("Lock All Groups").c_str(), UIWidgets::ButtonOptions()
                                                  .Size(ImVec2(230.0f, 0.0f))
                                                  .Color(THEME_COLOR)
                                                  .Tooltip(StringHelper::Translate("Locks all music and sound effects across tab groups").c_str()))) {
         AudioEditor_LockAll();
     }
     ImGui::SameLine();
-    if (UIWidgets::Button("Unlock All Groups", UIWidgets::ButtonOptions()
+    if (UIWidgets::Button(StringHelper::Translate("Unlock All Groups").c_str(), UIWidgets::ButtonOptions()
                                                    .Size(ImVec2(230.0f, 0.0f))
                                                    .Color(THEME_COLOR)
                                                    .Tooltip(StringHelper::Translate("Unlocks all music and sound effects across tab groups").c_str()))) {
@@ -574,7 +574,7 @@ void AudioEditor::DrawElement() {
     if (ImGui::BeginTabBar("SfxContextTabBar", ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) {
 
         static ImVec2 cellPadding(8.0f, 8.0f);
-        if (ImGui::BeginTabItem("Audio Options")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Audio Options").c_str())) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             ImGui::BeginTable("Audio Options", 1, ImGuiTableFlags_SizingStretchSame);
             ImGui::TableSetupColumn("", ImGuiTableColumnFlags_WidthStretch);
@@ -606,42 +606,42 @@ void AudioEditor::DrawElement() {
             ImGui::EndTabItem();
         }
 
-        if (ImGui::BeginTabItem("Background Music")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Background Music").c_str())) {
             Draw_SfxTab("backgroundMusic", SEQ_BGM_WORLD, "Background Music");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Fanfares")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Fanfares").c_str())) {
             Draw_SfxTab("fanfares", SEQ_FANFARE, "Fanfares");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Events")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Events").c_str())) {
             Draw_SfxTab("event", SEQ_BGM_EVENT, "Events");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Battle Music")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Battle Music").c_str())) {
             Draw_SfxTab("battleMusic", SEQ_BGM_BATTLE, "Battle Music");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Ending")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Ending").c_str())) {
             Draw_SfxTab("ending", SEQ_ENDING, "Ending");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Ocarina")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Ocarina").c_str())) {
             Draw_SfxTab("instrument", SEQ_INSTRUMENT, "Instruments");
             Draw_SfxTab("ocarina", SEQ_OCARINA, "Ocarina");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Sound Effects")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Sound Effects").c_str())) {
             Draw_SfxTab("sfx", SEQ_SFX, "Sound Effects");
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Voices")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Voices").c_str())) {
             Draw_SfxTab("voice", SEQ_VOICE, "Voices");
             ImGui::EndTabItem();
         }
 
         static bool excludeTabOpen = false;
-        if (ImGui::BeginTabItem("Audio Shuffle Pool Management")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Audio Shuffle Pool Management").c_str())) {
             ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, cellPadding);
             if (!excludeTabOpen) {
                 excludeTabOpen = true;
@@ -662,7 +662,7 @@ void AudioEditor::DrawElement() {
             sequenceSearch.Draw("Filter (inc,-exc)", 490.0f);
             UIWidgets::PopStyleInput();
             ImGui::SameLine();
-            if (UIWidgets::Button("Exclude All",
+            if (UIWidgets::Button(StringHelper::Translate("Exclude All").c_str(),
                                   UIWidgets::ButtonOptions().Size(UIWidgets::Sizes::Inline).Color(THEME_COLOR))) {
                 for (auto seqInfo : AudioCollection::Instance->GetIncludedSequences()) {
                     if (sequenceSearch.PassFilter(seqInfo->label.c_str()) && showType[seqInfo->category]) {
@@ -671,7 +671,7 @@ void AudioEditor::DrawElement() {
                 }
             }
             ImGui::SameLine();
-            if (UIWidgets::Button("Include All",
+            if (UIWidgets::Button(StringHelper::Translate("Include All").c_str(),
                                   UIWidgets::ButtonOptions().Size(UIWidgets::Sizes::Inline).Color(THEME_COLOR))) {
                 for (auto seqInfo : AudioCollection::Instance->GetExcludedSequences()) {
                     if (sequenceSearch.PassFilter(seqInfo->label.c_str()) && showType[seqInfo->category]) {

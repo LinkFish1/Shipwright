@@ -30,8 +30,8 @@ void DrawHookRegisteringInfos(const char* hookName) {
                           ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable |
                               ImGuiTableFlags_Borders | ImGuiTableFlags_SizingFixedFit)) {
         ImGui::TableSetupColumn("ID", ImGuiTableColumnFlags_WidthFixed);
-        ImGui::TableSetupColumn("Type", ImGuiTableColumnFlags_WidthFixed);
-        ImGui::TableSetupColumn("Registration Info", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn(StringHelper::Translate("Type").c_str(), ImGuiTableColumnFlags_WidthFixed);
+        ImGui::TableSetupColumn(StringHelper::Translate("Registration Info").c_str(), ImGuiTableColumnFlags_WidthStretch);
         ImGui::TableSetupColumn("# Calls", ImGuiTableColumnFlags_WidthFixed);
         ImGui::TableHeadersRow();
         for (auto& [id, hookInfo] : (*hookData[hookName])) {
@@ -92,12 +92,12 @@ void HookDebuggerWindow::DrawElement() {
                                "(\"__cpp_lib_source_location\" not defined in \"<version>\").");
 #endif
 
-    if (UIWidgets::Button("Expand All", UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
+    if (UIWidgets::Button(StringHelper::Translate("Expand All").c_str(), UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
         hookOptCollapseAll = false;
         hookOptExpandAll = true;
     }
     ImGui::SameLine();
-    if (UIWidgets::Button("Collapse All",
+    if (UIWidgets::Button(StringHelper::Translate("Collapse All").c_str(),
                           UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
         hookOptExpandAll = false;
         hookOptCollapseAll = true;

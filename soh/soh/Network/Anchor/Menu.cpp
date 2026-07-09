@@ -70,7 +70,7 @@ void AnchorMainMenu(WidgetInfo& info) {
     }
     ImGui::Spacing();
 
-    if (UIWidgets::Button("Restore Defaults", UIWidgets::ButtonOptions()
+    if (UIWidgets::Button(StringHelper::Translate("Restore Defaults").c_str(), UIWidgets::ButtonOptions()
                                                   .Size(ImVec2(ImGui::GetContentRegionAvail().x / 2, 0))
                                                   .Color(UIWidgets::Colors::Red))) {
         CVarSetString(CVAR_REMOTE_ANCHOR("Host"), "anchor.hm64.org");
@@ -83,7 +83,7 @@ void AnchorMainMenu(WidgetInfo& info) {
 
     ImGui::SameLine();
 
-    if (UIWidgets::Button("Global Room", UIWidgets::ButtonOptions()
+    if (UIWidgets::Button(StringHelper::Translate("Global Room").c_str(), UIWidgets::ButtonOptions()
                                              .Color(UIWidgets::Colors::Blue)
                                              .Tooltip("Always-online public room so you don't have to experience "
                                                       "Hyrule alone. PVP and syncing are disabled."))) {

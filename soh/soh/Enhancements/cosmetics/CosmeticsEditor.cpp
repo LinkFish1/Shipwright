@@ -520,7 +520,7 @@ void SetMarginAll(const char* ButtonName, bool SetActivated, const char* tooltip
 }
 
 void ResetPositionAll() {
-    if (UIWidgets::Button("Reset all positions",
+    if (UIWidgets::Button(StringHelper::Translate("Reset all positions").c_str(),
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(200.0f, 0.0f))
                               .Color(THEME_COLOR)
@@ -1703,7 +1703,7 @@ void Draw_Placements() {
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
     if (ImGui::CollapsingHeader("Hearts count position")) {
         if (ImGui::BeginTable("tableHeartsCounts", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Hearts counts settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn(StringHelper::Translate("Hearts counts settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
             DrawUseMarginsSlider("Hearts counts", CVAR_COSMETIC("HUD.Hearts"));
             DrawPositionsRadioBoxes(CVAR_COSMETIC("HUD.HeartsCount"));
@@ -1725,7 +1725,7 @@ void Draw_Placements() {
     }
     if (ImGui::CollapsingHeader("Magic Meter position")) {
         if (ImGui::BeginTable("tablemmpos", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Magic meter settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn(StringHelper::Translate("Magic meter settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
             DrawUseMarginsSlider("Magic meter", CVAR_COSMETIC("HUD.MagicBar"));
             DrawPositionsRadioBoxes(CVAR_COSMETIC("HUD.MagicBar"));
@@ -1744,7 +1744,7 @@ void Draw_Placements() {
     if (CVarGetInteger(CVAR_ENHANCEMENT("VisualAgony"), 0) &&
         ImGui::CollapsingHeader("Visual stone of agony position")) {
         if (ImGui::BeginTable("tabledvisualstoneofagony", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Visual stone of agony settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn(StringHelper::Translate("Visual stone of agony settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
             DrawUseMarginsSlider("Visual stone of agony", CVAR_COSMETIC("HUD.VisualSoA"));
             DrawPositionsRadioBoxes(CVAR_COSMETIC("HUD.VisualSoA"));
@@ -1780,7 +1780,7 @@ void Draw_Placements() {
                       CVAR_COSMETIC("HUD.CRightButton"), CVAR_COSMETIC("HUD.CRightButton.PosType"), 0.87f);
     if (CVarGetInteger(CVAR_ENHANCEMENT("DpadEquips"), 0) && ImGui::CollapsingHeader("DPad items position")) {
         if (ImGui::BeginTable("tabledpaditems", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("DPad items settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn(StringHelper::Translate("DPad items settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
             DrawUseMarginsSlider("DPad items", CVAR_COSMETIC("HUD.Dpad"));
             DrawPositionsRadioBoxes(CVAR_COSMETIC("HUD.Dpad"));
@@ -1832,7 +1832,7 @@ void Draw_Placements() {
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 10, 1.0f);
     if (ImGui::CollapsingHeader("Enemy Health Bar position")) {
         if (ImGui::BeginTable("enemyhealthbar", 1, FlagsTable)) {
-            ImGui::TableSetupColumn("Enemy Health Bar settings", FlagsCell, TablesCellsWidth);
+            ImGui::TableSetupColumn(StringHelper::Translate("Enemy Health Bar settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
             std::string posTypeCVar = CVAR_COSMETIC("HUD.EnemyHealthBar.PosType");
             UIWidgets::CVarRadioButton(
@@ -2516,7 +2516,7 @@ void CosmeticsEditorWindow::DrawElement() {
             ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
             UIWidgets::Separator(true, true, 2.0f, 2.0f);
 
-            if (UIWidgets::Button("Give all keys dungeon-specific colors",
+            if (UIWidgets::Button(StringHelper::Translate("Give all keys dungeon-specific colors").c_str(),
                                   UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
                 ApplyDungeonKeyColors();
             }

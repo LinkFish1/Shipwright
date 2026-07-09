@@ -644,12 +644,12 @@ void TimeSplitsDrawSplitsList() {
     ImGui::BeginChild("SplitTable", ImVec2(0.0f, ImGui::GetWindowHeight() - 128.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, ImVec2(4, 0));
     if (ImGui::BeginTable("Splits", 5, ImGuiTableFlags_Hideable | ImGuiTableFlags_Reorderable)) {
-        ImGui::TableSetupColumn("Item Image", ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel,
+        ImGui::TableSetupColumn(StringHelper::Translate("Item Image").c_str(), ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel,
                                 34.0f);
-        ImGui::TableSetupColumn("Item Name");
+        ImGui::TableSetupColumn(StringHelper::Translate("Item Name").c_str());
         ImGui::TableSetupColumn("Current Time");
         ImGui::TableSetupColumn("+/-");
-        ImGui::TableSetupColumn("Prev. Best");
+        ImGui::TableSetupColumn(StringHelper::Translate("Prev. Best").c_str());
         ImGui::TableHeadersRow();
 
         SplitsPushImageButtonStyle();
@@ -728,11 +728,11 @@ void TimeSplitsDrawItemList(uint32_t type) {
     ImGui::BeginTable("Item List", tableSize);
     for (size_t i = 0; i < tableSize; i++) {
         if (i == 0) {
-            ImGui::TableSetupColumn("Item Image",
+            ImGui::TableSetupColumn(StringHelper::Translate("Item Image").c_str(),
                                     ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel, 39.0f);
         } else {
             if (type > SPLIT_TYPE_QUEST) {
-                ImGui::TableSetupColumn("Item Name");
+                ImGui::TableSetupColumn(StringHelper::Translate("Item Name").c_str());
             } else {
                 ImGui::TableSetupColumn(std::to_string(i).c_str(),
                                         ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel, 39.0f);
@@ -869,7 +869,7 @@ void TimeSplitsDrawManageList() {
     ImGui::BeginChild("SplitTable", ImVec2(0.0f, ImGui::GetWindowHeight() - 128.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, ImVec2(4, 0));
     if (ImGui::BeginTable("List Management", 2, ImGuiTableFlags_BordersInnerV)) {
-        ImGui::TableSetupColumn("Preview", ImGuiTableColumnFlags_WidthFixed, 120.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("Preview").c_str(), ImGuiTableColumnFlags_WidthFixed, 120.0f);
         ImGui::TableSetupColumn("Options", ImGuiTableColumnFlags_NoHeaderLabel);
 
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 1.0f, 1.0f, 0.0f));
@@ -878,7 +878,7 @@ void TimeSplitsDrawManageList() {
 
         ImGui::TableNextColumn();
         ImGui::BeginTabBar("List Preview");
-        if (ImGui::BeginTabItem("Preview")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Preview").c_str())) {
             ImGui::BeginChild("PreviewChild");
             for (auto& data : splitList) {
                 float availableWidth = ImGui::GetContentRegionAvail().x;
@@ -918,7 +918,7 @@ void TimeSplitsDrawManageList() {
             TimeSplitsDrawItemList(SPLIT_TYPE_ITEM);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Quest")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Quest").c_str())) {
             TimeSplitsDrawItemList(SPLIT_TYPE_QUEST);
             ImGui::EndTabItem();
         }
@@ -926,7 +926,7 @@ void TimeSplitsDrawManageList() {
             TimeSplitsDrawItemList(SPLIT_TYPE_ENTRANCE);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Bosses")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Bosses").c_str())) {
             TimeSplitsDrawItemList(SPLIT_TYPE_BOSS);
             ImGui::EndTabItem();
         }
@@ -957,11 +957,11 @@ void TimeSplitWindow::DrawElement() {
 
     PushStyleTabs(THEME_COLOR);
     if (ImGui::BeginTabBar("Split Tabs")) {
-        if (ImGui::BeginTabItem("Splits")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Splits").c_str())) {
             TimeSplitsDrawSplitsList();
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Manage List")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Manage List").c_str())) {
             TimeSplitsDrawManageList();
             ImGui::EndTabItem();
         }

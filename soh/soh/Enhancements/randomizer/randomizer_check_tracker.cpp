@@ -1066,7 +1066,7 @@ void CheckTrackerWindow::DrawElement() {
             }
         }
         if (CVarGetInteger(CVAR_TRACKER_CHECK("ExpandCollapseButtonsVisible"), 0)) {
-            if (UIWidgets::Button("Expand All", UIWidgets::ButtonOptions()
+            if (UIWidgets::Button(StringHelper::Translate("Expand All").c_str(), UIWidgets::ButtonOptions()
                                                     .Color(THEME_COLOR)
                                                     .Size({ ImGui::GetContentRegionAvail().x / 2 - 6, 0 }))) {
                 optCollapseAll = false;
@@ -1075,7 +1075,7 @@ void CheckTrackerWindow::DrawElement() {
             }
             ImGui::SameLine();
             if (UIWidgets::Button(
-                    "Collapse All",
+                    StringHelper::Translate("Collapse All").c_str(),
                     UIWidgets::ButtonOptions().Color(THEME_COLOR).Size({ ImGui::GetContentRegionAvail().x - 6, 0 }))) {
                 optExpandAll = false;
                 optCollapseAll = true;
@@ -2124,8 +2124,8 @@ void CheckTrackerWindow::Draw() {
 void CheckTrackerSettingsWindow::DrawElement() {
     ImGui::PushStyleVar(ImGuiStyleVar_CellPadding, { 8.0f, 8.0f });
     if (ImGui::BeginTable("CheckTrackerSettingsTable", 2, ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersV)) {
-        ImGui::TableSetupColumn("General settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
-        ImGui::TableSetupColumn("Section settings", ImGuiTableColumnFlags_WidthStretch, 200.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("General settings").c_str(), ImGuiTableColumnFlags_WidthStretch, 200.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("Section settings").c_str(), ImGuiTableColumnFlags_WidthStretch, 200.0f);
         ImGui::TableHeadersRow();
         ImGui::TableNextRow();
         ImGui::TableNextColumn();

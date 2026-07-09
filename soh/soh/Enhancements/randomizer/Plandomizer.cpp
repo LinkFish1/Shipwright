@@ -848,7 +848,7 @@ void PlandomizerDrawIceTrapSetup(uint32_t index) {
 
     ImGui::PushID(index);
     ImGui::BeginTable("IceTrap", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner);
-    ImGui::TableSetupColumn("Model", ImGuiTableColumnFlags_WidthFixed, 36.0f);
+    ImGui::TableSetupColumn(StringHelper::Translate("Model").c_str(), ImGuiTableColumnFlags_WidthFixed, 36.0f);
     ImGui::TableSetupColumn("Trap Options");
     ImGui::TableHeadersRow();
 
@@ -948,14 +948,14 @@ void PlandomizerDrawOptions() {
             ImGui::Text(StringHelper::Translate("No Spoiler Logs found.").c_str());
         }
         ImGui::BeginDisabled(existingSeedList.empty());
-        if (UIWidgets::Button("Load", UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
+        if (UIWidgets::Button(StringHelper::Translate("Load").c_str(), UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
             logTemp = existingSeedList[selectedList].c_str();
             PlandomizerLoadSpoilerLog(logTemp.c_str());
         }
         ImGui::EndDisabled();
         ImGui::BeginDisabled(spoilerLogData.empty());
         ImGui::SameLine();
-        if (UIWidgets::Button("Save", UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
+        if (UIWidgets::Button(StringHelper::Translate("Save").c_str(), UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
             PlandomizerSaveSpoilerLog();
         }
         ImGui::EndDisabled();
@@ -966,7 +966,7 @@ void PlandomizerDrawOptions() {
         if (spoilerLogData.size() > 0) {
             if (ImGui::BeginTable("HashIcons", 5)) {
                 for (int i = 0; i < 5; i++) {
-                    ImGui::TableSetupColumn("Icon", ImGuiTableColumnFlags_WidthFixed, 34.0f);
+                    ImGui::TableSetupColumn(StringHelper::Translate("Icon").c_str(), ImGuiTableColumnFlags_WidthFixed, 34.0f);
                 }
                 ImGui::TableNextColumn();
 
@@ -1018,19 +1018,19 @@ void PlandomizerDrawOptions() {
         ImGui::EndTable();
     }
 
-    ImGui::SeparatorText("Options");
+    ImGui::SeparatorText(StringHelper::Translate("Options").c_str());
     if (plandoLogData.size() == 0) {
         ImGui::Text(StringHelper::Translate("Please Load Spoiler Data...").c_str());
         return;
     }
 
     if (getTabID == TAB_HINTS) {
-        if (UIWidgets::Button("Clear All Hints",
+        if (UIWidgets::Button(StringHelper::Translate("Clear All Hints").c_str(),
                               UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
             PlandomizerRemoveAllHints();
         }
         ImGui::SameLine();
-        if (UIWidgets::Button("Randomize All Hints",
+        if (UIWidgets::Button(StringHelper::Translate("Randomize All Hints").c_str(),
                               UIWidgets::ButtonOptions().Color(THEME_COLOR).Size(UIWidgets::Sizes::Inline))) {
             PlandomizerRandomizeHint(HINT_ALL, 0);
         }
@@ -1043,7 +1043,7 @@ void PlandomizerDrawOptions() {
                                     .LabelPosition(UIWidgets::LabelPositions::Near)
                                     .ComponentAlignment(UIWidgets::ComponentAlignments::Right));
             ImGui::SameLine();
-            if (UIWidgets::Button("Empty All Rewards", UIWidgets::ButtonOptions()
+            if (UIWidgets::Button(StringHelper::Translate("Empty All Rewards").c_str(), UIWidgets::ButtonOptions()
                                                            .Color(THEME_COLOR)
                                                            .Size(UIWidgets::Sizes::Inline)
                                                            .Padding(ImVec2(10.f, 6.f)))) {
@@ -1059,7 +1059,7 @@ void PlandomizerDrawHintsWindow() {
 
     ImGui::BeginChild("Hints");
     if (ImGui::BeginTable("Hints Window", 1, ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_ScrollY)) {
-        ImGui::TableSetupColumn("Hint Entries");
+        ImGui::TableSetupColumn(StringHelper::Translate("Hint Entries").c_str());
         ImGui::TableSetupScrollFreeze(0, 1);
         ImGui::TableHeadersRow();
 
@@ -1105,11 +1105,11 @@ void PlandomizerDrawLocationsWindow(RandomizerCheckArea rcArea) {
     uint32_t index = 0;
     ImGui::BeginChild("Locations");
     if (ImGui::BeginTable("Locations Window", 4, ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_ScrollY)) {
-        ImGui::TableSetupColumn("Spoiler Log Check Name", ImGuiTableColumnFlags_WidthFixed, 250.0f);
-        ImGui::TableSetupColumn("Spoiler Log Reward", ImGuiTableColumnFlags_WidthFixed, 190.0f);
-        ImGui::TableSetupColumn("New Reward", ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel,
+        ImGui::TableSetupColumn(StringHelper::Translate("Spoiler Log Check Name").c_str(), ImGuiTableColumnFlags_WidthFixed, 250.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("Spoiler Log Reward").c_str(), ImGuiTableColumnFlags_WidthFixed, 190.0f);
+        ImGui::TableSetupColumn(StringHelper::Translate("New Reward").c_str(), ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHeaderLabel,
                                 34.0f);
-        ImGui::TableSetupColumn("Additional Options");
+        ImGui::TableSetupColumn(StringHelper::Translate("Additional Options").c_str());
         ImGui::TableSetupScrollFreeze(0, 1);
         ImGui::TableHeadersRow();
 
@@ -1129,7 +1129,7 @@ void PlandomizerDrawLocationsWindow(RandomizerCheckArea rcArea) {
                 } else if (spoilerData.shopPrice != -1) {
                     ImGui::TableNextColumn();
                     ImGui::BeginTable("Shops", 1, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersInner);
-                    ImGui::TableSetupColumn("Shop Price");
+                    ImGui::TableSetupColumn(StringHelper::Translate("Shop Price").c_str());
                     ImGui::TableHeadersRow();
                     ImGui::TableNextColumn();
                     PlandomizerDrawShopSlider(index);
@@ -1149,12 +1149,12 @@ void PlandomizerDrawSpoilerTable() {
     ImGui::BeginChild("Main");
     UIWidgets::PushStyleTabs(THEME_COLOR);
     if (ImGui::BeginTabBar("Check Tabs")) {
-        if (ImGui::BeginTabItem("Gossip Stones")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Gossip Stones").c_str())) {
             getTabID = TAB_HINTS;
             PlandomizerDrawHintsWindow();
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Locations")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Locations").c_str())) {
             getTabID = TAB_LOCATIONS;
             PlandomizerDrawLocationsWindow(selectedArea);
             ImGui::EndTabItem();
