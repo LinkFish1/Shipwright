@@ -33,13 +33,13 @@ namespace SohGui {
 extern std::shared_ptr<SohMenu> mSohMenu;
 enum setting { UPDATE_aspectRatioX, UPDATE_aspectRatioY, UPDATE_verticalPixelCount };
 
-std::map<int32_t, const char*> aspectRatioPresetLabels = { { 0, StringHelper::Translate("Off").c_str() },
-                                                           { 1, StringHelper::Translate("Custom").c_str() },
-                                                           { 2, StringHelper::Translate("Original (4:3)").c_str() },
-                                                           { 3, StringHelper::Translate("Widescreen (16:9)").c_str() },
-                                                           { 4, StringHelper::Translate("Nintendo 3DS (5:3)").c_str() },
-                                                           { 5, StringHelper::Translate("16:10 (8:5)").c_str() },
-                                                           { 6, StringHelper::Translate("Ultrawide (21:9)").c_str() } };
+std::map<int32_t, const char*> aspectRatioPresetLabels = { { 0, StringHelper::Translate("Off") },
+                                                           { 1, StringHelper::Translate("Custom") },
+                                                           { 2, StringHelper::Translate("Original (4:3)") },
+                                                           { 3, StringHelper::Translate("Widescreen (16:9)") },
+                                                           { 4, StringHelper::Translate("Nintendo 3DS (5:3)") },
+                                                           { 5, StringHelper::Translate("16:10 (8:5)") },
+                                                           { 6, StringHelper::Translate("Ultrawide (21:9)") } };
 const float aspectRatioPresetsX[] = { 0.0f, 16.0f, 4.0f, 16.0f, 5.0f, 16.0f, 21.0f };
 const float aspectRatioPresetsY[] = { 0.0f, 9.0f, 3.0f, 9.0f, 3.0f, 10.0f, 9.0f };
 const int default_aspectRatio = 1; // Default combo list option
@@ -52,7 +52,7 @@ std::vector<const char*> GetPixelCountPresetLabels() {
     static std::vector<std::string> translated;
     if (translated.empty()) {
         for (int i = 0; i < pixelCountPresetRawCount; i++) {
-            translated.push_back(StringHelper::Translate(pixelCountPresetRawLabels[i]));
+            translated.push_back(StringHelper::Translate(pixelCountPresetRawLabels[i]).c_str());
         }
     }
     std::vector<const char*> ptrs;
@@ -119,7 +119,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
     ImGui::BeginDisabled(disabled_everything);
     // Vertical Resolution
     UIWidgets::CVarCheckbox(
-        StringHelper::Translate("Set fixed vertical resolution (disables resolution slider)").c_str(),
+        StringHelper::Translate("Set fixed vertical resolution (disables resolution slider)"),
         CVAR_PREFIX_ADVANCED_RESOLUTION ".VerticalResolutionToggle",
         UIWidgets::CheckboxOptions({ { .disabled = disabled_everything } })
             .Tooltip("Override the resolution scale slider and use the settings below, irrespective of window size.")
@@ -129,7 +129,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
     // }
     UIWidgets::PushStyleCombobox(THEME_COLOR);
     auto pixelCountPresetLabels = GetPixelCountPresetLabels();
-    if (ImGui::Combo(StringHelper::Translate("Pixel Count Presets").c_str(), &item_pixelCount,
+    if (ImGui::Combo(StringHelper::Translate("Pixel Count Presets"), &item_pixelCount,
                      pixelCountPresetLabels.data(), (int)pixelCountPresetLabels.size()) &&
         item_pixelCount != default_pixelCount) { // don't change anything if "Custom" is selected.
         verticalPixelCount = pixelCountPresets[item_pixelCount];
@@ -149,7 +149,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
         if ((aspectRatioX > 0.0f) && (aspectRatioY > 0.0f)) {
             // So basically we're "faking" this one by setting aspectRatioX instead.
             UIWidgets::PushStyleInput(THEME_COLOR);
-            if (ImGui::InputInt(StringHelper::Translate("Horiz. Pixel Count").c_str(), &horizontalPixelCount, 8, 320)) {
+            if (ImGui::InputInt(StringHelper::Translate("Horiz. Pixel Count"), &horizontalPixelCount, 8, 320)) {
                 item_aspectRatio = default_aspectRatio;
                 if (horizontalPixelCount < SCREEN_WIDTH) {
                     horizontalPixelCount = SCREEN_WIDTH;
@@ -177,7 +177,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
     }
     // Vertical Resolution part 2
     UIWidgets::PushStyleInput(THEME_COLOR);
-    if (ImGui::InputInt(StringHelper::Translate("Vertical Pixel Count").c_str(), &verticalPixelCount, 8, 240)) {
+    if (ImGui::InputInt(StringHelper::Translate("Vertical Pixel Count"), &verticalPixelCount, 8, 240)) {
         item_pixelCount = default_pixelCount;
         update[UPDATE_verticalPixelCount] = true;
 
@@ -199,12 +199,12 @@ void ResolutionCustomWidget(WidgetInfo& info) {
         CVarGetInteger(CVAR_PREFIX_ADVANCED_RESOLUTION ".PixelPerfectMode", 0) ? ImGuiTreeNodeFlags_DefaultOpen
                                                                                : ImGuiTreeNodeFlags_None;
     UIWidgets::PushStyleHeader(THEME_COLOR);
-    if (ImGui::CollapsingHeader(StringHelper::Translate("Integer Scaling Settings").c_str(), IntegerScalingResolvedImGuiFlag)) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Integer Scaling Settings"), IntegerScalingResolvedImGuiFlag)) {
         const bool disabled_pixelPerfectMode =
             !CVarGetInteger(CVAR_PREFIX_ADVANCED_RESOLUTION ".PixelPerfectMode", 0) || disabled_everything;
         // Pixel Perfect Mode
         UIWidgets::CVarCheckbox(
-            StringHelper::Translate("Pixel Perfect Mode").c_str(), CVAR_PREFIX_ADVANCED_RESOLUTION ".PixelPerfectMode",
+            StringHelper::Translate("Pixel Perfect Mode"), CVAR_PREFIX_ADVANCED_RESOLUTION ".PixelPerfectMode",
             UIWidgets::CheckboxOptions({ { .disabled = disabled_pixelCount || disabled_everything } })
                 .Tooltip("Don't scale image to fill window.")
                 .Color(THEME_COLOR));
@@ -215,7 +215,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
 
         // Integer Scaling
         UIWidgets::CVarSliderInt(
-            fmt::format(StringHelper::Translate("Integer scale factor: {}").c_str(), max_integerScaleFactor).c_str(),
+            fmt::format(StringHelper::Translate("Integer scale factor: {}"), max_integerScaleFactor).c_str(),
             CVAR_PREFIX_ADVANCED_RESOLUTION ".IntegerScale.Factor",
             UIWidgets::IntSliderOptions(
                 { { .disabled = disabled_pixelPerfectMode ||
@@ -234,7 +234,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
         }
 
         UIWidgets::CVarCheckbox(
-            StringHelper::Translate("Automatically scale image to fit viewport").c_str(),
+            StringHelper::Translate("Automatically scale image to fit viewport"),
             CVAR_PREFIX_ADVANCED_RESOLUTION ".IntegerScale.FitAutomatically",
             UIWidgets::CheckboxOptions({ { .disabled = disabled_pixelPerfectMode } })
                 .DefaultValue(true)
@@ -251,7 +251,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
 
     // Collapsible panel for additional settings
     UIWidgets::PushStyleHeader(THEME_COLOR);
-    if (ImGui::CollapsingHeader(StringHelper::Translate("Additional Settings").c_str())) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Additional Settings"))) {
 #if defined(__SWITCH__) || defined(__WIIU__)
         // Disable aspect correction, stretching the framebuffer to fill the viewport.
         // This option is only really needed on systems limited to 16:9 TV resolutions, such as consoles.
@@ -272,7 +272,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
             // Having this button should hopefully prevent support headaches.
             ImGui::TextColored(messageColor[MESSAGE_QUESTION], ICON_FA_QUESTION_CIRCLE
                                " If the image is stretched and you don't know why, click this.");
-            if (ImGui::Button(StringHelper::Translate("Click to reenable aspect correction.").c_str())) {
+            if (ImGui::Button(StringHelper::Translate("Click to reenable aspect correction."))) {
                 CVarSetInteger(CVAR_PREFIX_ADVANCED_RESOLUTION ".IgnoreAspectCorrection", 0);
                 Ship::Context::GetInstance()->GetWindow()->GetGui()->SaveConsoleVariablesNextFrame();
             }
@@ -281,7 +281,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
 #endif
 
         // A requested addition; an alternative way of displaying the resolution field.
-        if (UIWidgets::Checkbox(StringHelper::Translate("Show a horizontal resolution field, instead of aspect ratio.").c_str(), &showHorizontalResField,
+        if (UIWidgets::Checkbox(StringHelper::Translate("Show a horizontal resolution field, instead of aspect ratio."), &showHorizontalResField,
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR))) {
             if (!showHorizontalResField && (aspectRatioX > 0.0f)) { // when turning this setting off
                 // Refresh relevant values
@@ -309,7 +309,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
                 disabled_everything;
             if (UIWidgets::CVarCheckbox(
                     StringHelper::Translate("Prevent integer scaling from exceeding screen bounds.\n"
-                                            "(Makes screen bounds take priority over specified factor.)").c_str(),
+                                            "(Makes screen bounds take priority over specified factor.)"),
                     CVAR_PREFIX_ADVANCED_RESOLUTION ".IntegerScale.NeverExceedBounds",
                     UIWidgets::CheckboxOptions({ { .disabled = disabled_neverExceedBounds } })
                         .Tooltip("Prevents integer scaling factor from exceeding screen bounds.\n\n"
@@ -454,7 +454,7 @@ void RegisterResolutionWidgets() {
             info.activeDisables.push_back(DISABLE_FOR_ADVANCED_RESOLUTION_OFF);
         }
     });
-    mSohMenu->AddWidget(path, StringHelper::Translate("(Select \"Off\" to disable.)").c_str(), WIDGET_TEXT)
+    mSohMenu->AddWidget(path, StringHelper::Translate("(Select \"Off\" to disable.)"), WIDGET_TEXT)
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             if (mSohMenu->GetDisabledMap().at(DISABLE_FOR_ADVANCED_RESOLUTION_OFF).active) {
@@ -525,7 +525,7 @@ void RegisterResolutionWidgets() {
                     ImGui::Dummy({ 0, 2 });
                     const float resolvedAspectRatio =
                         (float)gfx_current_dimensions.width / gfx_current_dimensions.height;
-                    ImGui::Text(StringHelper::Translate("Aspect ratio: %.2f:1").c_str(), resolvedAspectRatio);
+                    ImGui::Text(StringHelper::Translate("Aspect ratio: %.2f:1"), resolvedAspectRatio);
                 }
             }
         });
