@@ -33,7 +33,7 @@ void SohMenu::AddMenuNetwork() {
     AddSidebarEntry("Network", path.sidebarName, 3);
 
     AddWidget(path,
-              "Sail is a networking protocol designed to facilitate remote "
+              StringHelper::Translate("Sail is a networking protocol designed to facilitate remote "
               "control of the Ship of Harkinian client. It is intended to "
               "be utilized alongside a Sail server, for which we provide a "
               "few straightforward implementations on our GitHub. The current "
@@ -41,7 +41,7 @@ void SohMenu::AddMenuNetwork() {
               "and SAMMI Bot, feel free to contribute your own!\n"
               "\n"
               "Click this button to copy the link to the Sail Github "
-              "page to your clipboard.",
+              "page to your clipboard.").c_str(),
               WIDGET_TEXT);
     AddWidget(path, ICON_FA_CLIPBOARD "##Sail", WIDGET_BUTTON)
         .Callback([](WidgetInfo& info) {
@@ -110,10 +110,10 @@ void SohMenu::AddMenuNetwork() {
 
     AddWidget(path, "About Crowd Control", WIDGET_SEPARATOR_TEXT);
     AddWidget(path,
-              "Crowd Control is a platform that allows viewers to interact "
+              StringHelper::Translate("Crowd Control is a platform that allows viewers to interact "
               "with a streamer's game in real time.\n"
               "\n"
-              "Please head over to www.crowdcontrol.live for more information!",
+              "Please head over to www.crowdcontrol.live for more information!").c_str(),
               WIDGET_TEXT);
 
     AddWidget(path, "Connect to Crowd Control", WIDGET_SEPARATOR_TEXT);
@@ -178,8 +178,8 @@ void SohMenu::AddMenuNetwork() {
     AddWidget(path, "Spawned Enemies Ignored Ingame", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_REMOTE_CROWD_CONTROL("SpawnedEnemiesIgnoredIngame"))
         .RaceDisable(true)
-        .Options(CheckboxOptions().Tooltip("Enemies spawned by CrowdControl won't be considered for \"clear enemy "
-                                           "rooms\", so they don't need to be killed to complete these rooms."));
+        .Options(CheckboxOptions().Tooltip(StringHelper::Translate("Enemies spawned by CrowdControl won't be considered for \"clear enemy "
+                                           "rooms\", so they don't need to be killed to complete these rooms.").c_str()));
     path.sidebarName = "Anchor";
     AddSidebarEntry("Network", path.sidebarName, 2);
 }

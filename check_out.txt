@@ -1,0 +1,8 @@
+num keys: 1506
+has About: True
+has select off: True
+'(Select \\"Off\\" to disable.)'
+'-5 will be half as much time, +5 will be 6x as much time. Affects timed switches, torches, GTG statue '
+'0.25 Hearts'
+extracted line1 repr: '(Select \\"Off\\" to disable.)'
+extracted line1 in keys: True

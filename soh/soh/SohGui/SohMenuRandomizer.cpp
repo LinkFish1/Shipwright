@@ -636,20 +636,20 @@ void SohMenu::AddMenuRandomizer() {
         .CVar(CVAR_RANDOMIZER_ENHANCEMENT("QuestItemFanfares"))
         .RaceDisable(false)
         .Options(CheckboxOptions().Tooltip(
-            "Play unique fanfares when obtaining quest items (medallions/stones/songs). Note that these "
-            "fanfares can be longer than usual."));
+            StringHelper::Translate("Play unique fanfares when obtaining quest items (medallions/stones/songs). Note that these "
+            "fanfares can be longer than usual.").c_str()));
     AddWidget(path, "Mysterious Shuffled Items", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_RANDOMIZER_ENHANCEMENT("MysteriousShuffle"))
         .Options(CheckboxOptions().Tooltip(
-            "Displays a \"Mystery Item\" model in place of any freestanding/GS/shop items that were shuffled, "
+            StringHelper::Translate("Displays a \"Mystery Item\" model in place of any freestanding/GS/shop items that were shuffled, "
             "and replaces item names for them and scrubs and merchants, regardless of hint settings, "
-            "so you never know what you're getting."));
+            "so you never know what you're getting.").c_str()));
     AddWidget(path, "Simpler Boss Soul Models", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_RANDOMIZER_ENHANCEMENT("SimplerBossSoulModels"))
         .RaceDisable(false)
         .Options(CheckboxOptions().Tooltip(
-            "When shuffling boss souls, they'll appear as a simpler model instead of showing the boss' models."
-            "This might make boss souls more distinguishable from a distance, and can help with performance."));
+            StringHelper::Translate("When shuffling boss souls, they'll appear as a simpler model instead of showing the boss' models."
+            "This might make boss souls more distinguishable from a distance, and can help with performance.").c_str()));
     AddWidget(path, "Skip Get Item Animations", WIDGET_CVAR_COMBOBOX)
         .CVar(CVAR_RANDOMIZER_ENHANCEMENT("TimeSavers.SkipGetItemAnimation"))
         .Options(ComboboxOptions().ComboMap(skipGetItemAnimationOptions).DefaultIndex(SGIA_JUNK));

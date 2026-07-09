@@ -126,16 +126,16 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_DEVELOPER_TOOLS("ToonLighting.ShowDebug"))
         .PreFunc(hideUnlessCelEnabled)
         .Options(CheckboxOptions().Tooltip(
-            "Draws a debug ray from each actor for every candidate light (coloured by the light, longer "
+            StringHelper::Translate("Draws a debug ray from each actor for every candidate light (coloured by the light, longer "
             "when stronger), a cyan range ring around each point light, and a bold magenta needle down "
-            "the chosen key light, so you can see which light is winning and where the key points."));
+            "the chosen key light, so you can see which light is winning and where the key points.").c_str()));
     AddWidget(path, "Highlight Lit Objects", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_DEVELOPER_TOOLS("ToonLighting.HighlightBands"))
         .PreFunc(hideUnlessCelEnabled)
         .Options(CheckboxOptions().Tooltip(
-            "Renders every cel-shaded object as flat white on the lit side and flat black in shadow (the "
+            StringHelper::Translate("Renders every cel-shaded object as flat white on the lit side and flat black in shadow (the "
             "texture is discarded), so it is obvious which draws are being relit — handy for confirming "
-            "whether large surfaces like water or lava are getting relit."));
+            "whether large surfaces like water or lava are getting relit.").c_str()));
 
     // ===========================================================================================
     // Lights — Wind Waker flame-flicker tweaks (Misc) plus the cast light pools (Light Casting). On by
@@ -341,9 +341,9 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_DEVELOPER_TOOLS("WorldLighting.ShowLightSpheres"))
         .PreFunc(hideUnlessLightCastEnabled)
         .Options(CheckboxOptions().Tooltip(
-            "Overlays a translucent faceted shell of each light's icosphere — the volume used for its cast "
+            StringHelper::Translate("Overlays a translucent faceted shell of each light's icosphere — the volume used for its cast "
             "pool — tinted by the light, so you can see where the pools are, their size, and their spin. "
-            "(The renderer has no line primitive, so this is a shell rather than a true wireframe.)"));
+            "(The renderer has no line primitive, so this is a shell rather than a true wireframe.)").c_str()));
 
     // Held Deku stick — its own light source. Unlike the casting groups above it feeds Cel Shading + Actor
     // Shadows even with Light Casting off, so it lives in the right column with its toggle always visible;
@@ -481,8 +481,8 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_DEVELOPER_TOOLS("WorldShadows.ShowVolume"))
         .PreFunc(hideUnlessShadowsEnabled)
         .Options(CheckboxOptions().Tooltip(
-            "Draws the actual 3D shadow volume translucently so you can see its shape: black top/bottom caps, "
-            "blue side walls. The ground inside this volume is what gets shadowed."));
+            StringHelper::Translate("Draws the actual 3D shadow volume translucently so you can see its shape: black top/bottom caps, "
+            "blue side walls. The ground inside this volume is what gets shadowed.").c_str()));
 
     // ===========================================================================================
     // Sky — the Wind Waker-style sky replacement: gradient dome + drifting clouds + night stars.
