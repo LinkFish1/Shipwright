@@ -1380,7 +1380,7 @@ void SohInputEditorWindow::DrawCameraControlPanel() {
     CVarCheckbox(StringHelper::Translate("Right Stick Aiming").c_str(), CVAR_SETTING("Controls.RightStickAim"),
                  CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip(StringHelper::Translate("Allows for aiming with the right stick in:\n-First-Person/C-Up view\n-Weapon Aiming").c_str());
+                     .Tooltip("Allows for aiming with the right stick in:\n-First-Person/C-Up view\n-Weapon Aiming"));
     CVarCheckbox(StringHelper::Translate("Allow moving while in first-person mode").c_str(),
                  CVAR_SETTING("MoveInFirstPerson"),
                  CheckboxOptions({ { .disabled = !CVarGetInteger(CVAR_SETTING("Controls.RightStickAim"), 0),
@@ -1390,12 +1390,12 @@ void SohInputEditorWindow::DrawCameraControlPanel() {
     CVarCheckbox(StringHelper::Translate("Invert Aiming X Axis").c_str(), CVAR_SETTING("Controls.InvertAimingXAxis"),
                  CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip(StringHelper::Translate("Inverts the Camera X Axis in:\n-First-Person/C-Up view\n-Weapon Aiming").c_str());
+                     .Tooltip("Inverts the Camera X Axis in:\n-First-Person/C-Up view\n-Weapon Aiming"));
     CVarCheckbox(StringHelper::Translate("Invert Aiming Y Axis").c_str(), CVAR_SETTING("Controls.InvertAimingYAxis"),
                  CheckboxOptions()
                      .Color(THEME_COLOR)
                      .DefaultValue(true)
-                     .Tooltip(StringHelper::Translate("Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming").c_str());
+                     .Tooltip("Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming"));
     CVarCheckbox(StringHelper::Translate("Invert Shield Aiming X Axis").c_str(),
                  CVAR_SETTING("Controls.InvertShieldAimingXAxis"),
                  CheckboxOptions().Color(THEME_COLOR).DefaultValue(true).Tooltip(StringHelper::Translate("Inverts the Shield Aiming X Axis").c_str()));
@@ -1921,7 +1921,7 @@ void RegisterInputEditorWidgets() {
     dpadPause.CVar(CVAR_SETTING("DPadOnPause"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                    .Tooltip(StringHelper::Translate("Navigate Pause with the D-pad\nIf used with \"D-pad as Equip Items\", you must hold C-Up to equip instead of navigate").c_str());
+                    .Tooltip("Navigate Pause with the D-pad\nIf used with \"D-pad as Equip Items\", you must hold C-Up to equip instead of navigate"));
     SohGui::mSohMenu->AddSearchWidget({ dpadPause, "Settings", "Controls", "Dpad Controls" });
 
     dpadText = { .name = "D-pad Support in Text Boxes", .type = WidgetType::WIDGET_CVAR_CHECKBOX };

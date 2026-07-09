@@ -2410,7 +2410,7 @@ void CosmeticsEditorWindow::DrawElement() {
         UIWidgets::ComboboxOptions()
             .DefaultIndex(RANDOMIZE_OFF)
             .Color(THEME_COLOR)
-            .Tooltip(StringHelper::Translate("Set when the cosmetics is automaticly randomized:\n- Manual: Manually randomize cosmetics by pressing the 'Randomize all' button\n- On New Scene : Randomizes when you enter a new scene.\n- On Rando Gen Only: Randomizes only when you generate a new randomizer.\n- On File Load: Randomizes on File Load.\n- On File Load (Seeded): Randomizes on file load based on the current randomizer seed/file.").c_str());
+            .Tooltip("Set when the cosmetics is automaticly randomized:\n- Manual: Manually randomize cosmetics by pressing the 'Randomize all' button\n- On New Scene : Randomizes when you enter a new scene.\n- On Rando Gen Only: Randomizes only when you generate a new randomizer.\n- On File Load: Randomizes on File Load.\n- On File Load (Seeded): Randomizes on file load based on the current randomizer seed/file."));
     UIWidgets::CVarCheckbox(
         StringHelper::Translate("Advanced Mode").c_str(), CVAR_COSMETIC("AdvancedMode"),
         UIWidgets::CheckboxOptions()
