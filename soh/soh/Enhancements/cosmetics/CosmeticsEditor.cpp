@@ -76,20 +76,22 @@ extern std::shared_ptr<SohMenu> mSohMenu;
 #define dgEndGrayscaleAndEndDlistDL "__OTR__helpers/cosmetics/gEndGrayscaleAndEndDlistDL"
 static const ALIGN_ASSET(2) char gEndGrayscaleAndEndDlistDL[] = dgEndGrayscaleAndEndDlistDL;
 
+// NOTE: plain literals, not StringHelper::Translate(...).c_str() — see aspectRatioPresetLabels.
+// The group label is translated live at the read site (see DrawElement).
 std::map<CosmeticGroup, const char*> groupLabels = {
-    { COSMETICS_GROUP_LINK, StringHelper::Translate("Link").c_str() },
-    { COSMETICS_GROUP_MIRRORSHIELD, StringHelper::Translate("Mirror Shield").c_str() },
-    { COSMETICS_GROUP_SWORDS, StringHelper::Translate("Swords").c_str() },
-    { COSMETICS_GROUP_GLOVES, StringHelper::Translate("Gloves").c_str() },
+    { COSMETICS_GROUP_LINK, "Link" },
+    { COSMETICS_GROUP_MIRRORSHIELD, "Mirror Shield" },
+    { COSMETICS_GROUP_SWORDS, "Swords" },
+    { COSMETICS_GROUP_GLOVES, "Gloves" },
     { COSMETICS_GROUP_EQUIPMENT, "Equipment" },
     { COSMETICS_GROUP_KEYRING, "Keyring" },
-    { COSMETICS_GROUP_SMALL_KEYS, StringHelper::Translate("Small Keys").c_str() },
-    { COSMETICS_GROUP_BOSS_KEYS, StringHelper::Translate("Boss Keys").c_str() },
-    { COSMETICS_GROUP_CONSUMABLE, StringHelper::Translate("Consumables").c_str() },
-    { COSMETICS_GROUP_HUD, StringHelper::Translate("HUD").c_str() },
-    { COSMETICS_GROUP_KALEIDO, StringHelper::Translate("Pause Menu").c_str() },
-    { COSMETICS_GROUP_TITLE, StringHelper::Translate("Title Screen").c_str() },
-    { COSMETICS_GROUP_NPC, StringHelper::Translate("NPCs").c_str() },
+    { COSMETICS_GROUP_SMALL_KEYS, "Small Keys" },
+    { COSMETICS_GROUP_BOSS_KEYS, "Boss Keys" },
+    { COSMETICS_GROUP_CONSUMABLE, "Consumables" },
+    { COSMETICS_GROUP_HUD, "HUD" },
+    { COSMETICS_GROUP_KALEIDO, "Pause Menu" },
+    { COSMETICS_GROUP_TITLE, "Title Screen" },
+    { COSMETICS_GROUP_NPC, "NPCs" },
     { COSMETICS_GROUP_WORLD, "World" },
     { COSMETICS_GROUP_MAGIC, "Magic Effects" },
     { COSMETICS_GROUP_ARROWS, "Arrow Effects" },
@@ -97,15 +99,19 @@ std::map<CosmeticGroup, const char*> groupLabels = {
     { COSMETICS_GROUP_TRAILS, "Trails" },
     { COSMETICS_GROUP_NAVI, "Navi" },
     { COSMETICS_GROUP_IVAN, "Ivan" },
-    { COSMETICS_GROUP_MESSAGE, StringHelper::Translate("Message").c_str() },
+    { COSMETICS_GROUP_MESSAGE, "Message" },
 };
 
+// NOTE: option strings are stored as plain literals (NOT StringHelper::Translate(...).c_str()),
+// because Translate returns a temporary std::string whose buffer is freed right after .c_str(),
+// leaving a dangling pointer that crashes CalcComboWidth/strlen at draw time. The combobox
+// translates each option live (see UIWidgets::Combobox), so these still render in Chinese.
 static const std::map<int32_t, const char*> cosmeticsRandomizerModes = {
-    { RANDOMIZE_OFF, StringHelper::Translate("Manual").c_str() },
-    { RANDOMIZE_ON_NEW_SCENE, StringHelper::Translate("On New Scene").c_str() },
-    { RANDOMIZE_ON_RANDO_GEN_ONLY, StringHelper::Translate("On Rando Gen Only").c_str() },
-    { RANDOMIZE_ON_FILE_LOAD, StringHelper::Translate("On File Load").c_str() },
-    { RANDOMIZE_ON_FILE_LOAD_SEEDED, StringHelper::Translate("On File Load (Seeded)").c_str() },
+    { RANDOMIZE_OFF, "Manual" },
+    { RANDOMIZE_ON_NEW_SCENE, "On New Scene" },
+    { RANDOMIZE_ON_RANDO_GEN_ONLY, "On Rando Gen Only" },
+    { RANDOMIZE_ON_FILE_LOAD, "On File Load" },
+    { RANDOMIZE_ON_FILE_LOAD_SEEDED, "On File Load (Seeded)" },
 };
 
 typedef struct {
@@ -2291,9 +2297,10 @@ void DrawCosmeticGroup(CosmeticGroup cosmeticGroup) {
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
 }
 
+// NOTE: plain literals, not StringHelper::Translate(...).c_str() — see cosmeticsRandomizerModes above.
 static const char* colorSchemes[2] = {
-    StringHelper::Translate("N64").c_str(),
-    StringHelper::Translate("Gamecube").c_str(),
+    "N64",
+    "Gamecube",
 };
 
 void CosmeticsEditorWindow::ApplyDungeonKeyColors() {

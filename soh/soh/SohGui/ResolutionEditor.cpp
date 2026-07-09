@@ -33,13 +33,16 @@ namespace SohGui {
 extern std::shared_ptr<SohMenu> mSohMenu;
 enum setting { UPDATE_aspectRatioX, UPDATE_aspectRatioY, UPDATE_verticalPixelCount };
 
-std::map<int32_t, const char*> aspectRatioPresetLabels = { { 0, StringHelper::Translate("Off").c_str() },
-                                                           { 1, StringHelper::Translate("Custom").c_str() },
-                                                           { 2, StringHelper::Translate("Original (4:3)").c_str() },
-                                                           { 3, StringHelper::Translate("Widescreen (16:9)").c_str() },
-                                                           { 4, StringHelper::Translate("Nintendo 3DS (5:3)").c_str() },
-                                                           { 5, StringHelper::Translate("16:10 (8:5)").c_str() },
-                                                           { 6, StringHelper::Translate("Ultrawide (21:9)").c_str() } };
+// NOTE: plain literals, not StringHelper::Translate(...).c_str() — Translate returns a
+// temporary std::string freed right after .c_str(), leaving a dangling pointer that crashes
+// CalcComboWidth/strlen at draw time. The combobox translates options live (UIWidgets::Combobox).
+std::map<int32_t, const char*> aspectRatioPresetLabels = { { 0, "Off" },
+                                                           { 1, "Custom" },
+                                                           { 2, "Original (4:3)" },
+                                                           { 3, "Widescreen (16:9)" },
+                                                           { 4, "Nintendo 3DS (5:3)" },
+                                                           { 5, "16:10 (8:5)" },
+                                                           { 6, "Ultrawide (21:9)" } };
 const float aspectRatioPresetsX[] = { 0.0f, 16.0f, 4.0f, 16.0f, 5.0f, 16.0f, 21.0f };
 const float aspectRatioPresetsY[] = { 0.0f, 9.0f, 3.0f, 9.0f, 3.0f, 10.0f, 9.0f };
 const int default_aspectRatio = 1; // Default combo list option

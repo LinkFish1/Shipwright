@@ -981,12 +981,13 @@ bool Combobox(std::string label, T* value, const char* (&comboArray)[N], const C
     }
 
     ImGui::SetNextItemWidth(comboWidth);
-    if (ImGui::BeginCombo(invisibleLabel, comboArray[currentValueIndex], options.flags)) {
+    if (ImGui::BeginCombo(invisibleLabel, StringHelper::Translate(comboArray[currentValueIndex]).c_str(),
+                           options.flags)) {
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(10.0f, 10.0f));
         for (size_t i = 0; i < N; ++i) {
             auto newValue = static_cast<T>(i);
             if (strlen(comboArray[i]) > 1) {
-                if (ImGui::Selectable(comboArray[i], newValue == *value)) {
+                if (ImGui::Selectable(StringHelper::Translate(comboArray[i]).c_str(), newValue == *value)) {
                     *value = newValue;
                     dirty = true;
                 }
@@ -1002,7 +1003,8 @@ bool Combobox(std::string label, T* value, const char* (&comboArray)[N], const C
                 ImGui::SameLine();
                 ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             } else if (options.labelPosition == LabelPositions::Far) {
-                float width = ImGui::CalcTextSize(comboArray[*value]).x + ImGui::GetStyle().FramePadding.x * 2;
+                float width = ImGui::CalcTextSize(StringHelper::Translate(comboArray[*value]).c_str()).x +
+                             ImGui::GetStyle().FramePadding.x * 2;
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - width);
                 ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }

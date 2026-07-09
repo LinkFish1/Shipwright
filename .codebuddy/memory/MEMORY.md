@@ -11,3 +11,11 @@
 - C2143 “缺少’)’(在’;’的前面)” 常表现为**级联误报**：真正根因往往是前面某处 `CVarCheckbox(` / `Options(` / `CVarCombobox(` 调用**少了一个闭合 `)`**（应为 `));` 而非 `);`）。
 - 对照同级能编译的调用（如 `...c_str()));`）即可定位缺失的右括号。
 - 用户约定：仅当明确说“编译”时才执行构建；指出未翻译文本时只改翻译表/包裹代码，不自动编译。
+
+## 组合框崩溃根因（关键！）
+- **症状**：启动/打开 CosmeticEditor、ResolutionEditor 等含组合框的界面时，`0xc0000005` 访问违规，栈顶 `ImGui::CalcTextSize → UIWidgets::CalcComboWidth (UIWidgets.cpp:447) → Combobox → CVarCombobox → CosmeticsEditor::DrawElement`。
+- **根因**：把组合框**选项数组成员**写成 `StringHelper::Translate("...").c_str()` 存进 `const char*` 容器（`std::map<...,const char*>` 或 `const char* []`）。`Translate` 返回临时 `std::string`，`.c_str()` 指针在数组/map 初始化结束后立即失效 → **悬垂指针**；绘制时 `Combobox` 里的 `strlen(string)` / `CalcTextSize(longest)` 读野指针 → 崩。
+- **已修复的 4 处**：`cosmeticsRandomizerModes`、`colorSchemes`（CosmeticsEditor.cpp）、`aspectRatioPresetLabels`（ResolutionEditor.cpp:36）、`groupLabels`（CosmeticsEditor.cpp:79）。
+- **正确写法**：选项容器存**纯英文字面量**；在 `Combobox`/`CVarCombobox` 的绘制处（`BeginCombo`/`Selectable` 的 label）用 `StringHelper::Translate(comboArray[i]).c_str()` **实时翻译**（临时串在语句内有效，不悬垂）。`groupLabels.at(...)` 读取处同理包裹 `Translate`。
+- 排查入口：崩溃日志在 `x64\Release\logs\Ship of Harkinian.log`，含 `Exception: 0xc0000005` 与 `Traceback:` 栈。
+
