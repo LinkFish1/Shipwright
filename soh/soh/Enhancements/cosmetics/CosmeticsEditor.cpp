@@ -1,4 +1,5 @@
 #include "CosmeticsEditor.h"
+#include <ship/utils/StringHelper.h>
 #include "cosmeticsTypes.h"
 #include "authenticGfxPatches.h"
 #include "soh/Enhancements/game-interactor/GameInteractor.h"
@@ -517,7 +518,7 @@ void ResetPositionAll() {
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(200.0f, 0.0f))
                               .Color(THEME_COLOR)
-                              .Tooltip("Revert every element to use their original position and no margins"))) {
+                              .Tooltip(StringHelper::Translate("Revert every element to use their original position and no margins").c_str()))) {
         for (auto cvarName : MarginCvarList) {
             std::string cvarPosType = std::string(cvarName).append(".PosType");
             std::string cvarNameMargins = std::string(cvarName).append(".UseMargins");
@@ -1535,7 +1536,7 @@ void DrawUseMarginsSlider(const std::string ElementName, const std::string CvarN
     UIWidgets::CVarCheckbox(Label.c_str(), CvarLabel.c_str(),
                             UIWidgets::CheckboxOptions()
                                 .Color(THEME_COLOR)
-                                .Tooltip("Using this allow you move the element with General margins sliders"));
+                                .Tooltip(StringHelper::Translate("Using this allow you move the element with General margins sliders").c_str()));
 }
 
 void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = true) {
@@ -1543,15 +1544,15 @@ void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = 
     UIWidgets::CVarRadioButton("Original position", CvarLabel.c_str(), 0,
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
-                                   .Tooltip("This will use original intended elements position"));
+                                   .Tooltip(StringHelper::Translate("This will use original intended elements position").c_str()));
     UIWidgets::CVarRadioButton("Anchor to the left", CvarLabel.c_str(), 1,
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
-                                   .Tooltip("This will make your elements follow the left side of your game window"));
+                                   .Tooltip(StringHelper::Translate("This will make your elements follow the left side of your game window").c_str()));
     UIWidgets::CVarRadioButton("Anchor to the right", CvarLabel.c_str(), 2,
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
-                                   .Tooltip("This will make your elements follow the right side of your game window"));
+                                   .Tooltip(StringHelper::Translate("This will make your elements follow the right side of your game window").c_str()));
     if (NoAnchorEnabled) {
         UIWidgets::CVarRadioButton(
             "No anchors", CvarLabel.c_str(), 3,
@@ -1561,7 +1562,7 @@ void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = 
     }
     UIWidgets::CVarRadioButton(
         "Hidden", CvarLabel.c_str(), 4,
-        UIWidgets::RadioButtonsOptions().Color(THEME_COLOR).Tooltip("This will make your elements hidden"));
+        UIWidgets::RadioButtonsOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("This will make your elements hidden").c_str()));
 }
 
 void DrawPositionSlider(const std::string CvarName, int MinY, int MaxY, int MinX, int MaxX) {
@@ -1576,7 +1577,7 @@ void DrawPositionSlider(const std::string CvarName, int MinY, int MaxY, int MinX
                                  .DefaultValue(0)
                                  .Size(ImVec2(300.0f, 0.0f))
                                  .Color(THEME_COLOR)
-                                 .Tooltip("This slider is used to move Up and Down your elements."));
+                                 .Tooltip(StringHelper::Translate("This slider is used to move Up and Down your elements.").c_str()));
     UIWidgets::CVarSliderInt("Left <-> Right : %d", PosXCvar.c_str(),
                              UIWidgets::IntSliderOptions()
                                  .Min(MinX)
@@ -1584,7 +1585,7 @@ void DrawPositionSlider(const std::string CvarName, int MinY, int MaxY, int MinX
                                  .DefaultValue(0)
                                  .Size(ImVec2(300.0f, 0.0f))
                                  .Color(THEME_COLOR)
-                                 .Tooltip("This slider is used to move Left and Right your elements."));
+                                 .Tooltip(StringHelper::Translate("This slider is used to move Left and Right your elements.").c_str()));
 }
 
 void DrawScaleSlider(const std::string CvarName, float DefaultValue) {
@@ -1657,7 +1658,7 @@ void C_Button_Dropdown(const char* Header_Title, const char* Table_ID, const cha
 
 void Draw_Placements() {
     UIWidgets::PushStyleHeader(THEME_COLOR);
-    ImGui::SeparatorText("General Margins Settings");
+    ImGui::SeparatorText(StringHelper::Translate("General Margins Settings").c_str());
     UIWidgets::CVarSliderInt("Top: %dpx", CVAR_COSMETIC("HUD.Margin.T"),
                              UIWidgets::IntSliderOptions()
                                  .Min(static_cast<s16>(ImGui::GetWindowViewport()->Size.y / 2) * -1)
@@ -1712,7 +1713,7 @@ void Draw_Placements() {
                     .DefaultValue(0)
                     .Size(ImVec2(300.0f, 0.0f))
                     .Color(THEME_COLOR)
-                    .Tooltip("This will set the length of a row of hearts. Set to 0 for unlimited length."));
+                    .Tooltip(StringHelper::Translate("This will set the length of a row of hearts. Set to 0 for unlimited length.").c_str()));
             ImGui::EndTable();
         }
     }
@@ -1726,7 +1727,7 @@ void Draw_Placements() {
                 "Anchor to life bar", CVAR_COSMETIC("HUD.MagicBar.PosType"), 5,
                 UIWidgets::RadioButtonsOptions()
                     .Color(THEME_COLOR)
-                    .Tooltip("This will make your elements follow the bottom of the life meter"));
+                    .Tooltip(StringHelper::Translate("This will make your elements follow the bottom of the life meter").c_str()));
             DrawPositionSlider(CVAR_COSMETIC("HUD.MagicBar"), 0,
                                static_cast<s16>(ImGui::GetWindowViewport()->Size.y / 2), -5,
                                static_cast<s16>(ImGui::GetWindowViewport()->Size.x / 2));
@@ -1830,17 +1831,17 @@ void Draw_Placements() {
             std::string posTypeCVar = CVAR_COSMETIC("HUD.EnemyHealthBar.PosType");
             UIWidgets::CVarRadioButton(
                 "Anchor to Enemy", CVAR_COSMETIC("HUD.EnemyHealthBar.PosType"), ENEMYHEALTH_ANCHOR_ACTOR,
-                UIWidgets::RadioButtonsOptions().Color(THEME_COLOR).Tooltip("This will use enemy on screen position"));
+                UIWidgets::RadioButtonsOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("This will use enemy on screen position").c_str()));
             UIWidgets::CVarRadioButton(
                 "Anchor to the top", CVAR_COSMETIC("HUD.EnemyHealthBar.PosType"), ENEMYHEALTH_ANCHOR_TOP,
                 UIWidgets::RadioButtonsOptions()
                     .Color(THEME_COLOR)
-                    .Tooltip("This will make your elements follow the top edge of your game window"));
+                    .Tooltip(StringHelper::Translate("This will make your elements follow the top edge of your game window").c_str()));
             UIWidgets::CVarRadioButton(
                 "Anchor to the bottom", CVAR_COSMETIC("HUD.EnemyHealthBar.PosType"), ENEMYHEALTH_ANCHOR_BOTTOM,
                 UIWidgets::RadioButtonsOptions()
                     .Color(THEME_COLOR)
-                    .Tooltip("This will make your elements follow the bottom edge of your game window"));
+                    .Tooltip(StringHelper::Translate("This will make your elements follow the bottom edge of your game window").c_str()));
             DrawPositionSlider(CVAR_COSMETIC("HUD.EnemyHealthBar."), -SCREEN_HEIGHT, SCREEN_HEIGHT,
                                -static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2),
                                static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2));
@@ -1851,7 +1852,7 @@ void Draw_Placements() {
                                              .DefaultValue(64)
                                              .Size(ImVec2(300.0f, 0.0f))
                                              .Color(THEME_COLOR)
-                                             .Tooltip("This will change the width of the health bar"))) {
+                                             .Tooltip(StringHelper::Translate("This will change the width of the health bar").c_str()))) {
                 CVarSetInteger(CVAR_COSMETIC("HUD.EnemyHealthBar.Width.Changed"), 1);
             }
             ImGui::SameLine();
@@ -2255,7 +2256,7 @@ void DrawCosmeticRow(CosmeticOption& cosmeticOption) {
 
 void DrawCosmeticGroup(CosmeticGroup cosmeticGroup) {
     std::string label = groupLabels.at(cosmeticGroup);
-    ImGui::Text("%s", label.c_str());
+    ImGui::Text(StringHelper::Translate("%s").c_str(), label.c_str());
     // the longest option name
     ImGui::SameLine((ImGui::CalcTextSize("Message Light Blue (None No Shadow)").x * 1.0f) + 60.0f);
     if (UIWidgets::Button(

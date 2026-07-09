@@ -114,7 +114,7 @@ void DrawLocationsMenu(WidgetInfo& info) {
                             }
                             UIWidgets::PopStyleButton();
                             ImGui::SameLine();
-                            ImGui::Text("%s", Rando::StaticData::GetLocation(location)->GetShortName().c_str());
+                            ImGui::Text(StringHelper::Translate("%s").c_str(), Rando::StaticData::GetLocation(location)->GetShortName().c_str());
                         }
                     }
                     ImGui::TreePop();
@@ -165,7 +165,7 @@ void DrawLocationsMenu(WidgetInfo& info) {
                             }
                             UIWidgets::PopStyleButton();
                             ImGui::SameLine();
-                            ImGui::Text("%s", Rando::StaticData::GetLocation(location)->GetShortName().c_str());
+                            ImGui::Text(StringHelper::Translate("%s").c_str(), Rando::StaticData::GetLocation(location)->GetShortName().c_str());
                         }
                     }
                     ImGui::TreePop();
@@ -422,7 +422,7 @@ void DrawTricksMenu(WidgetInfo& info) {
                                 UIWidgets::PopStyleButton();
                                 Rando::Tricks::DrawTagChips(option.GetTags(), option.GetName());
                                 ImGui::SameLine();
-                                ImGui::Text("%s", option.GetName().c_str());
+                                ImGui::Text(StringHelper::Translate("%s").c_str(), option.GetName().c_str());
                                 UIWidgets::Tooltip(option.GetDescription().c_str());
                             }
                         }
@@ -499,7 +499,7 @@ void DrawTricksMenu(WidgetInfo& info) {
                                 UIWidgets::PopStyleButton();
                                 Rando::Tricks::DrawTagChips(option.GetTags(), option.GetName());
                                 ImGui::SameLine();
-                                ImGui::Text("%s", option.GetName().c_str());
+                                ImGui::Text(StringHelper::Translate("%s").c_str(), option.GetName().c_str());
                                 UIWidgets::Tooltip(option.GetDescription().c_str());
                             }
                         }
@@ -515,11 +515,11 @@ void DrawTricksMenu(WidgetInfo& info) {
         } else {
             ImGui::TableNextColumn();
             ImGui::BeginChild("ChildTricksDisabled", ImVec2(0, -8));
-            ImGui::Text("Requires Logic Turned On.");
+            ImGui::Text(StringHelper::Translate("Requires Logic Turned On.").c_str());
             ImGui::EndChild();
             ImGui::TableNextColumn();
             ImGui::BeginChild("ChildTricksEnabled", ImVec2(0, -8));
-            ImGui::Text("Requires Logic Turned On.");
+            ImGui::Text(StringHelper::Translate("Requires Logic Turned On.").c_str());
             ImGui::EndChild();
         }
         ImGui::EndTable();

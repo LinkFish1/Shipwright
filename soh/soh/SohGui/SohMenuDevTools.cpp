@@ -115,8 +115,8 @@ void SohMenu::AddMenuDevTools() {
     AddWidget(path, "Log Level", WIDGET_CVAR_COMBOBOX)
         .CVar(CVAR_DEVELOPER_TOOLS("LogLevel"))
         .Options(ComboboxOptions()
-                     .Tooltip("The log level determines which messages are printed to the console."
-                              " This does not affect the log file output")
+                     .Tooltip(StringHelper::Translate("The log level determines which messages are printed to the console."
+                              " This does not affect the log file output").c_str())
                      .ComboMap(logLevels)
                      .DefaultIndex(defaultLogLevel))
         .Callback([](WidgetInfo& info) {

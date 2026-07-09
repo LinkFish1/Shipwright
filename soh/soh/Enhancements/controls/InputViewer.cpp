@@ -1,4 +1,5 @@
 #include "InputViewer.h"
+#include <ship/utils/StringHelper.h>
 
 #include <libultraship/bridge/consolevariablebridge.h>
 #include "libultraship/libultra/controller.h"
@@ -427,7 +428,7 @@ void InputViewer::DrawElement() {
                 }
 
                 // Render text
-                ImGui::Text("X: %-3d  Y: %-3d", pads[0].stick_x, pads[0].stick_y);
+                ImGui::Text(StringHelper::Translate("X: %-3d  Y: %-3d").c_str(), pads[0].stick_x, pads[0].stick_y);
                 // Restore original color
                 ImGui::PopStyleColor();
                 // Restore original font scale
@@ -456,7 +457,7 @@ void InputViewerSettingsWindow::DrawElement() {
                         .Min(0.1f)
                         .Max(5.0f)
                         .ShowButtons(true)
-                        .Tooltip("Sets the on screen size of the input viewer"));
+                        .Tooltip(StringHelper::Translate("Sets the on screen size of the input viewer").c_str()));
 
     // gInputViewer.EnableDragging
     CVarCheckbox(StringHelper::Translate("Enable Dragging").c_str(), CVAR_INPUT_VIEWER("EnableDragging"),
@@ -480,8 +481,8 @@ void InputViewerSettingsWindow::DrawElement() {
                                 .disabledTooltip = "Disabled because Global Button Outline is off" } })
                 .Color(THEME_COLOR)
                 .DefaultIndex(BUTTON_OUTLINE_NOT_PRESSED)
-                .Tooltip("Sets the desired visibility behavior for the button outline/background layers. Useful for "
-                         "custom input viewers."));
+                .Tooltip(StringHelper::Translate("Sets the desired visibility behavior for the button outline/background layers. Useful for "
+                         "custom input viewers.").c_str()));
 
         // gInputViewer.UseGlobalButtonOutlineMode
         CVarCheckbox("Use for all buttons", CVAR_INPUT_VIEWER("UseGlobalButtonOutlineMode"),
@@ -620,7 +621,7 @@ void InputViewerSettingsWindow::DrawElement() {
                 .Color(THEME_COLOR)
                 .DefaultIndex(STICK_MODE_ALWAYS_SHOWN)
                 .Tooltip(
-                    "Determines the conditions under which the moving layer of the analog stick texture is visible."));
+                    StringHelper::Translate("Determines the conditions under which the moving layer of the analog stick texture is visible.").c_str()));
 
         // gInputViewer.AnalogStick.OutlineMode
         CVarCombobox(
@@ -630,7 +631,7 @@ void InputViewerSettingsWindow::DrawElement() {
                 .Color(THEME_COLOR)
                 .DefaultIndex(STICK_MODE_ALWAYS_SHOWN)
                 .Tooltip(
-                    "Determines the conditions under which the analog stick outline/background texture is visible."));
+                    StringHelper::Translate("Determines the conditions under which the analog stick outline/background texture is visible.").c_str()));
 
         // gInputViewer.AnalogStick.Movement
         CVarSliderInt("Analog Stick Movement: %dpx", CVAR_INPUT_VIEWER("AnalogStick.Movement"),
@@ -640,8 +641,8 @@ void InputViewerSettingsWindow::DrawElement() {
                           .Max(200)
                           .DefaultValue(12)
                           .ShowButtons(true)
-                          .Tooltip("Sets the distance to move the analog stick in the input viewer. Useful for custom "
-                                   "input viewers."));
+                          .Tooltip(StringHelper::Translate("Sets the distance to move the analog stick in the input viewer. Useful for custom "
+                                   "input viewers.").c_str()));
         UIWidgets::PaddedSeparator(true, true);
     }
 
@@ -674,7 +675,7 @@ void InputViewerSettingsWindow::DrawElement() {
                 .DefaultValue(7)
                 .ShowButtons(true)
                 .Tooltip(
-                    "Sets the distance to move the right stick in the input viewer. Useful for custom input viewers."));
+                    StringHelper::Translate("Sets the distance to move the right stick in the input viewer. Useful for custom input viewers.").c_str()));
         UIWidgets::PaddedSeparator(true, true);
     }
 
@@ -682,7 +683,7 @@ void InputViewerSettingsWindow::DrawElement() {
         // gAnalogAngles
         CVarCheckbox(
             StringHelper::Translate("Show Analog Stick Angle Values").c_str(), CVAR_INPUT_VIEWER("AnalogAngles.Enabled"),
-            CheckboxOptions().Color(THEME_COLOR).Tooltip("Displays analog stick angle values in the input viewer"));
+            CheckboxOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Displays analog stick angle values in the input viewer").c_str()));
         if (CVarGetInteger(CVAR_INPUT_VIEWER("AnalogAngles.Enabled"), 0)) {
             // gInputViewer.AnalogAngles.TextColor
             CVarColorPicker("Text Color", CVAR_INPUT_VIEWER("AnalogAngles.TextColor"), textColorDefault, true,
@@ -704,8 +705,8 @@ void InputViewerSettingsWindow::DrawElement() {
                               .Max(400)
                               .DefaultValue(0)
                               .ShowButtons(true)
-                              .Tooltip("Sets the distance to move the right stick in the input viewer. Useful for "
-                                       "custom input viewers."));
+                              .Tooltip(StringHelper::Translate("Sets the distance to move the right stick in the input viewer. Useful for "
+                                       "custom input viewers.").c_str()));
             UIWidgets::PaddedSeparator(true, true);
             // gInputViewer.AnalogAngles.Range1.Enabled
             CVarCheckbox(
@@ -713,7 +714,7 @@ void InputViewerSettingsWindow::DrawElement() {
                 CheckboxOptions()
                     .Color(THEME_COLOR)
                     .Tooltip(
-                        "Highlights the angle value text when the analog stick is in ESS position (on flat ground)"));
+                        StringHelper::Translate("Highlights the angle value text when the analog stick is in ESS position (on flat ground)").c_str()));
             if (CVarGetInteger(CVAR_INPUT_VIEWER("AnalogAngles.Range1.Enabled"), 0)) {
                 // gInputViewer.AnalogAngles.Range1.Color
                 CVarColorPicker("ESS Color", CVAR_INPUT_VIEWER("AnalogAngles.Range1.Color"), range1ColorDefault, true,

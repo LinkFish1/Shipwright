@@ -53,7 +53,7 @@ void SohMenu::AddMenuNetwork() {
         .Options(ButtonOptions().Tooltip("https://github.com/HarbourMasters/sail"));
     AddWidget(path, "Host & Port", WIDGET_CUSTOM).CustomFunction([](WidgetInfo& info) {
         ImGui::BeginDisabled(Sail::Instance->isEnabled || CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
-        ImGui::Text("%s", info.name.c_str());
+        ImGui::Text(StringHelper::Translate("%s").c_str(), info.name.c_str());
         CVarInputString("##HostSail", CVAR_REMOTE_SAIL("Host"),
                         InputOptions()
                             .Color(THEME_COLOR)
@@ -119,7 +119,7 @@ void SohMenu::AddMenuNetwork() {
     AddWidget(path, "Connect to Crowd Control", WIDGET_SEPARATOR_TEXT);
     AddWidget(path, "Host & Port", WIDGET_CUSTOM).CustomFunction([](WidgetInfo& info) {
         ImGui::BeginDisabled(CrowdControl::Instance->isEnabled || CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
-        ImGui::Text("%s", info.name.c_str());
+        ImGui::Text(StringHelper::Translate("%s").c_str(), info.name.c_str());
         CVarInputString("##HostCrowdControl", CVAR_REMOTE_CROWD_CONTROL("Host"),
                         InputOptions()
                             .Color(THEME_COLOR)

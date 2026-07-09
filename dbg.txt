@@ -1,4 +1,0 @@
-RAW KEY: 'Fisherman asks if you want to quit at the door if you try to leave the Fishing Pond '
-DECODED KEY: 'Fisherman asks if you want to quit at the door if you try to leave the Fishing Pond '
-RAW ARG: '"Fisherman asks if you want to quit at the door if you try to leave the Fishing Pond "\n            "while still holding the Fishing Rod."'
-DECODED ARG: 'Fisherman asks if you want to quit at the door if you try to leave the Fishing Pond while still holding the Fishing Rod.'

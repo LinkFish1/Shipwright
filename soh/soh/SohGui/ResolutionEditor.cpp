@@ -272,7 +272,7 @@ void ResolutionCustomWidget(WidgetInfo& info) {
             // Having this button should hopefully prevent support headaches.
             ImGui::TextColored(messageColor[MESSAGE_QUESTION], ICON_FA_QUESTION_CIRCLE
                                " If the image is stretched and you don't know why, click this.");
-            if (ImGui::Button("Click to reenable aspect correction.")) {
+            if (ImGui::Button(StringHelper::Translate("Click to reenable aspect correction.").c_str())) {
                 CVarSetInteger(CVAR_PREFIX_ADVANCED_RESOLUTION ".IgnoreAspectCorrection", 0);
                 Ship::Context::GetInstance()->GetWindow()->GetGui()->SaveConsoleVariablesNextFrame();
             }
@@ -525,7 +525,7 @@ void RegisterResolutionWidgets() {
                     ImGui::Dummy({ 0, 2 });
                     const float resolvedAspectRatio =
                         (float)gfx_current_dimensions.width / gfx_current_dimensions.height;
-                    ImGui::Text("Aspect ratio: %.2f:1", resolvedAspectRatio);
+                    ImGui::Text(StringHelper::Translate("Aspect ratio: %.2f:1").c_str(), resolvedAspectRatio);
                 }
             }
         });

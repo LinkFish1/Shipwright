@@ -1,4 +1,5 @@
 #include "randomizer_check_tracker.h"
+#include <ship/utils/StringHelper.h>
 #include "randomizer_entrance_tracker.h"
 #include "randomizer_item_tracker.h"
 #include "randomizerTypes.h"
@@ -1017,7 +1018,7 @@ void CheckTrackerWindow::DrawElement() {
             static_cast<TrackerWindowType>(CVarGetInteger(CVAR_TRACKER_CHECK("WindowType"), TRACKER_WINDOW_WINDOW)),
             CVarGetInteger(CVAR_TRACKER_CHECK("Draggable"), 1), ImGuiWindowFlags_NoScrollbar)) {
         if (!GameInteractor::IsSaveLoaded() || !initialized) {
-            ImGui::Text("Waiting for file load..."); // TODO Language
+            ImGui::Text(StringHelper::Translate("Waiting for file load...").c_str()); // TODO Language
             Trackers::EndFloatWindows();
             return;
         }
@@ -1049,7 +1050,7 @@ void CheckTrackerWindow::DrawElement() {
                 "Show Hidden Items", CVAR_TRACKER_CHECK("ShowHidden"),
                 UIWidgets::CheckboxOptions(
                     { { .tooltip =
-                            "When active, items will show hidden checks by default when updated to this state." } })
+                            StringHelper::Translate("When active, items will show hidden checks by default when updated to this state.").c_str() } })
                     .Color(THEME_COLOR))) {
             doAreaScroll = true;
             showHidden = CVarGetInteger(CVAR_TRACKER_CHECK("ShowHidden"), 0);
@@ -1058,7 +1059,7 @@ void CheckTrackerWindow::DrawElement() {
         if (enableAvailableChecks && CVarGetInteger(CVAR_TRACKER_CHECK("AvailableChecksToggleVisible"), 1)) {
             if (UIWidgets::CVarCheckbox(
                     "Only Show Available Checks", CVAR_TRACKER_CHECK("OnlyShowAvailable"),
-                    UIWidgets::CheckboxOptions({ { .tooltip = "When active, unavailable checks will be hidden." } })
+                    UIWidgets::CheckboxOptions({ { .tooltip = StringHelper::Translate("When active, unavailable checks will be hidden.").c_str() } })
                         .Color(THEME_COLOR))) {
                 doAreaScroll = true;
                 RecalculateAllAreaTotals();
@@ -1111,7 +1112,7 @@ void CheckTrackerWindow::DrawElement() {
                 totalChecksSS << totalChecksAvailable << " Available / ";
             }
             totalChecksSS << totalChecksGotten << " Checked / " << totalChecks << " Total";
-            ImGui::Text("%s", totalChecksSS.str().c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), totalChecksSS.str().c_str());
         }
 
         bool headerPresent =
@@ -1229,7 +1230,7 @@ void CheckTrackerWindow::DrawElement() {
                         }
                     }
 
-                    ImGui::Text("%s", areaTotalsSS.str().c_str());
+                    ImGui::Text(StringHelper::Translate("%s").c_str(), areaTotalsSS.str().c_str());
                     UIWidgets::Tooltip(areaTotalsTooltipSS.str().c_str());
                 } else {
                     ImGui::Text("???");
@@ -1856,13 +1857,13 @@ void DrawLocation(RandomizerCheck rc) {
         } else {
             ImGui::PushStyleColor(ImGuiCol_Text, styleColor);
         }
-        ImGui::Text("%s", available ? ICON_FA_UNLOCK : ICON_FA_LOCK);
+        ImGui::Text(StringHelper::Translate("%s").c_str(), available ? ICON_FA_UNLOCK : ICON_FA_LOCK);
         ImGui::PopStyleColor();
         ImGui::SameLine();
     }
 
     ImGui::PushStyleColor(ImGuiCol_Text, styleColor);
-    ImGui::Text("%s", txt.c_str());
+    ImGui::Text(StringHelper::Translate("%s").c_str(), txt.c_str());
     ImGui::PopStyleColor();
 
     // Draw the extra info
@@ -1929,7 +1930,7 @@ void DrawLocation(RandomizerCheck rc) {
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(extraColor.r / 255.0f, extraColor.g / 255.0f, extraColor.b / 255.0f,
                                                     extraColor.a / 255.0f));
         ImGui::SameLine();
-        ImGui::Text(" (%s)", txt.c_str());
+        ImGui::Text(StringHelper::Translate(" (%s)").c_str(), txt.c_str());
         ImGui::PopStyleColor();
     }
 
@@ -2134,7 +2135,7 @@ void CheckTrackerSettingsWindow::DrawElement() {
 
         UIWidgets::CVarSliderFloat("Font Size", CVAR_TRACKER_CHECK("FontSize"),
                                    UIWidgets::FloatSliderOptions()
-                                       .Tooltip("Sets the font size used in the check tracker.")
+                                       .Tooltip(StringHelper::Translate("Sets the font size used in the check tracker.").c_str())
                                        .Format("%.1f")
                                        .Step(0.1f)
                                        .Min(0.3f)
@@ -2187,11 +2188,11 @@ void CheckTrackerSettingsWindow::DrawElement() {
         UIWidgets::CVarCheckbox(
             "Filter Empty Areas", CVAR_TRACKER_CHECK("HideFilteredAreas"),
             UIWidgets::CheckboxOptions()
-                .Tooltip("If enabled, will hide area headers that have no locations matching filter")
+                .Tooltip(StringHelper::Translate("If enabled, will hide area headers that have no locations matching filter").c_str())
                 .Color(THEME_COLOR)
                 .DefaultValue(true));
 
-        ImGui::SeparatorText("Tracker Header Visibility");
+        ImGui::SeparatorText(StringHelper::Translate("Tracker Header Visibility").c_str());
         UIWidgets::CVarCheckbox("Hidden Items Toggle", CVAR_TRACKER_CHECK("HiddenItemsToggleVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(true));
         UIWidgets::CVarCheckbox("Available Checks Toggle", CVAR_TRACKER_CHECK("AvailableChecksToggleVisible"),
@@ -2290,8 +2291,8 @@ void RegisterCheckTrackerWidgets() {
     dungeonSpoilerWidget.CVar(CVAR_TRACKER_CHECK("MQSpoilers"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("If enabled, Vanilla/MQ dungeons will show on the tracker immediately. "
-                              "Otherwise, Vanilla/MQ dungeon locations must be unlocked."));
+                     .Tooltip(StringHelper::Translate("If enabled, Vanilla/MQ dungeons will show on the tracker immediately. "
+                              "Otherwise, Vanilla/MQ dungeon locations must be unlocked.").c_str()));
     SohGui::GetSohMenu()->AddSearchWidget({ dungeonSpoilerWidget, "Randomizer", "Check Tracker", "General Settings" });
 
     hideUnshuffledShopWidget = { .name = "Hide Unshuffled Shop Item Checks", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
@@ -2299,7 +2300,7 @@ void RegisterCheckTrackerWidgets() {
         .Options(
             CheckboxOptions()
                 .Color(THEME_COLOR)
-                .Tooltip("If enabled, will prevent the tracker from displaying slots with non-shop-item shuffles."))
+                .Tooltip(StringHelper::Translate("If enabled, will prevent the tracker from displaying slots with non-shop-item shuffles.").c_str()))
         .Callback([&](WidgetInfo& info) {
             hideShopUnshuffledChecks = CVarGetInteger(CVAR_TRACKER_CHECK("HideUnshuffledShopChecks"), 0);
             UpdateFilters();
@@ -2311,7 +2312,7 @@ void RegisterCheckTrackerWidgets() {
     showGSWidget.CVar(CVAR_TRACKER_CHECK("AlwaysShowGSLocs"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("If enabled, will show GS locations in the tracker regardless of tokensanity settings."))
+                     .Tooltip(StringHelper::Translate("If enabled, will show GS locations in the tracker regardless of tokensanity settings.").c_str()))
         .Callback([&](WidgetInfo& info) {
             alwaysShowGS = !alwaysShowGS;
             UpdateFilters();
@@ -2322,15 +2323,15 @@ void RegisterCheckTrackerWidgets() {
     showLogicWidget.CVar(CVAR_TRACKER_CHECK("ShowLogic"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("If enabled, will show a check's logic when hovering over it."));
+                     .Tooltip(StringHelper::Translate("If enabled, will show a check's logic when hovering over it.").c_str()));
     SohGui::GetSohMenu()->AddSearchWidget({ showLogicWidget, "Randomizer", "Check Tracker", "General Settings" });
 
     checkAvailabilityWidget = { .name = "Enable Available Checks", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     checkAvailabilityWidget.CVar(CVAR_TRACKER_CHECK("EnableAvailableChecks"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("If enabled, will show the checks that are available to be collected "
-                              "with your current progress."))
+                     .Tooltip(StringHelper::Translate("If enabled, will show the checks that are available to be collected "
+                              "with your current progress.").c_str()))
         .Callback([&](WidgetInfo& info) {
             enableAvailableChecks = CVarGetInteger(CVAR_TRACKER_CHECK("EnableAvailableChecks"), 0);
             RecalculateAvailableChecks();

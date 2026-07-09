@@ -1,133 +1,510 @@
-# Mapping of full concatenated English UI strings (exactly as they appear in code)
-# to Simplified Chinese. Consumed by apply_translations.py.
+# -*- coding: utf-8 -*-
+# Translation map: English UI string (as it appears in source) -> Simplified Chinese.
+# Used by apply_translations.py (wrap source literals + insert into Localization.cpp).
+
 TRANSLATIONS = {
-    # ---- SohMenuDevTools.cpp ----
-    'Enables Debug Mode, allowing you to select maps with L + R + Z, noclip with L + D-pad Right, and open the debug menu with L on the pause screen.':
-        '启用调试模式，允许你用 L + R + Z 选择地图，用 L + 方向键右键穿墙，并在暂停界面用 L 打开调试菜单。',
-    'Enables Skulltula Debug, when moving the cursor in the menu above various map icons (boss key, compass, map screen locations, etc.) will set the GS bits in that area.\nUSE WITH CAUTION AS IT DOES NOT UPDATE THE GS COUNT!':
-        '启用黄金骷髅调试：在菜单中将光标移到各种地图图标（头目钥匙、罗盘、地图屏幕位置等）上方时，会设置该区域的黄金骷髅位。\n注意：它不会更新黄金骷髅计数，请谨慎使用！',
-    'This allows you to advance through the game one frame at a time on command. To advance a frame, hold Z and tap R on the second controller. Holding Z and R will advance a frame every half second. You can also use the buttons below.':
-        '允许你按需逐帧推进游戏。要推进一帧，在第二手柄上按住 Z 并轻点 R。按住 Z 和 R 会每半秒推进一帧。你也可以使用下方的按钮。',
+# ---- Anchor / Network ----
+"1. All players involved should start at the file select screen": "1. 所有参与玩家都应在文件选择界面启动",
+"2. Come up with a unique Room ID (this is basically your password) and enter it, along with ": "2. 想出一个唯一的房间 ID（基本就是你的密码）并输入，同时输入",
+"3. The host should configure the randomizer settings and generate a seed, then share the newly ": "3. 房主应配置随机化设置并生成种子，然后分享新生成的",
+"4. All players should load the same JSON spoiler file (drag it into SoH window), make sure ": "4. 所有玩家应加载相同的 JSON 剧透文件（拖入 SoH 窗口），并确保",
+"5. All players should now load into their game. IMPORTANT! If using an existing save/seed ": "5. 所有玩家现在应载入各自的游戏。重要！如果使用已有的存档/种子",
+"6. After everyone has loaded in, verify on the network tab that it doesn't warn about anyone ": "6. 所有人载入后，在网络标签页确认没有关于任何人的警告",
+"Always-online public room so you don't have to experience ": "常驻在线公共房间，让你无需独自体验",
+"Always-online public room so you don't have to experience Hyrule alone. PVP and syncing are disabled.": "常驻在线公共房间，让你无需独自体验海拉尔。PVP 与同步已禁用。",
+"AnchorAdminMenu": "Anchor 管理员菜单",
+"AnchorInstructionsMenu": "Anchor 说明菜单",
+"AnchorMainMenu": "Anchor 主菜单",
+"Clear All Team State": "清除所有队伍状态",
+"Connection Settings": "连接设置",
+"Current Room": "当前房间",
+"Incompatible version! Will not work together!": "版本不兼容！无法一起游玩！",
+"Name & Color": "名称与颜色",
+"Note: Team ID is used to group players together in the same team, sharing items and flags. Make sure all ": "注意：队伍 ID 用于将玩家分组到同一队伍，共享物品与标记。请确保所有人",
+"Request Team State": "请求队伍状态",
+"Room ID": "房间 ID",
+"Room Settings (Admin Only)": "房间设置（仅管理员）",
+"Team ID (Items & Flags Shared)": "队伍 ID（共享物品与标记）",
+"Theirs: %s": "对方：%s",
+"Theirs: %u": "对方：%u",
+"Usage Instructions": "使用说明",
+"Yours: %s": "你的：%s",
+"Yours: %u": "你的：%u",
+"Players Online: %d": "在线玩家：%d",
+"%s Connected": "%s 已连接",
+"Seed mismatch! Continuing will break things!": "种子不匹配！继续将导致问题！",
 
-    # ---- SohMenuEnhancements.cpp ----
-    "Pierre appears when an Ocarina is pulled out. Requires learning the Scarecrow's Song first.\nWithout the randomizer option \"Skip Scarecrow's Song\" enabled for a seed, this still requires you to teach the scarecrow the song as both ages before summoning.":
-        '拔出陶笛时皮埃尔会出现。需要先学会斯卡洛的歌。\n若随机化种子未启用“跳过斯卡洛之歌”选项，仍需要你在两个年龄段都把歌教给斯卡洛才能召唤。',
-    'Stops the game from freezing the player when picking up Gold Skulltula Tokens. Does not apply in randomizer savefiles.':
-        '防止拾取黄金骷髅代币时游戏冻结玩家。不适用于随机化存档。',
-    'Disables the fixed camera in maps that use 2D pre-rendered backgrounds. Enable this when using a mod that implements 3D backdrops for these areas.\nRequires Scene Change to alter.':
-        '在使用 2D 预渲染背景的地图中禁用固定相机。使用为这些区域实现 3D 背景的模组时启用。\n需要切换场景才能生效。',
-    'Scales all of the Adult Equipment, as well as moving some a bit, to fit on Child Link better. May not work properly with some mods.':
-        '缩放所有成人装备，并略微移动部分装备，使其更贴合儿童林克。某些模组下可能工作不正常。',
-    'The Kokiri are mystical beings that fade into view when approached. Enabling this will remove their draw distance.':
-        '科克里是神秘生物，靠近时才会显现。启用此项将移除它们的显示距离限制。',
-    'Exclude Actors that are useful for Glitches from the extended culling ranges. Some actors may still draw in the extended ranges, but will not "update" so that certain glitches that leverage the original culling requirements will still work.\n\nThe following actors are excluded:\n - White Clothed Gerudos\n - King Zora\n - Gossip Stones\n - Boulders\n - Blue Warps\n - Darunia\n - Gold Skulltulas':
-        '将有助于故障的演员排除在扩展剔除范围之外。部分演员仍可能在扩展范围内绘制，但不会“更新”，从而让某些依赖原始剔除要求的故障仍然可用。\n\n排除的演员如下：\n - 白衣盖鲁多\n - 佐拉之王\n -  gossip 石\n - 巨石\n - 蓝色传送点\n - 达鲁尼亚\n - 黄金骷髅',
-    'Equip items and equipment on the D-pad. If used with "D-pad on Pause Screen", you must hold C-Up to equip instead of navigate.':
-        '在十字键上装备物品与装备。若与“暂停界面十字键”配合使用，必须按住 C-Up 来装备而非导航。',
-    "Allows unequipping items from C-Buttons/D-pad by hovering over an equipped item and pressing the button it's equipped to.":
-        '允许将光标悬停在已装备物品上，并按下其装备到的按钮，从而卸下 C 按钮/十字键上的物品。',
-    'Allows Strength to be toggled on and off by pressing A on the Strength Upgrade in the Equipment Subscreen of the Pause Menu. This allows performing some glitches that require the player to not have Strength.':
-        '允许在暂停菜单装备子界面中，对力量升级按 A 来开关力量。这允许执行某些要求玩家没有力量的故障。',
-    'Stops masks from automatically unequipping on certain situations:\n- When entering a new scene\n- When not in any C-Button or the D-pad\n- When saving and quitting\n- When dying\n- When traveling through time (if "Masks Equippable as Adult" is activated)':
-        '阻止面具在特定情况下自动卸下：\n- 进入新场景时\n- 不在任何 C 按钮或十字键上时\n- 保存并退出时\n- 死亡时\n- 穿越时间时（若启用“成人可装备面具”）',
-    'After completing the mask trading sub-quest, press A and any direction on the mask slot to change masks.':
-        '完成面具交易支线任务后，在面具槽按 A 加任意方向即可切换面具。',
-    'Allows you to control a Bombchu after dropping it.\nControl Stick: Steer\nB: Detonate\nA: Quit Control':
-        '允许你在丢出炸弹鼠后控制它。\n控制摇杆：转向\nB：引爆\nA：退出控制',
-    'Make Deku Nuts explode Bombs, similar to how they interact with Bombchus. This does not affect Bomb Flowers.':
-        '让德库坚果引爆炸弹，类似于它们与炸弹鼠的互动方式。不影响炸弹花。',
-    "Explosions are now a static size, like in Majora's Mask and OoT3D. Makes Bombchu hovering much easier.":
-        '爆炸现在为固定大小，如同《姆吉拉的面具》和 OoT3D 中一样。使炸弹鼠悬停更容易。',
-    'Bombchus do not sell out when bought, and a 10 pack of Bombchus costs 99 rupees instead of 100.':
-        '炸弹鼠购买后不会售罄，且 10 个装炸弹鼠售价 99 卢比而非 100。',
-    "Allow the Bow and Magic Arrows to be equipped at the same time on different slots. NOTE: This will disable the behavior of the 'Equip Dupe' glitch.":
-        '允许弓与魔法箭同时装备在不同槽位。注意：这将禁用“装备复制”故障的行为。',
-    "Allows Child Link to use a Bow with Arrows.\nAllows Adult Link to use a Slingshot with Seeds.\n\nRequires glitches or the 'Timeless Equipment' cheat to equip.":
-        '允许儿童林克使用弓与箭。\n允许成人林克使用弹弓与种子。\n\n需要故障或“ timeless 装备”作弊来装备。',
-    'Aiming with a Bow or Slingshot will display a reticle as with the Hookshot when the projectile is ready to fire.':
-        '用弓或弹弓瞄准时，在投射物准备发射时会显示准星，如同钩绳一样。',
-    'Allows cycling between different arrow types (Normal, Fire, Ice, Light) while aiming the bow. Press the R button to cycle to the next available arrow type. Only works when aiming and only cycles to arrow types you own with sufficient magic.':
-        '允许在瞄准弓时在不同类型的箭（普通、火、冰、光）之间循环。按 R 键循环到下一个可用箭型。仅在瞄准时有效，且只循环到你拥有足够魔法的箭型。',
-    "Instantly return the Boomerang to Link by pressing its item button while it's in the air.":
-        '在回旋镖飞行中按下其物品按钮，可立即将其收回林克手中。',
-    'Helps FW persist between ages, gives Child and Adult separate FW points, and can be used in more places.':
-        '帮助 FW（Farore 的风）在年龄间持续存在，为儿童与成人分别提供 FW 点，并可在更多地方使用。',
-    "Fixes kokiri animation state to match their text state when getting Zelda's Letter before Kokiri Emerald.":
-        '修复在获得科克里翡翠之前取得塞尔达的信时，科克里动画状态与其文本状态不匹配的问题。',
-    'Fixes the two raised floor switches, the one in Forest Temple Basement and the one at the top of Fire Temple. This will lower them, making activating them easier.':
-        '修复森林神殿地下与火之神殿顶部的两个凸起地板开关。这将降低它们，使激活更容易。',
-    "Fixes one Zora's dialogue giving a hint about bringing Ruto's Letter to King Zora to properly occur before moving King Zora rather than after.":
-        '修复某佐拉对话中关于将露托的信带给佐拉之王的提示，使其正确地发生在移动佐拉之王之前而非之后。',
-    'Causes respawning enemies, like Stalchildren, to appear on land near bodies of water. Fixes an incorrect calculation that acted like water underneath ground was above it.':
-        '使复活的敌人（如斯塔童）出现在水体附近的陆地上。修复了将地下水体误判为在其上方的不正确计算。',
-    'Forces Goron City doors open if you somehow complete Fire Temple without talking to Goron Link  and receiving the Goron Tunic.':
-        '若你以某种方式在未与哥隆林克对话并获得哥隆外衣的情况下完成了火之神殿，则强制打开哥隆城大门。',
-    "Prevents the Forest Stage Deku Nut upgrade from becoming unobtainable after receiving the Poacher's Saw.":
-        '防止森林舞台德库坚果升级在获得偷猎者锯后出现无法获得的情况。',
-    'Fixes camera slightly drifting to the left when standing still due to a math error. May impact certain glitches.':
-        '修复因数学错误导致静止站立时相机轻微向左漂移的问题。可能影响某些故障。',
-    'Fixes camera getting stuck on collision when standing still. Also fixes slight shift back in camera when Link stops moving. May impact certain glitches.':
-        '修复静止站立时相机卡在碰撞上的问题。同时修复林克停止移动时相机轻微回移的问题。可能影响某些故障。',
-    'Fixes camera swing rate when the player falls off a ledge and the camera swings around. May impact certain glitches.':
-        '修复玩家从边缘掉落且相机绕转时的相机摆动速率问题。可能影响某些故障。',
-    'Removes the Dungeon Entrance icon on the top-left corner of the screen when no dungeon is present on the current map.':
-        '当当前地图没有地牢时，移除屏幕左上角的地牢入口图标。',
-    'Re-Enables the two-handed idle animation, a seemingly finished animation that was disabled on accident in the original game.':
-        '重新启用双手待机动画——一个在原版游戏中被意外禁用的、看似已完成的动画。',
-    "Prevent the Gerudo Warrior's clothes changing color when changing Link's tunic or using bombs in front of her.":
-        '防止在更换林克外衣或在其面前使用炸弹时，盖鲁多战士的衣物变色。',
-    'Adds 5 higher pitches for the Silver Rupee Jingle for the rooms with more than 5 Silver Rupees. Only relevant for playthroughs involving Master Quest Dungeons.':
-        '为含超过 5 枚银卢比的房间，银卢比铃声增加 5 个更高音。仅与涉及大师任务地牢的游玩相关。',
-    'Restore a bug from NTSC 1.0 that allows putting away an item without an animation and performing Putaway Ocarina Items.':
-        '还原 NTSC 1.0 中的一个漏洞，允许无动画地收起物品并执行收起陶笛物品。',
-    'Restores a bug from NTSC 1.0/1.1 that allows you to obtain the eyeball frog from King Zora instead of the Zora Tunic by Holding Shield.':
-        '还原 NTSC 1.0/1.1 中的一个漏洞，允许你通过按住盾牌从佐拉之王处获得眼球蛙而非佐拉外衣。',
-    'Restores the wider range of certain shutter doors from NTSC 1.0.\nNotably affects Jabu-Jabu and boss doors.':
-        '还原 NTSC 1.0 中某些卷帘门的更宽范围。\n显著影响 Jabu-Jabu 与头目门。',
-    'When you lose 4 quarters of a heart you will permanently lose that Heart Container.\n\nDisabling this after the fact will restore your Heart Containers.':
-        '当你失去 4 分之 1 颗心时，将永久失去该红心容器。\n\n事后禁用此项将恢复你的红心容器。',
-    'Disables Heart Drops, but not Heart Placements, like from a Deku Scrub running off.\nThis simulates Hero Mode from other games in the series.':
-        '禁用红心掉落，但不禁用心形放置，例如德库树精逃跑时。\n这模拟了本系列其他游戏中的英雄模式。',
-    "Always win the Heart Piece/Purple Rupee on the first dig in Dampe's Grave Digging game. In a Randomizer file, this defaults to on if this enhancement has never been changed.":
-        '在达姆佩挖坟游戏中，首次挖掘必定获得红心碎片/紫色卢比。在随机化文件中，若从未更改此增强，则默认开启。',
-    'Every fish in the Fishing Pond will always be a Hyrule Loach.\n\nNOTE: This requires reloading the area.':
-        '钓鱼池中的每条鱼都将是海拉尔泥鳅。\n\n注意：这需要重新加载区域。',
-    'Allows Link to bounce off walls when linear velocity is high enough, this is relevant when frequently being knocked back by traps, CC, or in Anchor.':
-        '当线速度足够高时，允许林克从墙壁弹开，这在频繁被陷阱、CC 或 Anchor 击退时相关。',
-    'Enables Ivan the Fairy upon the next map change. Player 2 can control Ivan and press the C-Buttons to use items and mess with Player 1!':
-        '在下一次地图切换时启用精灵 Ivan。玩家 2 可控制 Ivan 并按下 C 按钮使用物品、干扰玩家 1！',
-    'Changes Heart Piece and Heart Container functionality.\n\n - Each Heart Container or full Heart Piece reduces Link\'s Hearts by 1.\n - Can be enabled retroactively after a File has already started.':
-        '改变红心碎片与红心容器的功能。\n\n - 每个红心容器或完整红心碎片使林克的心减少 1。\n - 可在文件已开始后进行追溯启用。',
-    'Allows any item to be equipped, regardless of age.\nAlso allows child to use adult strength upgrades.':
-        '允许装备任何物品，不受年龄限制。\n也允许儿童使用成人力量升级。',
-    'Keese and Guay no longer target you and simply ignore you as if you were wearing the Skull Mask.':
-        '凯斯与瓜伊不再以你为目标，而是像你戴着骷髅面具一样直接忽略你。',
-    'Passive Infinite Sword Glitch\nIt makes your sword\'s swing effect and hitbox stay active indefinitely.':
-        '被动无限剑故障\n它使你的剑的挥动效果与碰撞箱无限期保持激活。',
+# ---- Cosmetics Editor ----
+"General Margins Settings": "通用边距设置",
+"Revert every element to use their original position and no margins": "将所有元素还原为原始位置且无边距",
+"Using this allow you move the element with General margins sliders": "使用此选项可通过通用边距滑块移动元素",
+"This will use original intended elements position": "使用元素原本预期的位置",
+"This will make your elements follow the left side of your game window": "使元素贴附游戏窗口左侧",
+"This will make your elements follow the right side of your game window": "使元素贴附游戏窗口右侧",
+"This will make your elements to not follow any side\nBetter used for center elements": "使元素不贴附任何一侧\n更适合居中元素",
+"This will make your elements hidden": "隐藏所有元素",
+"This slider is used to move Up and Down your elements.": "此滑块用于上下移动元素。",
+"This slider is used to move Left and Right your elements.": "此滑块用于左右移动元素。",
+"This will set the length of a row of hearts. Set to 0 for unlimited length.": "设置一行心形的长度。设为 0 表示不限长度。",
+"This will make your elements follow the bottom of the life meter": "使元素贴附生命槽底部",
+"This will use enemy on screen position": "使用敌人在屏幕上的位置",
+"This will make your elements follow the top edge of your game window": "使元素贴附游戏窗口上边缘",
+"This will make your elements follow the bottom edge of your game window": "使元素贴附游戏窗口下边缘",
+"This will change the width of the health bar": "更改生命条的宽度",
+"Makes snow fall for December holidays.\nWill reset on restart outside of December 23-25.": "在十二月节日期间飘雪。\n在 12 月 23-25 日之外重启将重置。",
+"Some cosmetic options may not apply if you have any mods that provide custom models for the cosmetic ": "如果你有任何为外观提供自定义模型的模组，部分外观选项可能不生效：",
+"Some cosmetic options may not apply if you have any mods that provide custom models for the cosmetic option.\n\nFor example, if you have custom Link model, then the Link's Hair color option will most likely not apply.": "如果你有任何为外观提供自定义模型的模组，部分外观选项可能不生效。\n\n例如，如果你有自定义的林克模型，那么林克发色选项很可能不会生效。",
+"Set when the cosmetics is automaticly randomized:\n": "设置外观自动随机化的时机：\n",
+"Set when the cosmetics is automaticly randomized:\n- Manual: Manually randomize cosmetics by pressing the 'Randomize all' button\n- On New Scene : Randomizes when you enter a new scene.\n- On Rando Gen Only: Randomizes only when you generate a new randomizer.\n- On File Load: Randomizes on File Load.\n- On File Load (Seeded): Randomizes on file load based on the current randomizer seed/file.": "设置外观自动随机化的时机：\n- 手动：通过按“全部随机化”按钮手动随机化外观\n- 进入新场景：进入新场景时随机化\n- 仅随机化生成：仅在生成新随机化时随机化\n- 载入存档：在载入存档时随机化\n- 载入存档（种子）：根据当前随机化种子/存档在载入时随机化。",
 
-    # ---- SohMenuNetwork.cpp ----
-    'Sail is a networking protocol designed to facilitate remote control of the Ship of Harkinian client. It is intended to be utilized alongside a Sail server, for which we provide a few straightforward implementations on our GitHub. The current implementations available allow integration with Twitch chat and SAMMI Bot, feel free to contribute your own!\n\nClick this button to copy the link to the Sail Github page to your clipboard.':
-        'Sail 是一种网络协议，旨在便于远程控制 Ship of Harkinian 客户端。它 intended 与 Sail 服务器配合使用，我们在 GitHub 上提供了一些简单实现。当前可用的实现允许与 Twitch 聊天和 SAMMI Bot 集成，欢迎贡献你自己的实现！\n\n点击此按钮将 Sail GitHub 页面链接复制到剪贴板。',
-    'Crowd Control is a platform that allows viewers to interact with a streamer\'s game in real time.\n\nPlease head over to www.crowdcontrol.live for more information!':
-        'Crowd Control 是一个允许观众实时与主播游戏互动的平台。\n\n请前往 www.crowdcontrol.live 了解更多信息！',
-    'Enemies spawned by CrowdControl won\'t be considered for "clear enemy rooms", so they don\'t need to be killed to complete these rooms.':
-        '由 CrowdControl 生成的敌人不计入“清空敌人房间”，因此无需击杀它们即可完成这些房间。',
+# ---- Audio Editor ----
+"Disable the low HP beeping sound.": "禁用低血量时的滴滴声。",
+"Disables the voice audio when Navi calls you.": "禁用娜薇呼叫你时的语音。",
+"Disables the music change when getting close to enemies. Useful for hearing ": "禁用接近敌人时的音乐切换。便于听清",
+"Disables the music change when getting close to enemies. Useful for hearing your custom music for each scene more often.": "禁用接近敌人时的音乐切换。便于更常听到你为每个场景自定义的乐曲。",
+"Disables the volume shifting in the Lost Woods. Useful for hearing ": "禁用迷失森林中的音量变化。便于听清",
+"Disables the volume shifting in the Lost Woods. Useful for hearing your custom music in the Lost Woods if you don't need the navigation assitance the volume changing provides. If toggling this while in the Lost Woods, reload the area for the effect to kick in.": "禁用迷失森林中的音量变化。如果你不需要音量变化提供的导航辅助，便于在迷失森林中听清你的自定义乐曲。若在迷失森林中切换此选项，需重新加载区域才能生效。",
+"Emits a notification with the current song name whenever it changes. ": "每当当前曲目名称变化时发出通知。",
+"Emits a notification with the current song name whenever it changes. (does not apply to fanfares or enemy BGM).": "每当当前曲目名称变化时发出通知。（不适用于小调或敌人 BGM）",
+"Play Preview": "播放预览",
+"Stop Preview": "停止预览",
+"Randomize this sound": "随机化此音效",
+"Randomizes all unlocked music and sound effects across tab groups": "随机化所有标签页组中已解锁的音乐与音效",
+"Resets all unlocked music and sound effects across tab groups": "重置所有标签页组中已解锁的音乐与音效",
+"Locks all music and sound effects across tab groups": "锁定所有标签页组中的音乐与音效",
+"Unlocks all music and sound effects across tab groups": "解锁所有标签页组中的音乐与音效",
+"Set when the music and sound effects is automaticly randomized:\n": "设置音乐与音效自动随机化的时机：\n",
+"Set when the music and sound effects is automaticly randomized:\n- Manual: Manually randomize music or sound effects by pressing the 'Randomize all Groups' button\n- On New Scene : Randomizes when you enter a new scene.\n- On Rando Gen Only: Randomizes only when you generate a new randomizer.\n- On File Load: Randomizes on File Load.\n- On File Load (Seeded): Randomizes on file load based on the current randomizer seed/file.": "设置音乐与音效自动随机化的时机：\n- 手动：通过按“随机化所有组”按钮手动随机化音乐或音效\n- 进入新场景：进入新场景时随机化\n- 仅随机化生成：仅在生成新随机化时随机化\n- 载入存档：在载入存档时随机化\n- 载入存档（种子）：根据当前随机化种子/存档在载入时随机化。",
+"Some custom sequences may have notes that are too high for the game's audio ": "某些自定义音序可能含有对游戏音频",
+"Some custom sequences may have notes that are too high for the game's audio engine to play. Enabling this checkbox will cause these notes to drop a couple of octaves so they can still harmonize with the other notes of the sequence.": "某些自定义音序可能含有对游戏音频引擎而言过高的音符。启用此选项会使这些音符下降几个八度，以便仍能与其他音符和谐。",
+"Plays the battle music when getting close to a Leever, like in Majora's Mask.": "接近利维尔时播放战斗音乐，如同《玛祖拉的面具》。",
 
-    # ---- SohMenuRandomizer.cpp ----
-    'Play unique fanfares when obtaining quest items (medallions/stones/songs). Note that these fanfares can be longer than usual.':
-        '获得任务物品（勋章/石头/歌曲）时播放独特的号角声。注意这些号角声可能比平常更长。',
-    'Displays a "Mystery Item" model in place of any freestanding/GS/shop items that were shuffled, and replaces item names for them and scrubs and merchants, regardless of hint settings, so you never know what you\'re getting.':
-        '为任何被洗牌的静止/黄金骷髅/商店物品显示“神秘物品”模型，并替换它们以及灌木与商人的物品名称，无论提示设置如何，因此你永远不知道会得到什么。',
-    "When shuffling boss souls, they'll appear as a simpler model instead of showing the boss' models.This might make boss souls more distinguishable from a distance, and can help with performance.":
-        '随机化头目灵魂时，它们会显示为更简单的模型，而非显示头目模型。这可能使头目灵魂在远处更易区分，并有助于性能。',
+# ---- Input Viewer ----
+"X: %-3d  Y: %-3d": "X：%-3d  Y：%-3d",
+"Sets the on screen size of the input viewer": "设置输入查看器在屏幕上的大小",
+"Sets the desired visibility behavior for the button outline/background layers. Useful for ": "设置按钮轮廓/背景层的期望可见行为。便于",
+"Sets the desired visibility behavior for the button outline/background layers. Useful for custom input viewers.": "设置按钮轮廓/背景层的期望可见行为。便于自定义输入查看器。",
+"Determines the conditions under which the moving layer of the analog stick texture is visible.": "决定模拟摇杆贴图移动层可见的条件。",
+"Determines the conditions under which the analog stick outline/background texture is visible.": "决定模拟摇杆轮廓/背景贴图可见的条件。",
+"Sets the distance to move the analog stick in the input viewer. Useful for custom ": "设置在输入查看器中移动模拟摇杆的距离。便于自定义",
+"Sets the distance to move the analog stick in the input viewer. Useful for custom input viewers.": "设置在输入查看器中移动模拟摇杆的距离。便于自定义输入查看器。",
+"Displays analog stick angle values in the input viewer": "在输入查看器中显示模拟摇杆角度数值",
+"Sets the distance to move the right stick in the input viewer. Useful for custom input viewers.": "设置在输入查看器中移动右摇杆的距离。便于自定义输入查看器。",
+"Highlights the angle value text when the analog stick is in ESS position (on flat ground)": "当模拟摇杆处于 ESS 位置（在平地上）时高亮角度数值文本",
+"Highlights the angle value text when the analog stick is at an angle that would ": "当模拟摇杆处于会产生行走速度的角度时高亮角度数值文本（在平地上）",
+"Highlights the angle value text when the analog stick is at an angle that would produce a walking speed (on flat ground)\n\nUseful for 1.0 Empty Jumpslash Quick Put Away": "当模拟摇杆处于会产生行走速度的角度时高亮角度数值文本（在平地上）\n\n便于 1.0 空跳劈与快速收剑",
 
-    # ---- SohMenuWindWakerStyle.cpp ----
-    'Draws a debug ray from each actor for every candidate light (coloured by the light, longer when stronger), a cyan range ring around each point light, and a bold magenta needle down the chosen key light, so you can see which light is winning and where the key points.':
-        '为每个候选光源从每个演员绘制一条调试射线（按光源着色，越强越长），为每个点光源绘制青色范围环，并为所选关键光源绘制粗洋红色指针，以便你查看哪个光源获胜以及关键点指向何处。',
-    'Renders every cel-shaded object as flat white on the lit side and flat black in shadow (the texture is discarded), so it is obvious which draws are being relit — handy for confirming whether large surfaces like water or lava are getting relit.':
-        '将每个卡通着色物体在受光面渲染为纯白、在阴影中为纯黑（丢弃纹理），从而清楚地看出哪些绘制正在被重新光照——便于确认水或熔岩等大型表面是否正在被重新光照。',
-    'Overlays a translucent faceted shell of each light\'s icosphere — the volume used for its cast pool — tinted by the light, so you can see where the pools are, their size, and their spin. (The renderer has no line primitive, so this is a shell rather than a true wireframe.)':
-        '为每个光源的二十面体覆盖一层半透明多面外壳——即其投射池所用的体积——按光源着色，以便你查看池的位置、大小与旋转。（渲染器没有线图元，因此这是外壳而非真正的线框。）',
-    'Draws the actual 3D shadow volume translucently so you can see its shape: black top/bottom caps, blue side walls. The ground inside this volume is what gets shadowed.':
-        '半透明地绘制实际 3D 阴影体积，以便你查看其形状：黑色顶/底盖、蓝色侧壁。此体积内的地面即为被阴影遮挡的部分。',
+# ---- Input Editor (Soh) ----
+"X:%3d, Y:%3d": "X：%3d，Y：%3d",
+"Press any button,\nmove any axis,\nor press any key\nto add mapping": "按任意按钮、\n移动任意轴，\n或按任意键\n以添加映射",
+"Press any button,\nmove any axis,\nor press any key\nto edit mapping": "按任意按钮、\n移动任意轴，\n或按任意键\n以编辑映射",
+"Axis Threshold\n\nThe extent to which the joystick\nmust be moved or the trigger\npressed to ": "轴阈值\n\n摇杆须移动或扳机\n须按下的程度，以",
+"Stick axis threshold:": "摇杆轴阈值：",
+"Trigger axis threshold:": "扳机轴阈值：",
+"Allows for aiming with the right stick in:\n-First-Person/C-Up view\n-Weapon Aiming": "允许使用右摇杆瞄准：\n- 第一人称/C 上视角\n- 武器瞄准",
+"Changes the left stick to move the player while in first-person mode": "更改左摇杆以在第一人称模式下移动玩家",
+"Allows for using the mouse to control the camera (must enable Free Look), ": "允许使用鼠标控制相机（须启用自由视角），",
+"Allows for using the mouse to control the camera (must enable Free Look), aim with the shield, and perform quickspin attacks (quickly rotate the mouse then press B)\nPress F2 to toggle mouse capture manually.": "允许使用鼠标控制相机（须启用自由视角）、用盾瞄准，并执行快速旋转攻击（快速转动鼠标后按 B）。\n按 F2 手动切换鼠标捕获。",
+"Inverts the Camera X Axis in:\n-First-Person/C-Up view\n-Weapon Aiming": "反转相机 X 轴于：\n- 第一人称/C 上视角\n- 武器瞄准",
+"Inverts the Camera X Axis in:\n-Free look": "反转相机 X 轴于：\n- 自由视角",
+"Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming": "反转相机 Y 轴于：\n- 第一人称/C 上视角\n- 武器瞄准",
+"Inverts the Camera Y Axis in:\n-Free look": "反转相机 Y 轴于：\n- 自由视角",
+"Inverts the Camera Y Axis in:\n-Z-Weapon Aiming": "反转相机 Y 轴于：\n- Z 轴武器瞄准",
+"Inverts the Shield Aiming X Axis": "反转盾瞄准 X 轴",
+"Inverts the Shield Aiming Y Axis": "反转盾瞄准 Y 轴",
+"Prevents the C-Up view from auto-centering, allowing for Gyro Aiming": "阻止 C 上视角自动居中，以允许陀螺仪瞄准",
+"Enables free look camera control\nNote: You must remap C buttons off of the right stick in the ": "启用自由视角相机控制\n注意：你须在",
+"Enables free look camera control\nNote: You must remap C buttons off of the right stick in the controller config menu, and map the camera stick to the right stick.\nDoesn't work in areas were the game locks the camera.\nScene reload may be necessary to enable.": "启用自由视角相机控制\n注意：你须在控制器配置菜单中将 C 按钮从右摇杆移开，并将相机摇杆映射到右摇杆。\n在游戏锁定相机的区域无效。\n可能需要重新加载场景才能启用。",
+"Navigate Pause with the D-pad\nIf used with \"D-pad as Equip Items\", you must hold ": "用方向键导航暂停菜单\n若与“方向键作为装备物品”一起使用，你须按住",
+"Navigate Pause with the D-pad\nIf used with \"D-pad as Equip Items\", you must hold C-Up to equip instead of navigate": "用方向键导航暂停菜单\n若与“方向键作为装备物品”一起使用，你须按住 C 上以装备而非导航",
+"Navigate choices in text boxes, shop item selection, and the file select / name entry ": "在文本框、商店物品选择，以及文件选择/命名界面中导航",
+"Navigate choices in text boxes, shop item selection, and the file select / name entry screens with the D-pad": "使用方向键在文本框、商店物品选择，以及文件选择/命名界面中导航",
+"Health\n- Red when health critical (13-20% depending on max health)\n- Yellow when ": "生命\n- 生命危急时（依最大生命为 13-20%）显示红色\n- ",
+"The cursor will only move a single space no matter how long a D-pad direction is held": "无论方向键方向按住多久，光标每次只移动一格",
+"When Mouse Controls are enabled, this toggles whether the program will automatically ": "启用鼠标控制时，此选项切换程序是否自动",
+"When Mouse Controls are enabled, this toggles whether the program will automatically hide the cursor and capture mouse input when closing the menu.": "启用鼠标控制时，此选项切换程序在关闭菜单时是否自动隐藏光标并捕获鼠标输入。",
+"This will clear all existing mappings for\nMouse on port %d.\n\nContinue?": "这将清除端口 %d 上鼠标的所有现有映射。\n\n继续？",
+
+# ---- Debuggers: actorViewer ----
+"Adds \"name tags\" above actors for identification": "在角色上方添加“名称标签”以便识别",
+"Click to add display items on the name tags": "点击以在名称标签上添加显示项",
+"Allow name tags to be obstructed when behind geometry and actors": "允许名称标签在几何体与角色后方时被遮挡",
+"Name: %s": "名称：%s",
+"Description: %s": "描述：%s",
+"Category: %s": "类别：%s",
+"ID: %d": "ID：%d",
+"Parameters: %d": "参数：%d",
+"Actor List Index: %d": "角色列表索引：%d",
+"Actor Position": "角色位置",
+"Actor Rotation": "角色旋转",
+"flags": "标记",
+"bgCheckFlags": "碰撞标记",
+"Select an actor to display information.": "选择一个角色以显示信息。",
+"Grabs actor with target arrow above it. You might need C-Up for enemies": "抓取头顶有目标箭头的角色。对敌人可能需要 C 上",
+"Grabs actor that Link is holding": "抓取林克正持有的角色",
+"Grabs actor from \"interaction range\"": "从“交互范围”抓取角色",
+"Changes the actor specific param menus with a direct input": "通过直接输入更改角色特定参数菜单",
+"Actor Specific Data": "角色特定数据",
+"New Actor Position": "新角色位置",
+"New Actor Rotation": "新角色旋转",
+"Global Context needed for actor info!": "需要全局上下文才能显示角色信息！",
+
+# ---- Debuggers: dlViewer ----
+"Resource type is not a Display List. Please choose another.": "资源类型不是显示列表。请另选一个。",
+"Total Instruction Size: %lu": "指令总大小：%lu",
+"FMT: %u": "格式：%u",
+"SIZ: %u": "尺寸：%u",
+"LINE: %u": "行：%u",
+"TMEM: %u": "纹理内存：%u",
+"TILE: %u": "贴图：%u",
+"PAL: %u": "调色板：%u",
+"CMT: %u": "CMT：%u",
+"MASKT: %u": "MASKT：%u",
+"SHIFT: %u": "SHIFT：%u",
+"CMS: %u": "CMS：%u",
+"MASKS: %u": "MASKS：%u",
+"SHIFTS: %u": "SHIFTS：%u",
+"WIDTH: %u": "宽度：%u",
+"Texture Name: %s": "贴图名称：%s",
+"Num VTX: %u": "顶点数：%u",
+"Offset: %u": "偏移：%u",
+"Vertex Name: %s": "顶点名称：%s",
+"DL Name: %s": "显示列表名称：%s",
+"%lu - Reserved - Second half of %s": "%lu - 保留 - %s 的后半部分",
+"Error displaying DL instructions.": "显示显示列表指令时出错。",
+
+# ---- Debuggers: hookDebugger ----
+"Total Registered: %d": "已注册总数：%d",
+"%d": "%d",
+"ID": "ID",
+"Ptr": "指针",
+"Filter": "筛选",
+"%s(%d:%d) <-\u00A0%s": "%s(%d:%d) <-%s",
+
+# ---- Debuggers: valueViewer ----
+"%s:": "%s：",
+"%c": "%c",
+"%s": "%s",
+
+# ---- Debuggers: MessageViewer ----
+"Table ID": "表 ID",
+"Text ID": "文本 ID",
+"Which language to load from the selected text ID": "从所选文本 ID 加载哪种语言",
+"Display Message##ExistingMessage": "显示消息##现有消息",
+"CUSTOM Message": "自定义消息",
+"Display Message##CustomMessage": "显示消息##自定义消息",
+
+# ---- Debuggers: StatsWindow (Soh) ----
+"Platform: Windows": "平台：Windows",
+"Platform: iOS": "平台：iOS",
+"Platform: macOS": "平台：macOS",
+"Platform: Linux": "平台：Linux",
+"Platform: OpenBSD": "平台：OpenBSD",
+"Platform: Unknown": "平台：未知",
+"Status: %0.3f ms/frame (%0.1f FPS)": "状态：%0.3f 毫秒/帧（%0.1f FPS）",
+
+# ---- Debuggers: debugSaveEditor ----
+"Current File Number": "当前文件编号",
+"Name: %s": "名称：%s",
+"Encoding used for Player Name": "玩家名称使用的编码",
+"Current health. 16 units per full heart": "当前生命。每颗完整心为 16 单位",
+"Is double defense unlocked?": "是否已解锁双倍防御？",
+"Current magic level": "当前魔法等级",
+"Current magic. 48 units per magic level": "当前魔法。每级魔法为 48 单位",
+"Time of day": "一天中的时间",
+"Is Biggoron sword unlocked? Replaces Giant's knife": "是否已解锁巨人之刀？替代巨人之刀",
+"Sound setting": "声音设置",
+"WARNING! If you save, your file may be locked! Use caution!": "警告！如果你保存，存档可能会被锁定！请谨慎操作！",
+"Z-Targeting behavior": "Z 瞄准行为",
+"Used the Sinking lure to catch it.": "使用沉没诱饵钓到了它。",
+"Played at least one game as a child": "童年时至少玩过一次小游戏",
+"Played at least one game as an adult": "成年时至少玩过一次小游戏",
+"Got the prize item (Heart Piece, unless rando.)\nunlocks Sinking Lure for Child Link.": "获得奖励物品（心之碎片，除非随机化）\n为儿童林克解锁沉没诱饵。",
+"Got the prize item (Golden Scale, unless rando.)\nUnlocks ": "获得奖励物品（黄金鳞片，除非随机化）\n解锁",
+"Got the prize item (Golden Scale, unless rando.)\nUnlocks Sinking Lure for Adult Link.": "获得奖励物品（黄金鳞片，除非随机化）\n为成人林克解锁沉没诱饵。",
+"The owner's now visibly bald when Adult Link.": "成人林克时，店主现在明显秃头。",
+"Restricts items and ammo to only what is possible to legally acquire in-game": "将物品与弹药限制为游戏内可合法获取的",
+"##itemNone": "##无物品",
+"##itemNonePicker": "##无物品选择",
+"##upgradePopupPicker": "##升级弹窗选择",
+"0x%02X: %s": "0x%02X：%s",
+"0x%02X": "0x%02X",
+"No flags match the current search.": "没有标记匹配当前搜索。",
+"stateFlags1": "状态标记1",
+"stateFlags2": "状态标记2",
+"stateFlags3": "状态标记3",
+"unk_6AE_rotFlags": "未知_6AE_旋转标记",
+"Switch": "开关",
+"Temp Switch": "临时开关",
+"Temp Clear": "临时清除",
+"Temp Collect": "临时收集",
+"Collect": "收集",
+"Chest": "宝箱",
+"Load flags from saved scene flags. Normally happens on scene load": "从已保存的场景标记加载标记。通常在场景载入时发生",
+"Save current scene flags. Normally happens on scene exit": "保存当前场景标记。通常在退出场景时发生",
+"Clear current scene flags. Reload scene to see changes": "清除当前场景标记。重新加载场景以查看更改",
+"Current game state does not have an active scene": "当前游戏状态没有活动场景",
+"Map": "地图",
+"Open flags for current scene": "当前场景的开启标记",
+"Rooms": "房间",
+"Floors": "楼层",
+"Gold Skulltulas": "黄金骷髅",
+"Flags": "标记",
+"Automatically adjust the number of gold skulltula tokens acquired based on set flags.": "根据设置的标记自动调整已获得的黄金骷髅代币数量。",
+"%X": "%X",
+"Dungeon Items": "地牢物品",
+"Barinade's Lair does not have small keys": "巴里那德的巢穴没有小钥匙",
+"Link's Position": "林克的位置",
+"Link's Rotation": "林克的旋转",
+"Link's Model Rotation": "林克模型旋转",
+"Link's Current Equipment": "林克当前装备",
+"Current Items": "当前物品",
+"Current D-pad Items": "当前方向键物品",
+"Player State": "玩家状态",
+"  %d": "  %d",
+"Global Context needed for player info!": "需要全局上下文才能显示玩家信息！",
+
+# ---- ExtraModes: EnemyRandomizer ----
+"Replaces fixed enemies throughout the game with a random enemy. Bosses, Mini-Bosses and a ": "用随机敌人替换游戏全程的固定敌人。Boss、迷你 Boss 以及",
+"Replaces fixed enemies throughout the game with a random enemy. Bosses, Mini-Bosses and a few specific regular enemies are excluded.\nEnemies that need more than Deku Nuts & either Deku Sticks or a sword to kill are excluded from spawning in \"clear enemy\" rooms.\n\n- Random: Enemies are randomized every time you load a room.\n- Random (Seeded): Enemies are randomized based on the current randomizer seed/file.\n": "用随机敌人替换游戏全程的固定敌人。Boss、迷你 Boss 以及少数特定的普通敌人除外。\n需要超过德库坚果且需要德库木棒或剑才能击杀的敌人，不会在“清场”房间生成。\n\n- 随机：每次载入房间时敌人随机化。\n- 随机（种子）：根据当前随机化种子/存档进行敌人随机化。\n",
+"Enemies and Bosses spawn with random sizes.": "敌人与 Boss 以随机大小生成。",
+"Scales normal enemies Health with their randomized size.\n": "使普通敌人的生命值随其随机大小缩放。\n",
+"Scales normal enemies Health with their randomized size.\n*This will NOT affect Bosses!*": "使普通敌人的生命值随其随机大小缩放。\n*这不会影响 Boss！*",
+
+# ---- Presets ----
+"No presets with rando options. Make some in Settings -> Presets": "没有带随机化选项的预设。请在“设置 -> 预设”中创建一些",
+"PresetsWidget": "预设组件",
+
+# ---- TimeDisplay ----
+"No Enabled Timers...": "没有已启用的计时器……",
+
+# ---- Mod menu ----
+"Toggle mods. For graphics mods, this means toggling between default and mod graphics.": "切换模组。对图像模组而言，即在默认图像与模组图像之间切换。",
+"Move %s": "移动 %s",
+
+# ---- Randomizer: Plandomizer ----
+"Resources": "资源",
+"Spoiler Log Rewards": "剧透日志奖励",
+"Name: ": "名称：",
+"Load/Save Spoiler Log": "加载/保存剧透日志",
+"No Spoiler Logs found.": "未找到剧透日志。",
+"Current Seed Hash": "当前种子哈希",
+"No Spoiler Log Loaded": "未载入剧透日志",
+"Please Load Spoiler Data...": "请载入剧透数据……",
+"Current Hint: ": "当前提示：",
+"New Hint:     ": "新提示：    ",
+"Randomize Hint": "随机化提示",
+"Old Spoiler Version": "旧版剧透",
+
+# ---- Randomizer: check tracker ----
+" (%s)": "（%s）",
+"When active, items will show hidden checks by default when updated to this state.": "启用时，物品更新到此状态时默认显示隐藏检查点。",
+"When active, unavailable checks will be hidden.": "启用时，不可用的检查点将被隐藏。",
+"Sets the font size used in the check tracker.": "设置检查追踪器中使用的字体大小。",
+"If enabled, will hide area headers that have no locations matching filter": "若启用，将隐藏没有匹配筛选条件的区域标题",
+"If enabled, Vanilla/MQ dungeons will show on the tracker immediately. ": "若启用，原版/MQ 地牢将立即显示在追踪器上。",
+"If enabled, Vanilla/MQ dungeons will show on the tracker immediately. Otherwise, Vanilla/MQ dungeon locations must be unlocked.": "若启用，原版/MQ 地牢将立即显示在追踪器上。否则，原版/MQ 地牢位置须先解锁。",
+"If enabled, will prevent the tracker from displaying slots with non-shop-item shuffles.": "若启用，将阻止追踪器显示使用非商店物品洗牌的槽位。",
+"If enabled, will show GS locations in the tracker regardless of tokensanity settings.": "若启用，无论代币狂热设置如何，都会在追踪器中显示黄金骷髅位置。",
+"If enabled, will show a check's logic when hovering over it.": "若启用，悬停在检查点上时会显示其逻辑。",
+"If enabled, will show the checks that are available to be collected ": "若启用，将显示当前进度下可收集的检查点",
+"If enabled, will show the checks that are available to be collected with your current progress.": "若启用，将显示当前进度下可收集的检查点。",
+"When active, checks will hide by default when updated to this state. Can ": "启用时，检查点更新到此状态后默认隐藏。可",
+"When active, checks will hide by default when updated to this state. Can be overridden with the \"Show Hidden Items\" option.": "启用时，检查点更新到此状态后默认隐藏。可通过“显示隐藏物品”选项覆盖。",
+"Tracker Header Visibility": "追踪器标题可见性",
+
+# ---- Randomizer: entrance tracker ----
+"The entrance tracker will only track shuffled entrances": "入口追踪器仅追踪已洗牌的入口",
+"Sort By": "排序依据",
+"Sort entrances by the original source entrance": "按原始源入口排序",
+"Sort entrances by the overrided destination": "按被覆盖的目标排序",
+"List Items": "列出物品",
+"Automatically scroll to the first available entrance in the current scene": "自动滚动到当前场景中第一个可用入口",
+"Highlight the previous entrance that Link came from": "高亮林克来时的上一个入口",
+"Highlight available entrances in the current scene": "高亮当前场景中的可用入口",
+"Collapse undiscovered entrances towards the bottom of each group": "将未发现的入口折叠到各组底部",
+"Hide reverse entrance transitions when Decouple Entrances is off": "当“解耦入口”关闭时隐藏反向入口转换",
+"Group By": "分组依据",
+"Group entrances by their area": "按区域分组入口",
+"Group entrances by their entrance type": "按入口类型分组入口",
+"Spoiler Reveal": "剧透揭示",
+"Reveal the source for undiscovered entrances": "揭示未发现入口的来源",
+"Reveal the destination for undiscovered entrances": "揭示未发现入口的目标",
+"Waiting for file load...": "等待存档载入……",
+"Collapse all entrance groups": "折叠所有入口组",
+"Expand all entrance groups": "展开所有入口组",
+"Clear the search field": "清除搜索框",
+"%s\u00A0-> %s": "%s -> %s",
+"%d Undiscovered": "%d 个未发现",
+
+# ---- Randomizer: item tracker ----
+"Checks: %d/%d": "检查点：%d/%d",
+"Customize what the numbers under each item are tracking.": "自定义每个物品下方数字所追踪的内容。",
+"Customize what numbers are shown for key tracking.": "自定义钥匙追踪所显示的数字。",
+"Customize what numbers are shown for triforce piece tracking.": "自定义三角神力碎片追踪所显示的数字。",
+"Customize what the numbers under each item are tracking.\n\nNote: items without capacity upgrades will track ammo even in capacity mode": "自定义每个物品下方数字所追踪的内容。\n\n注意：没有容量升级的物品即使在容量模式下也会追踪弹药",
+"Shows an 'H' or an 'L' to more easily distinguish between Hookshot and Longshot.": "显示“H”或“L”以便更易区分钩爪与长钩爪。",
+
+# ---- TimeSplits ----
+"Set Tokens": "设置标记",
+"Window Options": "窗口选项",
+"Split List Management": "分段列表管理",
+"New List Name: ": "新列表名称：",
+"Select List to Load: ": "选择要加载的列表：",
+
+# ---- OTRGlobals ----
+"SoH Path Error": "SoH 路径错误",
+"SoH is running in a temp folder.\nExtract the .zip and run again.": "SoH 正在临时文件夹中运行。\n请解压 .zip 后重新运行。",
+"All files have been processed. Run SoH?": "所有文件已处理完毕。运行 SoH 吗？",
+"Run Ship of Harkinian": "运行 Ship of Harkinian",
+"No O2R Files": "没有 O2R 文件",
+"No O2R files found. Generate one now?": "未找到 O2R 文件。现在生成一个吗？",
+"ROMs found": "找到 ROM",
+"ROMs found in application directory. Would you like to process them?": "在应用程序目录中找到 ROM。是否处理它们？",
+"Extraction Complete": "提取完成",
+"ROM Extracted. Extract another?": "ROM 已提取。再提取一个吗？",
+"No ROM Archives": "没有 ROM 档案",
+"No ROM O2R files detected. Please generate a ROM O2R and relaunch.": "未检测到 ROM O2R 文件。请生成 ROM O2R 后重新启动。",
+"Extracting %s...%s": "正在提取 %s……%s",
+"Extraction Crashed": "提取崩溃",
+"Extractor assets not found": "未找到提取器资源",
+"Confirm Re-extract": "确认重新提取",
+"Menu Moved": "菜单已移动",
+"Loading old file": "正在载入旧文件",
+"Error loading save file": "载入存档文件出错",
+"Outdated ROM Archives": "过时的 ROM 档案",
+"Outdated Randomizer Save": "过时的随机化存档",
+"SoH Permissions Error": "SoH 权限错误",
+"SoH ROM Error": "SoH ROM 错误",
+
+# ---- SohGui: Menu / Settings / Enhancements (remaining) ----
+"Start typing to see results.": "开始输入以查看结果。",
+"Search Results": "搜索结果",
+"Allows controller navigation of the port menu (Settings, Enhancements,...)\nCAUTION: ": "允许用控制器导航端口菜单（设置、增强功能等）\n注意：",
+"Allows controller inputs to be picked up by the game even when the game window isn't ": "允许游戏即使在游戏窗口未聚焦时也能接收控制器输入：",
+"Configure what happens when starting or resetting the game.\n\n": "配置在开始或重置游戏时发生的情况。\n\n",
+"Multiplies your output resolution by the value inputted, as a more intensive but effective ": "将输出分辨率乘以所输入的值，作为一种更密集但有效的",
+"Activates MSAA (multi-sample anti-aliasing) from 2x up to 8x, to smooth the edges of ": "启用 MSAA（多重采样抗锯齿），范围从 2x 到 8x，用于平滑",
+"-5 will be half as much time, +5 will be 6x as much time. Affects timed switches, torches, GTG statue eyes, & doors in race with Dampe.": "-5 表示时间减半，+5 表示时间增至 6 倍。影响定时开关、火把、GTG 雕像眼睛，以及与达姆佩竞速中的门。",
+"Buttons that activate Speed Modifier 1.\n\nIf \"Toggle modifier instead of holding\" is off, hold this combo to apply the modifier.\nIf it is on, tap this combo to toggle the modifier on/off.": "激活速度修正器 1 的按钮。\n\n若“切换修正器而非按住”关闭，按住此组合以应用修正器。\n若开启，点按此组合即可开关修正器。",
+"Allows Link to freely change age by playing the Song of Time.\nTime Blocks can still be used properly.\n\nRequirements:\n - Obtained the Song of Time\n - Obtained the Ocarina of Time (depends on selection)\n - Obtained the Master Sword (depends on selection)\n - Not within range of a Time Block\n - Not within range of Ocarina Playing spots": "允许林克通过演奏时之曲自由改变年龄。\n时间方块仍可正常使用。\n\n需求：\n - 已获得时之曲\n - 已获得时之笛（取决于选择）\n - 已获得大师之剑（取决于选择）\n - 不在时间方块范围内\n - 不在演奏时之笛地点范围内",
+"Allows a more in-depth perspective of time spent in a certain map.": "提供更深入地了解在某张地图中所花时间。",
+"Allows you to change the number of days it takes for Biggoron to forge the Biggoron's Sword.": "允许你更改巨人之哥隆锻造巨人之剑所需的天数。",
+"Mirrors the world horizontally:\n\n - Always: Always mirror the world.\n - Random: Randomly decide to mirror the world on each scene change.\n - Random (Seeded): Scenes are mirrored based on the current randomizer seed/file.\n - Dungeons: Mirror the world in Dungeons.\n - Dungeons (Vanilla): Mirror the world in Vanilla Dungeons.\n - Dungeons (MQ): Mirror the world in MQ Dungeons.\n - Dungeons Random: Randomly decide to mirror the world in Dungeons.\n - Dungeons Random (Seeded): Dungeons are mirrored based on the current randomizer seed/file.": "水平镜像世界：\n\n - 总是：总是镜像世界。\n - 随机：每次场景切换时随机决定是否镜像世界。\n - 随机（种子）：场景根据当前随机化种子/存档镜像。\n - 地牢：在地牢中镜像世界。\n - 地牢（原版）：在原版地牢中镜像世界。\n - 地牢（MQ）：在 MQ 地牢中镜像世界。\n - 地牢随机：在地牢中随机决定是否镜像世界。\n - 地牢随机（种子）：地牢根据当前随机化种子/存档镜像。",
+"Modifies all fall damage:\n2x: Can survive all fall damage from the start of the game.\n4x: Can only survive short fall damage from the start of the game.\n8x: Cannot survive any fall damage from the start of the game.\n16x: Can survive all fall damage with max health without double defense.\n32x: Can survive all fall damage with max health and double defense.\n64x: Can survive short fall damage with double defense.\n128x: Cannot survive fall damage.": "修改所有坠落伤害：\n2x：从游戏开始即可承受所有坠落伤害。\n4x：从游戏开始只能承受短暂坠落伤害。\n8x：从游戏开始无法承受任何坠落伤害。\n16x：满生命无双倍防御时可承受所有坠落伤害。\n32x：满生命且有双倍防御时可承受所有坠落伤害。\n64x：有双倍防御时可承受短暂坠落伤害。\n128x：无法承受坠落伤害。",
+"Modifies all sources of damage not affected by other sliders:\n2x: Can survive all common attacks from the start of the game.\n4x: Dies in 1 hit to any substantial attack from the start of the game.\n8x: Can only survive trivial damage from the start of the game.\n16x: Can survive all common attacks with max health without double defense.\n32x: Can survive all common attacks with max health and double defense.\n64x: Can survive trivial damage with max health without double defense.\n128x: Can survive trivial damage with max health and double defense.\n256x: Cannot survive damage.": "修改不受其他滑块影响的伤害来源：\n2x：从游戏开始即可承受所有常见攻击。\n4x：从游戏开始任何实质性攻击一击即死。\n8x：从游戏开始只能承受微小伤害。\n16x：满生命无双倍防御时可承受所有常见攻击。\n32x：满生命且有双倍防御时可承受所有常见攻击。\n64x：满生命无双倍防御时可承受微小伤害。\n128x：满生命且有双倍防御时可承受微小伤害。\n256x：无法承受伤害。",
+"Modifies damage taken after falling into a void:\n2x: Can survive void damage from the start of the game.\n4x: Cannot survive void damage from the start of the game.\n8x: Can survive void damage twice with max health without double defense.\n16x: Can survive void damage with max health without double defense.\n32x: Can survive void damage with max health and double defense.\n64x: Cannot survive void damage.": "修改坠入虚空后受到的伤害：\n2x：从游戏开始即可承受虚空伤害。\n4x：从游戏开始无法承受虚空伤害。\n8x：满生命无双倍防御时可承受两次虚空伤害。\n16x：满生命无双倍防御时可承受虚空伤害。\n32x：满生命且有双倍防御时可承受虚空伤害。\n64x：无法承受虚空伤害。",
+"Disabled: Paths vanish more the higher the resolution (Z-Fighting is based on resolution).\nConsistent: Certain paths vanish the same way in all resolutions.\nNo Vanish: Paths do not vanish, Link seems to sink into some paths.\nThis might affect other decal effects.": "禁用：分辨率越高，路径消失越多（Z 冲突基于分辨率）。\n一致：某些路径在所有分辨率下以相同方式消失。\n不消失：路径不会消失，林克似乎会陷入某些路径。\n这可能影响其他贴花效果。",
+"Introduces Options for unequipping Link's sword\n\nNone: Only Biggoron's Sword/Giant's Knife can be toggled. Doing so will equip the Master Sword.\n\nChild Toggle: This will allow for completely unequipping any sword as Child link.\n\nBoth Ages: Any sword can be unequipped as either age. This may lead to swordless glitches as adult.": "引入卸下林克之剑的选项\n\n无：仅巨人之剑/巨人之刀可被切换。这样做会装备大师之剑。\n\n儿童切换：允许儿童林克完全卸下任何剑。\n\n双年龄：任何年龄下都可卸下任何剑。作为成人可能导致无剑故障。",
+"Wearing the Bunny Hood grants a speed and jump boost like in Majora's Mask.\nCan also be limited to only the speed boost.\nThe effects of either option are not accounted for in Randomizer logic.\nAlso disables NPC's reactions to wearing the Bunny Hood.": "佩戴兔帽会像《玛祖拉的面具》中那样获得速度与跳跃加成。\n也可限制为仅速度加成。\n随机化逻辑不考虑任一选项的效果。\n同时禁用 NPC 对佩戴兔帽的反应。",
+"Set the Beta Quest world to explore. *WARNING*: Changing this will reset your game!\nCtrl+Click to type in a value.": "设置要探索的 Beta 任务世界。*警告*：更改此项将重置你的游戏！\nCtrl+点击以输入数值。",
+
+# ---- SohGui: ResolutionEditor (remaining) ----
+"Click to reenable aspect correction.": "点击以重新启用宽高比校正。",
+"Aspect ratio: %.2f:1": "宽高比：%.2f:1",
+"Prevents integer scaling factor from exceeding screen bounds.\n\nEnabled: Will clamp the scaling factor and display a gentle warning in the resolution editor.\nDisabled: Will allow scaling to exceed screen bounds, for users who want to crop overscan.\n\n ": "阻止整数缩放系数超出屏幕边界。\n\n启用：将限制缩放系数并在分辨率编辑器中显示温和警告。\n禁用：允许缩放超出屏幕边界，供需要裁切过扫描的用户使用。\n\n",
+
+# ---- SohGui: Randomizer menu (remaining) ----
+"Requires Logic Turned On.": "需要启用逻辑。",
+"Matches the color of maps & compasses to the dungeon they belong to. This helps identify maps & compasses from afar and adds a little bit of flair.\n\nThis only applies to seeds with maps & compasses shuffled to \"Any Dungeon\", \"Overworld\", or \"Anywhere\".": "将地图与罗盘的颜色匹配到它们所属的地牢。这有助于从远处识别地图与罗盘，并增添一点风采。\n\n这仅适用于将地图与罗盘洗牌到“任意地牢”、“地面世界”或“任意位置”的种子。",
+
+# ---- SohGui: Menu.cpp (remaining) ----
+"%s": "%s",
+
+# ---- SohGui: Wind Waker Style (cel shading) ----
+"A Wind Waker-style twinkling starfield over the night sky: a fixed bright constellation plus hundreds of small stars that shimmer, fading in at dusk and out at dawn.": "夜空中风之杖风格的闪烁星空：固定的明亮星座，加上数百颗微微闪烁的小星，在黄昏淡入、黎明淡出。",
+"Casts a pool of light from each point light (torch, fairy, ...) onto the surrounding world geometry, Wind Waker-style. Affects only the static world, not actors/objects (lit by Cel Shading).": "以风之杖风格，将每个点光源（火把、精灵……）的光池投射到周围的世界几何体上。仅影响静态世界，不影响角色/物体（由卡通渲染照亮）。",
+"Depth of the Wind Waker size pulse \u2014 the pool's dominant flicker. The orb gently grows/shrinks on a slow random walk (re-rolled every ~0.2 s, eased). 1.0 = authentic (~5%); 0 = steady. (Navi is excluded \u2014 she isn't a flame.)": "风之杖尺寸脉动深度——光池的主要闪烁。光球以缓慢的随机游走轻轻胀缩（每约 0.2 秒重新随机，缓动）。1.0 = 原版（约 5%）；0 = 稳定。（娜薇被排除——她不是火焰。）",
+"Drifting Wind Waker-style puffy clouds across the sky, plus the wispy cloud band around the horizon, both riding the wind.": "风之杖风格蓬松云朵飘过天空，加上环绕地平线的稀薄云带，二者皆随风而行。",
+"Draws the Wind Waker sky only on the left half of the screen, leaving the original sky visible on the right \u2014 a live side-by-side comparison.": "仅在屏幕左半部分绘制风之杖天空，右侧保留原始天空——实时并排对比。",
+"Extends how far a point light can remain an object's key light, as a multiplier on its actual radius (key selection only \u2014 the game's real lighting is unchanged). Raise it so an orbiting fairy keeps lighting nearby objects even when it swings to its far side. 1x = the light's literal range.": "扩展点光源能作为物体主光源的距离，作为其实际半径的倍数（仅关键选择——游戏的真实光照不变）。调高它，让环绕的精灵即使摆到远端也能继续照亮附近物体。1x = 光源的字面范围。",
+"Hide the original game's actor shadows (Link's feet, the NPC/enemy circles, the horse shadow, the sign and snake-statue texture shadows) so only the new shape shadows show. Turn off to draw both.": "隐藏原版游戏的的角色阴影（林克的脚、NPC/敌人圆圈、马影、招牌与蛇像贴图阴影），使仅新的形状阴影显示。关闭则两者都绘制。",
+"Hides the original flat, billboarded, flickering glow circle the game draws over torches and other glow lights (it clashes with the cast pools). Applies while Light Casting is on.": "隐藏原版在火把与其他发光光源上方绘制的扁平、广告牌式、闪烁的光晕圈（它与投射光池冲突）。在启用光投射时生效。",
+"How dark the shadow side gets. 0% = no shadow (flat), 100% = full shadow down to ambient.": "阴影面有多暗。0% = 无阴影（平面），100% = 完全阴影直至环境光。",
+"How far ABOVE the feet the shadow can climb onto rising ground. Raise this so the shadow still appears where an incline rises higher than the actor's feet (without it, the shadow vanishes on up-slopes). Too high starts to catch the actor's own lower legs, so keep it just above the ground rise you need.": "阴影能爬上升地面的脚部上方距离。调高它，让阴影在斜坡升高超过角色脚部的位置仍显示（不调则阴影在上坡处消失）。过高会开始捕捉角色自身的下腿，所以只需略高于你需要的地面隆起。",
+"How far below the feet the shadow conforms to the ground. The shadow is a thin stencil 'slab' at the feet that wraps onto whatever ground is inside it. Higher = follows ground that dips further (steeper inclines), but past a ledge the shadow creeps further down the drop. Lower = clings tight to the feet and won't spill over cliff edges, but may clip on steep slopes.": "阴影在脚部下方贴合地面的距离。阴影是脚部一处薄薄的模板“板”，包裹其范围内的任何地面。越高 = 跟随下陷更深的地面（更陡的斜坡），但越过边缘后阴影会沿坠落处延伸得更远。越低 = 紧贴脚部，不会溢出悬崖边缘，但在陡坡上可能穿模。",
+"How fast the clouds drift across the sky on the wind. 1x is Wind Waker's own speed.": "云在风中飘过天空的速度。1x 为风之杖自身的速度。",
+"How fast the stars pulse. 1x is Wind Waker's rate \u2014 about ten seconds per cycle.": "星星脉动的速度。1x 为风之杖的速率——约每十秒一个周期。",
+"How fast the wisps fly. 1x is Wind Waker's own speed. The whole flight path scales together, so the curls and loops keep their shape; slower wisps also leave shorter streaks.": "微光飞行速度。1x 为风之杖自身的速度。整条飞行路径一起缩放，因此卷曲与环圈保持形状；较慢的微光留下更短的拖尾。",
+"How long the key light takes to ease from one source to another. Higher = slower, more deliberate travel between the sun and a fairy/torch.": "主光源从一个来源缓动到另一个来源所需的时间。越高 = 越慢，在太阳与精灵/火把之间更从容地移动。",
+"How long the shadow may get. The key light is raised toward straight-overhead before projecting, so a low light still casts a short shadow tucked under the actor (like the vanilla shadow). Lower = always short and steep; higher = lets a low light stretch the shadow out further.": "阴影可能达到的长度。在投射前主光源被抬升到接近正上方，因此低光源仍投出躲在角色下方的短阴影（如同原版阴影）。越低 = 始终短而陡；越高 = 让低光源把阴影拉得更长。",
+"How many wisps ride the wind (their number also rises and falls with the wind's strength). 1x is Wind Waker's own count.": "有多少微光乘风而行（其数量也随风力增减）。1x 为风之杖自身的计数。",
+"How much of the sky the clouds fill \u2014 from a few scattered clouds up to fully overcast.": "云填满天空的多少——从零星散布的云到完全阴天。",
+"How much the sky horizon sinks as the camera climbs. 0% = it follows the camera, always at the same height on screen; 100% = it stays at a fixed world height, so hilltops rise in front of it and valleys look out over it.": "随着相机攀升，天空地平线下沉多少。0% = 跟随相机，在屏幕上始终同一高度；100% = 固定在世界高度，因此山顶从它前方升起、山谷从它上方望出。",
+"How often flames pick a new brightness for the Wind Waker flicker. Higher = faster; lower = a lazier flame.": "火焰为风之杖闪烁选择新亮度的频率。越高 = 越快；越低 = 越慵懒的火焰。",
+"Let Navi count as a candidate key light for cel shading. Navi blinks on/off and orbits Link, so leaving this on makes the lighting on nearby objects shift around with her. Turn it off to ignore Navi and keep the key light steady (the sun/moon or a torch wins instead).": "让娜薇作为卡通渲染的候选主光源。娜薇闪烁开关并环绕林克，所以保持开启会使附近物体的光照随她移动。关闭以忽略娜薇，保持主光源稳定（太阳/月亮或火把取而代之）。",
+"Let shadows fall on a few \"floors\" that the game spawns as actors instead of room geometry \u2014 the castle-town drawbridge, the Gerudo Valley bridge, and some dungeon platforms. They are drawn just before the shadows so the shadows land on them like normal ground. Off = those surfaces show no shadow (the original behaviour).": "让阴影落在游戏作为角色（而非房间几何体）生成的几处“地板”上——城堡镇吊桥、格鲁德山谷桥，以及一些地牢平台。它们在阴影之前绘制，因此阴影如普通地面般落于其上。关闭 = 那些表面不显示阴影（原版行为）。",
+"Makes a lit, held Deku stick a real light source at its burning tip (it isn't in vanilla). Like a torch it lights nearby objects via Cel Shading and casts their shadows, and \u2014 with Light Casting on \u2014 casts its own pool on the world. This one toggle controls all three.": "使点燃并持有的德库木棒在其燃烧尖端成为真实光源（原版中没有）。如同火把，它通过卡通渲染照亮附近物体并投射其阴影，且——在启用光投射时——在世界中投射自身光池。这一个开关控制全部三项。",
+"Makes non-Navi fairies emit light (they don't in vanilla): the fairies that drift around places like Kokiri Forest, and the healing fairies found out in the world (the magic one casts a wider pool). Since it turns them into real light sources, they then cast light pools AND can light nearby objects via Cel Shading, the same as Navi. A cluster of them can make the lighting busy.": "使非娜薇的精灵发光（原版中不会）：在科克里森林等地飘荡的精灵，以及在世界各处发现的治愈精灵（魔法那只会投射更宽的光池）。由于这使它们成为真实光源，它们随后既投射光池，又能通过卡通渲染照亮附近物体，与娜薇相同。成群的它们会让光照显得繁忙。",
+"Maximum number of stars at full night (the visible count rises and falls with the time of day). Wind Waker uses 1000.": "满夜时的最大星星数（可见数量随一天中的时间增减）。风之杖使用 1000。",
+"Overall brightness of the sky gradient. Raise for a more vivid sky, lower for a moodier one.": "天空渐变的整体亮度。调高以获得更生动的天空，调低以获得更沉静的天空。",
+"Performance: actors farther than this from the camera get no shape shadow (each shadow redraws the actor's whole silhouette once per tap, so distant ones cost more than they're worth). Lower to gain frames in crowded scenes; raise for shadows that stay visible into the distance.": "性能：距离相机超过此值的角色没有形状阴影（每个阴影每次轻点都重绘角色整个轮廓，因此远处角色花费多于其价值）。在拥挤场景中调低以获取帧数；调高则让阴影在远处仍可见。",
+"Pins the pool's tumble and size pulse to the authentic Wind Waker rates. Turn off to reveal and set Rotation Speed and Size Flicker yourself.": "将光池的翻滚与尺寸脉动固定为原版风之杖速率。关闭以自行显示并设置旋转速度与尺寸闪烁。",
+"Raises or lowers the sky's horizon line \u2014 the gradient's haze boundary and the horizon cloud band move together. Useful where the visible horizon sits below eye level, like the middle of Hyrule Field.": "升高或降低天空的地平线——渐变的朦胧边界与地平线云带一起移动。在可见地平线低于视线水平的位置很有用，例如海拉尔平原中央。",
+"Re-lights actors and objects with a single dominant light and a soft Wind Waker-style ramp. Only affects objects, not the static scene. Pairs well with cel-shaded texture packs.": "用单一主光源与柔和的风之杖风格斜坡重新照亮角色与物体。仅影响物体，不影响静态场景。与卡通渲染贴图包搭配良好。",
+"Replaces the game's fast, jagged per-frame torch/flame flicker with a slow, organic Wind Waker flicker. Applied at the source, so it affects the vanilla scene lighting and Cel Shading even when Light Casting is off.": "将游戏快速、锯齿状的逐帧火把/火焰闪烁替换为缓慢、自然的风之杖闪烁。在源头应用，因此即使关闭光投射，也会影响原版场景光照与卡通渲染。",
+"Replaces the overworld sky with a Wind Waker-style one: a gradient sky dome, drifting puffy clouds with a wispy horizon cloud band, and a twinkling night starfield. Each part can be toggled and tuned below. Texture packs can swap in different cloud art.": "用风之杖风格的天空替换地面世界天空：渐变天空穹顶、飘移的蓬松云朵与稀薄的地平线云带，以及闪烁的夜间星空。每个部分都可在下方切换与微调。贴图包可换入不同的云朵美术。",
+"Replaces the sky texture with a smooth Wind Waker-style gradient, fading from a hazy horizon up to a deeper sky. The colours shift with the time of day through dawn, dusk and night.": "用平滑的风之杖风格渐变替换天空贴图，从朦胧的地平线淡入到更深的天空。颜色随一天中的时间经历黎明、黄昏与夜晚而变化。",
+"Replaces the vanilla actor shadows with a shape-based drop shadow for each actor (Link, NPCs, enemies, items, ...): its own silhouette cast from the single key light Cel Shading picks, wrapped onto the real ground so it follows slopes and bumps. Off by default (vanilla shadows). Uses the Cel Shading key selection, but works whether or not Cel Shading itself is on.": "用基于形状的下落阴影替换每个角色（林克、NPC、敌人、物品……）的原版阴影：其自身轮廓由卡通渲染所选的单一主光源投射，包裹到真实地面，从而跟随斜坡与凸起。默认关闭（原版阴影）。使用卡通渲染的关键选择，但无论卡通渲染本身是否开启都有效。",
+"Speed of the Wind Waker two-axis tumble that animates the pool's faceted edges, as a multiplier on the authentic rate. 1.0 = authentic; 0 = static.": "风之杖双轴翻滚的速度，使光池的多面边缘动起来，作为原版速率的倍数。1.0 = 原版；0 = 静止。",
+"Tints Navi's light toward her current colour. Her light is normally white, but she changes colour when targeting (yellow on enemies, and so on); raise this to let a little of that colour through. Applied at the source, so it tints her cast pool, the objects she lights under Cel Shading, and the vanilla lighting alike. 0% = white.": "将娜薇的光调向她当前的颜色。她的光通常是白色，但瞄准时会变色（敌人上为黄色，等等）；调高此值以让一点那种颜色透出。在源头应用，因此会同时染她投射的光池、她在卡通渲染下照亮的物体，以及原版光照。0% = 白色。",
+"Where the dark-to-light transition sits. Higher = more of the surface stays in shadow.": "明暗过渡的位置。越高 = 更多表面停留在阴影中。",
+"Width of the transition band. Low = a hard cel edge; high = a softer gradient.": "过渡带的宽度。低 = 硬卡通边缘；高 = 更柔和的渐变。",
+"Wind Waker's white wind streaks curling through the sky \u2014 occasionally pulling a full loop-de-loop. Their number follows the wind's strength.": "风之杖的白色风纹卷曲穿过天空——偶尔拉出一个完整的 Loop-de-loop。其数量随风力变化。",
+
+# ---- SohGui: DevTools (remaining) ----
+"Changes the behavior of debug file select creation (creating a save file on slot 1 with debug mode on):\n- Off: The debug save file will be a normal savefile.\n- Vanilla: The debug save file will be the debug save file from the original game.\n- Maxed: The debug save file will be a save file with all of the items & upgrades.": "更改调试文件选择创建的行为（在槽位 1 创建调试模式开启的存档）：\n- 关闭：调试存档将是普通存档。\n- 原版：调试存档将是原版游戏中的调试存档。\n- 满级：调试存档将是拥有全部物品与升级的存档。",
+"The log level determines which messages are printed to the console. This does not affect the log file output": "日志级别决定打印到控制台的哪些消息。这不影响日志文件输出",
+
+# ---- FileSelectEnhancements ----
+"Take a look at our presets!": "看看我们的预设吧！",
+
+# ---- GameplayStats ----
+"Keep track of the timer as an in-game HUD element. The position of the ": "将计时器作为游戏内 HUD 元素追踪。计时器的",
+"Keep track of the timer as an in-game HUD element. The position of the timer can be changed in the Cosmetics Editor.": "将计时器作为游戏内 HUD 元素追踪。计时器的位置可在外观编辑器中更改。",
+"Allows a more in-depth perspective of time spent in a certain map.": "提供更深入地了解在某张地图中所花时间。",
+"Timestamps are relative to starting timestamp rather than in game time, ": "时间戳相对于起始时间戳，而非游戏内时间，",
+"Timestamps are relative to starting timestamp rather than in game time, usually necessary for races/speedruns.\n\nStarting timestamp is on first non-C-up input after intro cutscene.\n\nNOTE: THIS NEEDS TO BE SET BEFORE CREATING A FILE TO TAKE EFFECT": "时间戳相对于起始时间戳，而非游戏内时间，通常竞速/速通所必需。\n\n起始时间戳在开场过场后第一次非 C 上输入时设定。\n\n注意：必须在创建存档前设置才能生效",
+"Note: Gameplay stats are saved to the current file and will be\nlost if you quit without saving.": "注意：游戏统计会保存到当前存档，若未保存就退出将\n丢失。",
+
+# ---- colViewer ----
+"Applies the collision as a decal display. This can be useful if there is z-fighting occuring ": "将碰撞作为贴花显示。若发生 Z 冲突时这很有用：",
+"Applies the collision as a decal display. This can be useful if there is z-fighting occuring with the scene geometry, but can cause other artifacts.": "将碰撞作为贴花显示。若与场景几何体发生 Z 冲突时这很有用，但可能引发其他瑕疵。",
+"Applies the scene's shading to the collision display.": "将场景的着色应用到碰撞显示。",
+
+# ---- GfxDebuggerWindow (libultraship) ----
+"dlist: %p": "显示列表：%p",
+"BREAKPoint: %s": "断点：%s",
+"Disp Stack": "显示栈",
+"%s": "%s",
+"Tiles": "贴图块",
+"%s: %dx%d; type=%s": "%s：%dx%d；类型：%s",
+"%dx%d; type=%s": "%dx%d；类型：%s",
+"Loaded Textures": "已加载贴图",
+"Texture To Load": "要加载的贴图",
+"Resume Game": "继续游戏",
+
+# ---- ConsoleWindow (libultraship) ----
+"Copy Text": "复制文本",
+"Submit": "提交",
+
+# ---- GameOverlay (libultraship) ----
+"Overlays Text Font": "叠层文本字体",
+
+# ---- StatsWindow (libultraship) ----
+"Platform: Windows": "平台：Windows",
+"Platform: iOS": "平台：iOS",
+"Platform: macOS": "平台：macOS",
+"Platform: Linux": "平台：Linux",
+"Platform: OpenBSD": "平台：OpenBSD",
+"Platform: Unknown": "平台：未知",
+"Status: %.3f ms/frame (%.1f FPS)": "状态：%.3f 毫秒/帧（%.1f FPS）",
+
+# ---- InputEditorWindow (libultraship base) ----
+"X:%3d, Y:%3d": "X：%3d，Y：%3d",
+"Press any button,\\nmove any axis,\\nor press any key\\nto add mapping": "按任意按钮、\n移动任意轴，\n或按任意键\n以添加映射",
+"Press any button,\\nmove any axis,\\nor press any key\\nto edit mapping": "按任意按钮、\n移动任意轴，\n或按任意键\n以编辑映射",
+"Axis Threshold\\n\\nThe extent to which the joystick\\nmust be moved or the trigger\\npressed to ": "轴阈值\\n\\n摇杆须移动或扳机\\n须按下的程度，以",
+"Stick axis threshold:": "摇杆轴阈值：",
+"Trigger axis threshold:": "扳机轴阈值：",
 }

@@ -708,7 +708,7 @@ bool Combobox(std::string label, T* value, const std::map<T, const char*>& combo
     ImGui::AlignTextToFramePadding();
     if (options.labelPosition != LabelPositions::None) {
         if (options.alignment == ComponentAlignments::Right) {
-            ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             if (options.labelPosition == LabelPositions::Above) {
                 ImGui::NewLine();
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - comboWidth);
@@ -719,7 +719,7 @@ bool Combobox(std::string label, T* value, const std::map<T, const char*>& combo
             }
         } else if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Above) {
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -743,11 +743,11 @@ bool Combobox(std::string label, T* value, const std::map<T, const char*>& combo
         if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Near) {
                 ImGui::SameLine();
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             } else if (options.labelPosition == LabelPositions::Far) {
                 float width = ImGui::CalcTextSize(comboMap.at(*value)).x + ImGui::GetStyle().FramePadding.x * 2;
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - width);
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -791,7 +791,7 @@ bool Combobox(std::string label, T* value, const std::vector<const char*>& combo
     ImGui::AlignTextToFramePadding();
     if (options.labelPosition != LabelPositions::None) {
         if (options.alignment == ComponentAlignments::Right) {
-            ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             if (options.labelPosition == LabelPositions::Above) {
                 ImGui::NewLine();
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - comboWidth);
@@ -802,7 +802,7 @@ bool Combobox(std::string label, T* value, const std::vector<const char*>& combo
             }
         } else if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Above) {
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -827,11 +827,11 @@ bool Combobox(std::string label, T* value, const std::vector<const char*>& combo
         if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Near) {
                 ImGui::SameLine();
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             } else if (options.labelPosition == LabelPositions::Far) {
                 float width = ImGui::CalcTextSize(comboVector.at(*value)).x + ImGui::GetStyle().FramePadding.x * 2;
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - width);
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -876,7 +876,7 @@ bool Combobox(std::string label, T* value, const std::vector<std::string>& combo
     ImGui::AlignTextToFramePadding();
     if (options.labelPosition != LabelPositions::None) {
         if (options.alignment == ComponentAlignments::Right) {
-            ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             if (options.labelPosition == LabelPositions::Above) {
                 ImGui::NewLine();
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - comboWidth);
@@ -887,7 +887,7 @@ bool Combobox(std::string label, T* value, const std::vector<std::string>& combo
             }
         } else if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Above) {
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -912,12 +912,12 @@ bool Combobox(std::string label, T* value, const std::vector<std::string>& combo
         if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Near) {
                 ImGui::SameLine();
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             } else if (options.labelPosition == LabelPositions::Far) {
                 float width =
                     ImGui::CalcTextSize(comboVector.at(*value).c_str()).x + ImGui::GetStyle().FramePadding.x * 2;
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - width);
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -964,7 +964,7 @@ bool Combobox(std::string label, T* value, const char* (&comboArray)[N], const C
     ImGui::AlignTextToFramePadding();
     if (options.labelPosition != LabelPositions::None) {
         if (options.alignment == ComponentAlignments::Right) {
-            ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             if (options.labelPosition == LabelPositions::Above) {
                 ImGui::NewLine();
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - comboWidth);
@@ -975,7 +975,7 @@ bool Combobox(std::string label, T* value, const char* (&comboArray)[N], const C
             }
         } else if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Above) {
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }
@@ -1000,11 +1000,11 @@ bool Combobox(std::string label, T* value, const char* (&comboArray)[N], const C
         if (options.alignment == ComponentAlignments::Left) {
             if (options.labelPosition == LabelPositions::Near) {
                 ImGui::SameLine();
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             } else if (options.labelPosition == LabelPositions::Far) {
                 float width = ImGui::CalcTextSize(comboArray[*value]).x + ImGui::GetStyle().FramePadding.x * 2;
                 ImGui::SameLine(ImGui::GetContentRegionAvail().x - width);
-                ImGui::Text("%s", StringHelper::Translate(trueLabel).c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(trueLabel).c_str());
             }
         }
     }

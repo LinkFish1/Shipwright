@@ -1,4 +1,5 @@
 #include "hookDebugger.h"
+#include <ship/utils/StringHelper.h>
 #include "soh/SohGui/SohGui.hpp"
 #include "soh/Enhancements/game-interactor/GameInteractor.h"
 #include "soh/SohGui/UIWidgets.hpp"
@@ -23,7 +24,7 @@ void DrawHookRegisteringInfos(const char* hookName) {
         return;
     }
 
-    ImGui::Text("Total Registered: %d", numHooks);
+    ImGui::Text(StringHelper::Translate("Total Registered: %d").c_str(), numHooks);
 
     if (ImGui::BeginTable(("Table##" + std::string(hookName)).c_str(), 4,
                           ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable |
@@ -37,7 +38,7 @@ void DrawHookRegisteringInfos(const char* hookName) {
             ImGui::TableNextRow();
 
             ImGui::TableNextColumn();
-            ImGui::Text("%d", id);
+            ImGui::Text(StringHelper::Translate("%d").c_str(), id);
 
             ImGui::TableNextColumn();
             switch (hookInfo.registering.type) {
@@ -45,13 +46,13 @@ void DrawHookRegisteringInfos(const char* hookName) {
                     ImGui::Text("Normal");
                     break;
                 case HOOK_TYPE_ID:
-                    ImGui::Text("ID");
+                    ImGui::Text(StringHelper::Translate("ID").c_str());
                     break;
                 case HOOK_TYPE_PTR:
-                    ImGui::Text("Ptr");
+                    ImGui::Text(StringHelper::Translate("Ptr").c_str());
                     break;
                 case HOOK_TYPE_FILTER:
-                    ImGui::Text("Filter");
+                    ImGui::Text(StringHelper::Translate("Filter").c_str());
                     break;
                 default:
                     ImGui::TextColored(red, "[UNKNOWN]");
@@ -74,7 +75,7 @@ void DrawHookRegisteringInfos(const char* hookName) {
             }
 
             ImGui::TableNextColumn();
-            ImGui::Text("%d", hookInfo.calls);
+            ImGui::Text(StringHelper::Translate("%d").c_str(), hookInfo.calls);
         }
         ImGui::EndTable();
     }

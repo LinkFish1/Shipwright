@@ -537,8 +537,8 @@ void SohMenu::AddMenuEnhancements() {
     AddWidget(path, "Biggoron Forge Time: %d days", WIDGET_CVAR_SLIDER_INT)
         .CVar(CVAR_ENHANCEMENT("ForgeTime"))
         .Options(IntSliderOptions().Min(0).Max(3).DefaultValue(3).Format("%d days").Tooltip(
-            "Allows you to change the number of days it takes for "
-            "Biggoron to forge the Biggoron's Sword."));
+            StringHelper::Translate("Allows you to change the number of days it takes for "
+            "Biggoron to forge the Biggoron's Sword.").c_str()));
 
     // Graphics
     path.sidebarName = "Graphics";
@@ -1330,8 +1330,8 @@ void SohMenu::AddMenuEnhancements() {
     AddWidget(path, "Switch Timer Multiplier", WIDGET_CVAR_SLIDER_INT)
         .CVar(CVAR_ENHANCEMENT("SwitchTimerMultiplier"))
         .Options(IntSliderOptions().Min(-5).Max(5).DefaultValue(0).Format("%+d").Tooltip(
-            "-5 will be half as much time, +5 will be 6x as much time. Affects timed switches, torches, GTG statue "
-            "eyes, & doors in race with Dampe."));
+            StringHelper::Translate("-5 will be half as much time, +5 will be 6x as much time. Affects timed switches, torches, GTG statue "
+            "eyes, & doors in race with Dampe.").c_str()));
     AddWidget(path, "Always Win Goron Pot", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENHANCEMENT("GoronPot"))
         .Options(CheckboxOptions().Tooltip("Always get the Heart Piece/Purple Rupee from the Spinning Goron Pot."));

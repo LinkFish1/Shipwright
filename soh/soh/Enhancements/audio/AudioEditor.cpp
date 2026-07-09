@@ -217,7 +217,7 @@ void DrawPreviewButton(uint16_t sequenceId, std::string sfxKey, SeqType sequence
         if (UIWidgets::Button(stopButton.c_str(), UIWidgets::ButtonOptions()
                                                       .Size(UIWidgets::Sizes::Inline)
                                                       .Padding(ImVec2(10.0f, 6.0f))
-                                                      .Tooltip("Stop Preview")
+                                                      .Tooltip(StringHelper::Translate("Stop Preview").c_str())
                                                       .Color(THEME_COLOR))) {
             func_800F5C2C();
             CVarSetInteger(CVAR_AUDIO("Playing"), 0);
@@ -226,7 +226,7 @@ void DrawPreviewButton(uint16_t sequenceId, std::string sfxKey, SeqType sequence
         if (UIWidgets::Button(previewButton.c_str(), UIWidgets::ButtonOptions()
                                                          .Size(UIWidgets::Sizes::Inline)
                                                          .Padding(ImVec2(10.0f, 6.0f))
-                                                         .Tooltip("Play Preview")
+                                                         .Tooltip(StringHelper::Translate("Play Preview").c_str())
                                                          .Color(THEME_COLOR))) {
             if (CVarGetInteger(CVAR_AUDIO("Playing"), 0) != 0) {
                 func_800F5C2C();
@@ -342,7 +342,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
             ImGui::TextColored(UIWidgets::ColorValues.at(UIWidgets::Colors::Yellow), "%s %s", ICON_FA_PLAY,
                                seqData.label.c_str());
         } else {
-            ImGui::Text("%s", seqData.label.c_str());
+            ImGui::Text(StringHelper::Translate("%s").c_str(), seqData.label.c_str());
         }
         ImGui::TableNextColumn();
         ImGui::PushItemWidth(-FLT_MIN);
@@ -394,7 +394,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
         if (UIWidgets::Button(randomizeButton.c_str(), UIWidgets::ButtonOptions()
                                                            .Size(UIWidgets::Sizes::Inline)
                                                            .Padding(ImVec2(10.0f, 6.0f))
-                                                           .Tooltip("Randomize this sound")
+                                                           .Tooltip(StringHelper::Translate("Randomize this sound").c_str())
                                                            .Color(THEME_COLOR))) {
             std::vector<SequenceInfo*> validSequences = {};
             for (const auto seqInfo : AudioCollection::Instance->GetIncludedSequences()) {
@@ -543,7 +543,7 @@ void AudioEditor::DrawElement() {
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(230.0f, 0.0f))
                               .Color(THEME_COLOR)
-                              .Tooltip("Randomizes all unlocked music and sound effects across tab groups"))) {
+                              .Tooltip(StringHelper::Translate("Randomizes all unlocked music and sound effects across tab groups").c_str()))) {
         AudioEditor_RandomizeAll();
     }
     ImGui::SameLine();
@@ -551,21 +551,21 @@ void AudioEditor::DrawElement() {
                           UIWidgets::ButtonOptions()
                               .Size(ImVec2(230.0f, 0.0f))
                               .Color(THEME_COLOR)
-                              .Tooltip("Resets all unlocked music and sound effects across tab groups"))) {
+                              .Tooltip(StringHelper::Translate("Resets all unlocked music and sound effects across tab groups").c_str()))) {
         AudioEditor_ResetAll();
     }
     ImGui::SameLine();
     if (UIWidgets::Button("Lock All Groups", UIWidgets::ButtonOptions()
                                                  .Size(ImVec2(230.0f, 0.0f))
                                                  .Color(THEME_COLOR)
-                                                 .Tooltip("Locks all music and sound effects across tab groups"))) {
+                                                 .Tooltip(StringHelper::Translate("Locks all music and sound effects across tab groups").c_str()))) {
         AudioEditor_LockAll();
     }
     ImGui::SameLine();
     if (UIWidgets::Button("Unlock All Groups", UIWidgets::ButtonOptions()
                                                    .Size(ImVec2(230.0f, 0.0f))
                                                    .Color(THEME_COLOR)
-                                                   .Tooltip("Unlocks all music and sound effects across tab groups"))) {
+                                                   .Tooltip(StringHelper::Translate("Unlocks all music and sound effects across tab groups").c_str()))) {
         AudioEditor_UnlockAll();
     }
     UIWidgets::Separator();
@@ -754,7 +754,7 @@ void AudioEditor::DrawElement() {
                         ImGui::SameLine();
                         DrawTypeChip(seqInfo->category, seqInfo->label);
                         ImGui::SameLine();
-                        ImGui::Text("%s", seqInfo->label.c_str());
+                        ImGui::Text(StringHelper::Translate("%s").c_str(), seqInfo->label.c_str());
                     }
                 }
                 ImGui::EndChild();
@@ -782,7 +782,7 @@ void AudioEditor::DrawElement() {
                         ImGui::SameLine();
                         DrawTypeChip(seqInfo->category, seqInfo->sfxKey);
                         ImGui::SameLine();
-                        ImGui::Text("%s", seqInfo->label.c_str());
+                        ImGui::Text(StringHelper::Translate("%s").c_str(), seqInfo->label.c_str());
                     }
                 }
                 ImGui::EndChild();
@@ -869,43 +869,43 @@ void AudioEditor_UnlockAll() {
 void RegisterAudioWidgets() {
     lowHpAlarm = { .name = "Mute Low HP Alarm", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     lowHpAlarm.CVar(CVAR_AUDIO("LowHpAlarm"))
-        .Options(CheckboxOptions().Color(THEME_COLOR).Tooltip("Disable the low HP beeping sound."));
+        .Options(CheckboxOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Disable the low HP beeping sound.").c_str()));
     SohGui::mSohMenu->AddSearchWidget({ lowHpAlarm, "Enhancements", "Audio Editor", "Audio Options" });
 
     naviCall = { .name = "Disable Navi Call Audio", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     naviCall.CVar(CVAR_AUDIO("DisableNaviCallAudio"))
-        .Options(CheckboxOptions().Color(THEME_COLOR).Tooltip("Disables the voice audio when Navi calls you."));
+        .Options(CheckboxOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Disables the voice audio when Navi calls you.").c_str()));
     SohGui::mSohMenu->AddSearchWidget({ naviCall, "Enhancements", "Audio Editor", "Audio Options" });
 
     enemyProx = { .name = "Disable Enemy Proximity Music", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     enemyProx.CVar(CVAR_AUDIO("EnemyBGMDisable"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("Disables the music change when getting close to enemies. Useful for hearing "
-                              "your custom music for each scene more often."));
+                     .Tooltip(StringHelper::Translate("Disables the music change when getting close to enemies. Useful for hearing "
+                              "your custom music for each scene more often.").c_str()));
 
     leeverProx = { .name = "Enable Enemy Proximity Music for Leever", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     leeverProx.CVar(CVAR_AUDIO("LeeverEnemyBGM"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("Plays the battle music when getting close to a Leever, like in Majora's Mask."));
+                     .Tooltip(StringHelper::Translate("Plays the battle music when getting close to a Leever, like in Majora's Mask.").c_str()));
 
     leadingMusic = { .name = "Disable Leading Music in Lost Woods", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     leadingMusic.CVar(CVAR_AUDIO("LostWoodsConsistentVolume"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("Disables the volume shifting in the Lost Woods. Useful for hearing "
+                     .Tooltip(StringHelper::Translate("Disables the volume shifting in the Lost Woods. Useful for hearing "
                               "your custom music in the Lost Woods if you don't need the navigation assitance "
                               "the volume changing provides. If toggling this while in the Lost Woods, reload "
-                              "the area for the effect to kick in."));
+                              "the area for the effect to kick in.").c_str()));
     SohGui::mSohMenu->AddSearchWidget({ leadingMusic, "Enhancements", "Audio Editor", "Audio Options" });
 
     displaySeqName = { .name = "Display Sequence Name in Notifications", .type = WidgetType::WIDGET_CVAR_CHECKBOX };
     displaySeqName.CVar(CVAR_AUDIO("SeqNameNotification"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("Emits a notification with the current song name whenever it changes. "
-                              "(does not apply to fanfares or enemy BGM)."));
+                     .Tooltip(StringHelper::Translate("Emits a notification with the current song name whenever it changes. "
+                              "(does not apply to fanfares or enemy BGM).").c_str()));
     SohGui::mSohMenu->AddSearchWidget({ displaySeqName, "Enhancements", "Audio Editor", "Audio Options" });
 
     ovlDuration = { .name = "Sequence Notification Duration: %d seconds", .type = WidgetType::WIDGET_CVAR_SLIDER_INT };
@@ -945,10 +945,10 @@ void RegisterAudioWidgets() {
     lowerOctaves.CVar(CVAR_AUDIO("ExperimentalOctaveDrop"))
         .Options(CheckboxOptions()
                      .Color(THEME_COLOR)
-                     .Tooltip("Some custom sequences may have notes that are too high for the game's audio "
+                     .Tooltip(StringHelper::Translate("Some custom sequences may have notes that are too high for the game's audio "
                               "engine to play. Enabling this checkbox will cause these notes to drop a "
                               "couple of octaves so they can still harmonize with the other notes of the "
-                              "sequence."));
+                              "sequence.").c_str()));
     SohGui::mSohMenu->AddSearchWidget({ lowerOctaves, "Enhancements", "Audio Editor", "Audio Options" });
 }
 
