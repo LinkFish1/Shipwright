@@ -2223,6 +2223,17 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "%s\\u00A0-> %s", "%s -> %s" },
     { "Sets the distance to move the right stick in the input viewer. Useful for ", "设置在输入查看器中移动右摇杆的距离。便于" },
 
+    { "Camera Controls", "摄像机控制" },
+    { "Disable song detection", "禁用歌曲检测" },
+    { "Always Shown", "始终显示" },
+    { "Shown Only While Not Pressed", "仅未按下时显示" },
+    { "Shown Only While Pressed", "仅按下时显示" },
+    { "Always Hidden", "始终隐藏" },
+    { "Outline Always Shown", "始终显示描边" },
+    { "Outline Shown Only While Not Pressed", "仅未按下时显示描边" },
+    { "Outline Shown Only While Pressed", "仅按下时显示描边" },
+    { "Outline Always Hidden", "始终隐藏描边" },
+
     // __TRANSLATION_TAIL__
 };
 

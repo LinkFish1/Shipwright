@@ -1,5 +1,4 @@
 #include "TimeDisplay.h"
-#include <ship/utils/StringHelper.h>
 #include "soh/Enhancements/gameplaystats.h"
 #include <global.h>
 
