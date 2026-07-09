@@ -476,7 +476,7 @@ void InputViewerSettingsWindow::DrawElement() {
 
         // gInputViewer.ButtonOutlineMode
         CVarCombobox(
-            "Button Outlines/Backgrounds", CVAR_INPUT_VIEWER("ButtonOutlineMode"), buttonOutlineOptions,
+            StringHelper::Translate("Button Outlines/Backgrounds").c_str(), CVAR_INPUT_VIEWER("ButtonOutlineMode"), buttonOutlineOptions,
             ComboboxOptions({ { .disabled = !CVarGetInteger(CVAR_INPUT_VIEWER("UseGlobalButtonOutlineMode"), 1),
                                 .disabledTooltip = "Disabled because Global Button Outline is off" } })
                 .Color(THEME_COLOR)

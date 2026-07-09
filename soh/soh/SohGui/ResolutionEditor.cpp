@@ -312,13 +312,14 @@ void ResolutionCustomWidget(WidgetInfo& info) {
                                             "(Makes screen bounds take priority over specified factor.)").c_str(),
                     CVAR_PREFIX_ADVANCED_RESOLUTION ".IntegerScale.NeverExceedBounds",
                     UIWidgets::CheckboxOptions({ { .disabled = disabled_neverExceedBounds } })
-                        .Tooltip("Prevents integer scaling factor from exceeding screen bounds.\n\n"
+                        .Tooltip(StringHelper::Translate(
+                                 "Prevents integer scaling factor from exceeding screen bounds.\n\n"
                                  "Enabled: Will clamp the scaling factor and display a gentle warning in the "
                                  "resolution editor.\n"
                                  "Disabled: Will allow scaling to exceed screen bounds, for users who want to crop "
                                  "overscan.\n\n"
                                  " " ICON_FA_INFO_CIRCLE
-                                 " Please note that exceeding screen bounds may show a scroll bar on-screen.")
+                                 " Please note that exceeding screen bounds may show a scroll bar on-screen.").c_str())
                         .Color(THEME_COLOR)
                         .DefaultValue(true))) {
 
@@ -408,14 +409,14 @@ void RegisterResolutionWidgets() {
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             auto gfx_current_game_window_viewport = GetInterpreter().get()->mGameWindowViewport;
-            info.name = fmt::format(fmt::runtime(StringHelper::Translate("Viewport dimensions: {} x {})), gfx_current_game_window_viewport.width,
+            info.name = fmt::format(fmt::runtime(StringHelper::Translate("Viewport dimensions: {} x {}")), gfx_current_game_window_viewport.width,
                                     gfx_current_game_window_viewport.height);
         });
     mSohMenu->AddWidget(path, StringHelper::Translate("Internal resolution: {} x {}").c_str(), WIDGET_TEXT)
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             auto gfx_current_dimensions = GetInterpreter().get()->mCurDimensions;
-            info.name = fmt::format(fmt::runtime(StringHelper::Translate("Internal resolution: {} x {})), gfx_current_dimensions.width,
+            info.name = fmt::format(fmt::runtime(StringHelper::Translate("Internal resolution: {} x {}")), gfx_current_dimensions.width,
                                     gfx_current_dimensions.height);
         });
 

@@ -1,4 +1,4 @@
-#include "Localization.h"
+﻿#include "Localization.h"
 #include "ship/utils/StringHelper.h"
 #include "ship/window/gui/Gui.h"
 #include "soh/cvar_prefixes.h"
@@ -2809,6 +2809,89 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "It's possible to hook the target at the end of fire trial with just Hookshot, but it requires precise aim and perfect positioning. The main difficulty comes from getting on the very corner of the obelisk without falling into the lava.", "仅用钩锁勾住火之试炼终点的目标是可能的，但需要精准瞄准与完美定位。主要难点在于要站上方尖碑的最边缘而不掉进熔岩。" },
     { "You can light the torch in this room without a fire source by shooting an arrow through the lit torch at the beginning of the room. Because the room is so dark and the unlit torch is so far away, it can be difficult to aim the shot correctly.", "你可以用箭穿过房间起点处已点燃的火把，从而无需火源点燃本房间的火把。由于房间极暗、未点燃的火把又极远，要正确瞄准这一箭颇为困难。" },
     { "If you move quickly you can sneak past the edge of a flame wall before it can rise up to block you. In this case to do it without taking damage is especially precise.", "若动作迅速，你可以在火焰墙升起挡路前从它边缘溜过。这种情况下要做到不受伤尤其需要精准。" },
+    // ---- misc UI (presets + cosmetics) ----
+    { "Preset Name", "预设名" },
+    { "Delete", "删除" },
+    { "Modifier", "修饰符" },
+    { "Color Scheme", "配色方案" },
+    { "Sync Rainbow colors", "同步彩虹颜色" },
+    { "Rainbow Speed", "彩虹速度" },
+    { "Automatically Randomize All Cosmetics", "自动随机化全部外观" },
+    { "Advanced Mode", "高级模式" },
+    { "Randomize All", "全部随机化" },
+    { "Lock All", "全部锁定" },
+    { "Unlock All", "全部解锁" },
+    { "Rainbow All", "全部彩虹" },
+    { "Un-Rainbow All", "全部取消彩虹" },
+    { "Lock All Advanced", "锁定全部（高级）" },
+    { "Unlock All Advanced", "解锁全部（高级）" },
+    { "Link & Items", "林克与物品" },
+    { "Keys", "钥匙" },
+    { "Effects", "效果" },
+    { "World & NPCs", "世界与 NPC" },
+    { "Silly", "趣味" },
+    { "HUD Placement", "HUD 位置" },
+    { "Link", "林克" },
+    { "Goron Tunic", "哥隆外衣" },
+    { "Kokiri Tunic", "科克里外衣" },
+    { "Zora Tunic", "卓拉外衣" },
+    { "Gloves", "手套" },
+    { "Golden Gauntlets", "金色护手" },
+    { "Goron Bracelet", "哥隆手镯" },
+    { "Silver Gauntlets", "白银护手" },
+    { "Rainbow", "彩虹" },
+    { "Locked", "已锁定" },
+    { "Manual", "手动" },
+    { "On New Scene", "进入新场景时" },
+    { "On Rando Gen Only", "仅随机生成时" },
+    { "On File Load", "载入存档时" },
+    { "On File Load (Seeded)", "载入存档时（按种子）" },
+    { "Mirror Shield", "镜盾" },
+    { "Swords", "剑" },
+    { "Small Keys", "小钥匙" },
+    { "Boss Keys", "Boss 钥匙" },
+    { "Consumables", "消耗品" },
+    { "Pause Menu", "暂停菜单" },
+    { "Title Screen", "标题画面" },
+    { "NPCs", "NPC" },
+    { "Prevent integer scaling from exceeding screen bounds.\n(Makes screen bounds take priority over specified factor.)",
+      "防止整数缩放超出屏幕边界。\n（屏幕边界优先于指定系数。）" },
+    { "Prevents integer scaling factor from exceeding screen bounds.\n\n"
+      "Enabled: Will clamp the scaling factor and display a gentle warning in the resolution editor.\n"
+      "Disabled: Will allow scaling to exceed screen bounds, for users who want to crop overscan.\n\n"
+      "Please note that exceeding screen bounds may show a scroll bar on-screen.",
+      "防止整数缩放系数超出屏幕边界。\n\n"
+      "启用：将限制缩放系数，并在分辨率编辑器中显示温和警告。\n"
+      "禁用：允许缩放超出屏幕边界，供需要裁切过扫描的用户使用。\n\n"
+      "请注意，超出屏幕边界可能会在屏幕上显示滚动条。" },
+
+    { "Message", "消息" },
+    { "HUD", "HUD" },
+    { "N64", "N64" },
+    { "Gamecube", "GameCube" },
+    { "Set when the cosmetics is automaticly randomized:\n"
+      "- Manual: Manually randomize cosmetics by pressing the 'Randomize all' button\n"
+      "- On New Scene : Randomizes when you enter a new scene.\n"
+      "- On Rando Gen Only: Randomizes only when you generate a new randomizer.\n"
+      "- On File Load: Randomizes on File Load.\n"
+      "- On File Load (Seeded): Randomizes on file load based on the current randomizer seed/file.",
+      "设置外观自动随机化的时机：\n"
+      "- 手动：点击“全部随机化”按钮手动随机化外观\n"
+      "- 进入新场景：在进入新场景时随机化\n"
+      "- 仅随机生成时：仅在你生成新随机种子时随机化\n"
+      "- 载入存档时：在载入存档时随机化\n"
+      "- 载入存档时（按种子）：根据当前随机种子/存档在载入时随机化。" },
+
+    { "Navigate Pause with the D-pad\nIf used with \"D-pad as Equip Items\", you must hold "
+      "C-Up to equip instead of navigate",
+      "在暂停界面使用方向键导航\n若与“方向键作为装备物品”一起使用，你须按住 C-Up 以装备而非导航" },
+    { "Allows for aiming with the right stick in:\n-First-Person/C-Up view\n-Weapon Aiming",
+      "允许使用右摇杆进行瞄准：\n-第一人称/C-Up 视角\n-武器瞄准" },
+    { "Inverts the Camera X Axis in:\n-First-Person/C-Up view\n-Weapon Aiming",
+      "反转摄像机 X 轴：\n-第一人称/C-Up 视角\n-武器瞄准" },
+    { "Inverts the Camera Y Axis in:\n-First-Person/C-Up view\n-Weapon Aiming",
+      "反转摄像机 Y 轴：\n-第一人称/C-Up 视角\n-武器瞄准" },
+
     // __TRANSLATION_TAIL__
 };
 

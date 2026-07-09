@@ -265,7 +265,7 @@ static bool saveSection[PRESET_SECTION_MAX];
 
 void DrawNewPresetPopup() {
     bool nameExists = presets.contains(newPresetName);
-    UIWidgets::InputString("Preset Name", &newPresetName,
+    UIWidgets::InputString(StringHelper::Translate("Preset Name").c_str(), &newPresetName,
                            UIWidgets::InputOptions()
                                .Color(THEME_COLOR)
                                .Size({ 200, 40 })
@@ -290,7 +290,7 @@ void DrawNewPresetPopup() {
                             UIWidgets::CheckboxOptions().Color(THEME_COLOR).Padding({ 6.0f, 6.0f }));
     }
     if (UIWidgets::Button(
-            "Save", UIWidgets::ButtonOptions({ { .disabled = (nameExists || noneSelected || newPresetName.empty()),
+            StringHelper::Translate("Save").c_str(), UIWidgets::ButtonOptions({ { .disabled = (nameExists || noneSelected || newPresetName.empty()),
                                                  .disabledTooltip = disabledTooltip } })
                         .Padding({ 6.0f, 6.0f })
                         .Color(THEME_COLOR))) {
