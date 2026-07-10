@@ -156,20 +156,21 @@ static RegisterShipInitFunc initFunc(RegisterValueViewerHooks, { CVAR_NAME });
 
 void ValueViewerWindow::DrawElement() {
     ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
-    UIWidgets::CVarCheckbox("Enable Printing", CVAR_NAME, UIWidgets::CheckboxOptions().Color(THEME_COLOR));
+    UIWidgets::CVarCheckbox(StringHelper::Translate("Enable Printing").c_str(), CVAR_NAME, UIWidgets::CheckboxOptions().Color(THEME_COLOR));
 
     ImGui::BeginGroup();
     static int selectedElement = -1;
-    std::string selectedElementText = (selectedElement == -1) ? "Select a value"
-                                                              : (std::string(valueTable[selectedElement].name) + " (" +
-                                                                 std::string(valueTable[selectedElement].path) + ")");
+    std::string selectedElementText = (selectedElement == -1)
+                                        ? StringHelper::Translate("Select a value")
+                                        : (StringHelper::Translate(valueTable[selectedElement].name) + " (" +
+                                           std::string(valueTable[selectedElement].path) + ")");
     UIWidgets::PushStyleCombobox(THEME_COLOR);
     if (ImGui::BeginCombo("##valueViewerElement", selectedElementText.c_str())) {
         for (size_t i = 0; i < valueTable.size(); i++) {
             if (valueTable[i].isActive)
                 continue;
             bool isSelected = (selectedElement == i);
-            std::string elementText = (std::string(valueTable[i].name) + " (" + std::string(valueTable[i].path) + ")");
+            std::string elementText = (StringHelper::Translate(valueTable[i].name) + " (" + std::string(valueTable[i].path) + ")");
             if (ImGui::Selectable(elementText.c_str(), isSelected)) {
                 selectedElement = i;
             }

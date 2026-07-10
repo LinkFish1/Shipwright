@@ -96,7 +96,7 @@ void DLViewerWindow::DrawElement() {
     UIWidgets::PushStyleInput(THEME_COLOR);
     ImGui::PushFont(OTRGlobals::Instance->fontMonoLarger);
 
-    if (ImGui::InputText("Search Display Lists", searchString, ARRAY_COUNT(searchString))) {
+    if (ImGui::InputText(StringHelper::Translate("Search Display Lists").c_str(), searchString, ARRAY_COUNT(searchString))) {
         doSearch = true;
         searchDebounceFrames = 30;
     }
@@ -112,7 +112,7 @@ void DLViewerWindow::DrawElement() {
     }
 
     UIWidgets::PushStyleCombobox(THEME_COLOR);
-    if (ImGui::BeginCombo("Active Display List", activeDisplayList.c_str())) {
+    if (ImGui::BeginCombo(StringHelper::Translate("Active Display List").c_str(), activeDisplayList.c_str())) {
         for (size_t i = 0; i < displayListSearchResults.size(); i++) {
             if (ImGui::Selectable(displayListSearchResults[i].c_str())) {
                 activeDisplayList = displayListSearchResults[i];
