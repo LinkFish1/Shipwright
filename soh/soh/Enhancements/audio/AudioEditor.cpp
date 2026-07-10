@@ -251,10 +251,10 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
     const std::map<u16, SequenceInfo>& map = AudioCollection::Instance->GetAllSequences();
 
     const std::string hiddenTabId = "##" + tabId;
-    const std::string resetAllButton = "Reset All" + hiddenTabId;
-    const std::string randomizeAllButton = "Randomize All" + hiddenTabId;
-    const std::string lockAllButton = "Lock All" + hiddenTabId;
-    const std::string unlockAllButton = "Unlock All" + hiddenTabId;
+    const std::string resetAllButton = StringHelper::Translate("Reset All") + hiddenTabId;
+    const std::string randomizeAllButton = StringHelper::Translate("Randomize All") + hiddenTabId;
+    const std::string lockAllButton = StringHelper::Translate("Lock All") + hiddenTabId;
+    const std::string unlockAllButton = StringHelper::Translate("Unlock All") + hiddenTabId;
 
     ImGui::SeparatorText(StringHelper::Translate(tabName).c_str());
     if (UIWidgets::Button(resetAllButton.c_str(),
@@ -340,7 +340,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
         ImGui::TableNextColumn();
         if (isCurrentlyPlaying) {
             ImGui::TextColored(UIWidgets::ColorValues.at(UIWidgets::Colors::Yellow), "%s %s", ICON_FA_PLAY,
-                               seqData.label.c_str());
+                               StringHelper::Translate(seqData.label).c_str());
         } else {
             ImGui::Text(StringHelper::Translate("%s").c_str(), seqData.label.c_str());
         }
@@ -348,7 +348,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
         ImGui::PushItemWidth(-FLT_MIN);
         const int initialValue = map.contains(currentValue) ? currentValue : defaultValue;
         UIWidgets::PushStyleCombobox(THEME_COLOR);
-        if (ImGui::BeginCombo(hiddenKey.c_str(), map.at(initialValue).label.c_str())) {
+        if (ImGui::BeginCombo(hiddenKey.c_str(), StringHelper::Translate(map.at(initialValue).label).c_str())) {
             for (const auto& [value, seqData] : map) {
                 // If excluded as a replacement sequence, don't show in other dropdowns except the effect's own
                 // dropdown.
@@ -357,7 +357,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
                     continue;
                 }
 
-                if (ImGui::Selectable(seqData.label.c_str())) {
+                if (ImGui::Selectable(StringHelper::Translate(seqData.label).c_str())) {
                     CVarSetInteger(cvarKey.c_str(), value);
                     Ship::Context::GetInstance()->GetWindow()->GetGui()->SaveConsoleVariablesNextFrame();
                     UpdateCurrentBGM(defaultValue, type);
@@ -494,7 +494,7 @@ ImVec4 GetSequenceTypeColor(SeqType type) {
 void DrawTypeChip(SeqType type, std::string sequenceName) {
     ImGui::BeginDisabled();
     ImGui::PushStyleColor(ImGuiCol_Button, GetSequenceTypeColor(type));
-    std::string buttonLabel = GetSequenceTypeName(type) + "##" + sequenceName;
+    std::string buttonLabel = StringHelper::Translate(GetSequenceTypeName(type)) + "##" + sequenceName;
     ImGui::Button(buttonLabel.c_str());
     ImGui::PopStyleColor();
     ImGui::EndDisabled();
@@ -593,7 +593,7 @@ void AudioEditor::DrawElement() {
                 SohGui::mSohMenu->MenuDrawItem(voicePitch, ImGui::GetContentRegionAvail().x, THEME_COLOR);
                 ImGui::SameLine();
                 ImGui::SetCursorPosY(ImGui::GetCursorPos().y + 40.f);
-                if (UIWidgets::Button("Reset##linkVoiceFreqMultiplier",
+                if (UIWidgets::Button((StringHelper::Translate("Reset") + "##linkVoiceFreqMultiplier").c_str(),
                                       UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
                     CVarSetFloat(CVAR_AUDIO("LinkVoiceFreqMultiplier"), 1.0f);
                 }

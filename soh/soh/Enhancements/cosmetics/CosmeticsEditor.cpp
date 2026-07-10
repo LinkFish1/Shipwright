@@ -1701,7 +1701,7 @@ void Draw_Placements() {
     ImGui::SameLine();
     ResetPositionAll();
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
-    if (ImGui::CollapsingHeader("Hearts count position")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Hearts count position").c_str())) {
         if (ImGui::BeginTable("tableHeartsCounts", 1, FlagsTable)) {
             ImGui::TableSetupColumn(StringHelper::Translate("Hearts counts settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
@@ -1723,7 +1723,7 @@ void Draw_Placements() {
             ImGui::EndTable();
         }
     }
-    if (ImGui::CollapsingHeader("Magic Meter position")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Magic Meter position").c_str())) {
         if (ImGui::BeginTable("tablemmpos", 1, FlagsTable)) {
             ImGui::TableSetupColumn(StringHelper::Translate("Magic meter settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
@@ -1742,7 +1742,7 @@ void Draw_Placements() {
         }
     }
     if (CVarGetInteger(CVAR_ENHANCEMENT("VisualAgony"), 0) &&
-        ImGui::CollapsingHeader("Visual stone of agony position")) {
+        ImGui::CollapsingHeader(StringHelper::Translate("Visual stone of agony position").c_str())) {
         if (ImGui::BeginTable("tabledvisualstoneofagony", 1, FlagsTable)) {
             ImGui::TableSetupColumn(StringHelper::Translate("Visual stone of agony settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
@@ -1761,24 +1761,24 @@ void Draw_Placements() {
             ImGui::EndTable();
         }
     }
-    Draw_Table_Dropdown("B Button position", "tablebbtn", "B Button settings", "B Button", CVAR_COSMETIC("HUD.BButton"),
+    Draw_Table_Dropdown(StringHelper::Translate("B Button position").c_str(), "tablebbtn", "B Button settings", "B Button", CVAR_COSMETIC("HUD.BButton"),
                         0, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 4) + 50, -1,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x) - 50, 0.95f);
-    Draw_Table_Dropdown("A Button position", "tableabtn", "A Button settings", "A Button", CVAR_COSMETIC("HUD.AButton"),
+    Draw_Table_Dropdown(StringHelper::Translate("A Button position").c_str(), "tableabtn", "A Button settings", "A Button", CVAR_COSMETIC("HUD.AButton"),
                         -10, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 4) + 50, -20,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x) - 50, 0.95f);
-    Draw_Table_Dropdown("Start Button position", "tablestartbtn", "Start Button settings", "Start Button",
+    Draw_Table_Dropdown(StringHelper::Translate("Start Button position").c_str(), "tablestartbtn", "Start Button settings", "Start Button",
                         CVAR_COSMETIC("HUD.StartButton"), 0, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2),
                         0, static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 70, 0.75f);
-    C_Button_Dropdown("C Button Up position", "tablecubtn", "C Button Up settings", "C Button Up",
+    C_Button_Dropdown(StringHelper::Translate("C Button Up position").c_str(), "tablecubtn", "C Button Up settings", "C Button Up",
                       CVAR_COSMETIC("HUD.CUpButton"), CVAR_COSMETIC("HUD.CUpButton.PosType"), 0.5f);
-    C_Button_Dropdown("C Button Down position", "tablecdbtn", "C Button Down settings", "C Button Down",
+    C_Button_Dropdown(StringHelper::Translate("C Button Down position").c_str(), "tablecdbtn", "C Button Down settings", "C Button Down",
                       CVAR_COSMETIC("HUD.CDownButton"), CVAR_COSMETIC("HUD.CDownButton.PosType"), 0.87f);
-    C_Button_Dropdown("C Button Left position", "tableclbtn", "C Button Left settings", "C Button Left",
+    C_Button_Dropdown(StringHelper::Translate("C Button Left position").c_str(), "tableclbtn", "C Button Left settings", "C Button Left",
                       CVAR_COSMETIC("HUD.CLeftButton"), CVAR_COSMETIC("HUD.CLeftButton.PosType"), 0.87f);
-    C_Button_Dropdown("C Button Right position", "tablecrbtn", "C Button Right settings", "C Button Right",
+    C_Button_Dropdown(StringHelper::Translate("C Button Right position").c_str(), "tablecrbtn", "C Button Right settings", "C Button Right",
                       CVAR_COSMETIC("HUD.CRightButton"), CVAR_COSMETIC("HUD.CRightButton.PosType"), 0.87f);
-    if (CVarGetInteger(CVAR_ENHANCEMENT("DpadEquips"), 0) && ImGui::CollapsingHeader("DPad items position")) {
+    if (CVarGetInteger(CVAR_ENHANCEMENT("DpadEquips"), 0) && ImGui::CollapsingHeader(StringHelper::Translate("DPad items position").c_str())) {
         if (ImGui::BeginTable("tabledpaditems", 1, FlagsTable)) {
             ImGui::TableSetupColumn(StringHelper::Translate("DPad items settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
@@ -1797,40 +1797,40 @@ void Draw_Placements() {
             ImGui::EndTable();
         }
     }
-    Draw_Table_Dropdown("Minimaps position", "tableminimapspos", "minimaps settings", "Minimap",
+    Draw_Table_Dropdown(StringHelper::Translate("Minimaps position").c_str(), "tableminimapspos", "minimaps settings", "Minimap",
                         CVAR_COSMETIC("HUD.Minimap"), static_cast<int>(ImGui::GetWindowViewport()->Size.y / 3) * -1,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 3),
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x) * -1,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2), 1.0f);
-    Draw_Table_Dropdown("Small Keys counter position", "tablesmolekeys", "Small Keys counter settings",
+    Draw_Table_Dropdown(StringHelper::Translate("Small Keys counter position").c_str(), "tablesmolekeys", "Small Keys counter settings",
                         "Small Keys counter", CVAR_COSMETIC("HUD.SmallKey"), 0,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 3), -1,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2), 1.0f);
-    Draw_Table_Dropdown("Rupee counter position", "tablerupeecount", "Rupee counter settings", "Rupee counter",
+    Draw_Table_Dropdown(StringHelper::Translate("Rupee counter position").c_str(), "tablerupeecount", "Rupee counter settings", "Rupee counter",
                         CVAR_COSMETIC("HUD.Rupees"), -2, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 3), -3,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2), 1.0f);
-    Draw_Table_Dropdown("Carrots position", "tableCarrots", "Carrots settings", "Carrots", CVAR_COSMETIC("HUD.Carrots"),
+    Draw_Table_Dropdown(StringHelper::Translate("Carrots position").c_str(), "tableCarrots", "Carrots settings", "Carrots", CVAR_COSMETIC("HUD.Carrots"),
                         0, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2), -50,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 25, 1.0f);
-    Draw_Table_Dropdown("Timers position", "tabletimers", "Timers settings", "Timers", CVAR_COSMETIC("HUD.Timers"), 0,
+    Draw_Table_Dropdown(StringHelper::Translate("Timers position").c_str(), "tabletimers", "Timers settings", "Timers", CVAR_COSMETIC("HUD.Timers"), 0,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2), -50,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) - 50, 1.0f);
-    Draw_Table_Dropdown("Archery Scores position", "tablearchery", "Archery Scores settings", "Archery scores",
+    Draw_Table_Dropdown(StringHelper::Translate("Archery Scores position").c_str(), "tablearchery", "Archery Scores settings", "Archery scores",
                         CVAR_COSMETIC("HUD.ArcheryScore"), 0, static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2),
                         -50, static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) - 50, 1.0f);
-    Draw_Table_Dropdown("Title cards (Maps) position", "tabletcmaps", "Titlecard maps settings",
+    Draw_Table_Dropdown(StringHelper::Translate("Title cards (Maps) position").c_str(), "tabletcmaps", "Titlecard maps settings",
                         "Title cards (overworld)", CVAR_COSMETIC("HUD.TitleCard.Map"), 0,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2), -50,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 10, 1.0f);
-    Draw_Table_Dropdown("Title cards (Bosses) position", "tabletcbosses", "Title cards (Bosses) settings",
+    Draw_Table_Dropdown(StringHelper::Translate("Title cards (Bosses) position").c_str(), "tabletcbosses", "Title cards (Bosses) settings",
                         "Title cards (Bosses)", CVAR_COSMETIC("HUD.TitleCard.Boss"), 0,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2), -50,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 10, 1.0f);
-    Draw_Table_Dropdown("In-game Gameplay Timer position", "tablegameplaytimer", "In-game Gameplay Timer settings",
+    Draw_Table_Dropdown(StringHelper::Translate("In-game Gameplay Timer position").c_str(), "tablegameplaytimer", "In-game Gameplay Timer settings",
                         "In-game Gameplay Timer", CVAR_COSMETIC("HUD.IGT"), 0,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.y / 2), -50,
                         static_cast<int>(ImGui::GetWindowViewport()->Size.x / 2) + 10, 1.0f);
-    if (ImGui::CollapsingHeader("Enemy Health Bar position")) {
+    if (ImGui::CollapsingHeader(StringHelper::Translate("Enemy Health Bar position").c_str())) {
         if (ImGui::BeginTable("enemyhealthbar", 1, FlagsTable)) {
             ImGui::TableSetupColumn(StringHelper::Translate("Enemy Health Bar settings").c_str(), FlagsCell, TablesCellsWidth);
             Table_InitHeader(false);
@@ -1863,7 +1863,7 @@ void Draw_Placements() {
             }
             ImGui::SameLine();
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::CalcTextSize("g").y * 2));
-            if (UIWidgets::Button("Reset##EnemyHealthBarWidth",
+            if (UIWidgets::Button(StringHelper::Translate("Reset##EnemyHealthBarWidth").c_str(),
                                   UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
                 CVarClear(CVAR_COSMETIC("HUD.EnemyHealthBar.Width.Value"));
                 CVarClear(CVAR_COSMETIC("HUD.EnemyHealthBar.Width.Changed"));
@@ -1877,7 +1877,7 @@ void Draw_Placements() {
 void Reset_Option_Single(const char* Button_Title, const char* name) {
     ImGui::SameLine();
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::CalcTextSize("g").y * 2));
-    if (UIWidgets::Button(Button_Title, UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
+    if (UIWidgets::Button(StringHelper::Translate(Button_Title).c_str(), UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
         CVarClear(name);
     }
 }
@@ -1885,7 +1885,7 @@ void Reset_Option_Single(const char* Button_Title, const char* name) {
 void Reset_Option_Double(const char* Button_Title, const char* name) {
     ImGui::SameLine();
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::CalcTextSize("g").y * 2));
-    if (UIWidgets::Button(Button_Title, UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
+    if (UIWidgets::Button(StringHelper::Translate(Button_Title).c_str(), UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
         CVarClear((std::string(name) + ".Value").c_str());
         CVarClear((std::string(name) + ".Changed").c_str());
     }
@@ -1897,7 +1897,7 @@ void DrawSillyTab() {
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
 
     UIWidgets::CVarCheckbox(
-        "Let It Snow", CVAR_GENERAL("LetItSnow"),
+        StringHelper::Translate("Let It Snow").c_str(), CVAR_GENERAL("LetItSnow"),
         UIWidgets::CheckboxOptions()
             .Color(THEME_COLOR)
             .Tooltip("Makes snow fall for December holidays.\nWill reset on restart outside of December 23-25."));
@@ -1917,7 +1917,7 @@ void DrawSillyTab() {
     }
     ImGui::SameLine();
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::CalcTextSize("g").y * 2));
-    if (UIWidgets::Button("Reset##Link_BodySize",
+    if (UIWidgets::Button(StringHelper::Translate("Reset##Link_BodySize").c_str(),
                           UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
         CVarClear(CVAR_COSMETIC("Link.BodySize.Value"));
         CVarClear(CVAR_COSMETIC("Link.BodySize.Changed"));
@@ -1991,7 +1991,7 @@ void DrawSillyTab() {
 
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
 
-    UIWidgets::CVarCheckbox("Unfix Goron Spin", CVAR_COSMETIC("UnfixGoronSpin"),
+    UIWidgets::CVarCheckbox(StringHelper::Translate("Unfix Goron Spin").c_str(), CVAR_COSMETIC("UnfixGoronSpin"),
                             UIWidgets::CheckboxOptions().Color(THEME_COLOR));
 
     UIWidgets::Separator(true, true, 2.0f, 2.0f);
@@ -2550,7 +2550,7 @@ void CosmeticsEditorWindow::DrawElement() {
             }
             ImGui::SameLine();
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::CalcTextSize("g").y * 2));
-            if (UIWidgets::Button("Reset##Trails_Duration",
+            if (UIWidgets::Button(StringHelper::Translate("Reset##Trails_Duration").c_str(),
                                   UIWidgets::ButtonOptions().Size(ImVec2(80, 36)).Padding(ImVec2(5.0f, 0.0f)))) {
                 CVarClear(CVAR_COSMETIC("Trails.Duration.Value"));
                 CVarClear(CVAR_COSMETIC("Trails.Duration.Changed"));
