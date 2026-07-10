@@ -1,0 +1,3 @@
+line 2566: 3 quotes ->     { "Talking to Malon as adult will tell you the item on \"Link's cow\", the cow you win from beating her ti
+line 2582: 3 quotes ->     { "Adds a new item called the \"Skeleton Key\", it unlocks every dungeon door locked by a small key.\", "新
+line 2939: 3 quotes ->     { "Removes the requirements for the Lens of Truth in Shadow Temple MQ for most areas in the dungeon. See \
