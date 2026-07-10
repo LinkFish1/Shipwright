@@ -1047,7 +1047,7 @@ void CheckTrackerWindow::DrawElement() {
         ImGui::TableNextColumn();
         if (CVarGetInteger(CVAR_TRACKER_CHECK("HiddenItemsToggleVisible"), 1) &&
             UIWidgets::CVarCheckbox(
-                "Show Hidden Items", CVAR_TRACKER_CHECK("ShowHidden"),
+                StringHelper::Translate("Show Hidden Items").c_str(), CVAR_TRACKER_CHECK("ShowHidden"),
                 UIWidgets::CheckboxOptions(
                     { { .tooltip =
                             StringHelper::Translate("When active, items will show hidden checks by default when updated to this state.").c_str() } })
@@ -1058,7 +1058,7 @@ void CheckTrackerWindow::DrawElement() {
         }
         if (enableAvailableChecks && CVarGetInteger(CVAR_TRACKER_CHECK("AvailableChecksToggleVisible"), 1)) {
             if (UIWidgets::CVarCheckbox(
-                    "Only Show Available Checks", CVAR_TRACKER_CHECK("OnlyShowAvailable"),
+                    StringHelper::Translate("Only Show Available Checks").c_str(), CVAR_TRACKER_CHECK("OnlyShowAvailable"),
                     UIWidgets::CheckboxOptions({ { .tooltip = StringHelper::Translate("When active, unavailable checks will be hidden.").c_str() } })
                         .Color(THEME_COLOR))) {
                 doAreaScroll = true;
@@ -1996,7 +1996,7 @@ void ImGuiDrawTwoColorPickerSection(const char* text, const char* cvarMainName, 
             label += "##Hidden";
             ImGui::PushID(label.c_str());
             UIWidgets::CVarCheckbox(
-                "Hidden", cvarHideName,
+                StringHelper::Translate("Hidden").c_str(), cvarHideName,
                 UIWidgets::CheckboxOptions(
                     { { .tooltip = "When active, checks will hide by default when updated to this state. Can "
                                    "be overridden with the \"Show Hidden Items\" option." } })
@@ -2144,9 +2144,9 @@ void CheckTrackerSettingsWindow::DrawElement() {
                                        .DefaultValue(1.0f));
 
         if (CVarGetInteger(CVAR_TRACKER_CHECK("WindowType"), TRACKER_WINDOW_WINDOW) == TRACKER_WINDOW_FLOATING) {
-            UIWidgets::CVarCheckbox("Enable Dragging", CVAR_TRACKER_CHECK("Draggable"),
+            UIWidgets::CVarCheckbox(StringHelper::Translate("Enable Dragging").c_str(), CVAR_TRACKER_CHECK("Draggable"),
                                     UIWidgets::CheckboxOptions().Color(THEME_COLOR));
-            UIWidgets::CVarCheckbox("Only Enable While Paused", CVAR_TRACKER_CHECK("ShowOnlyPaused"),
+            UIWidgets::CVarCheckbox(StringHelper::Translate("Only Enable While Paused").c_str(), CVAR_TRACKER_CHECK("ShowOnlyPaused"),
                                     UIWidgets::CheckboxOptions().Color(THEME_COLOR));
             UIWidgets::CVarCombobox("Display Mode", CVAR_TRACKER_CHECK("DisplayType"), showMode,
                                     UIWidgets::ComboboxOptions()
@@ -2186,22 +2186,22 @@ void CheckTrackerSettingsWindow::DrawElement() {
 
         // Filtering settings
         UIWidgets::CVarCheckbox(
-            "Filter Empty Areas", CVAR_TRACKER_CHECK("HideFilteredAreas"),
+            StringHelper::Translate("Filter Empty Areas").c_str(), CVAR_TRACKER_CHECK("HideFilteredAreas"),
             UIWidgets::CheckboxOptions()
                 .Tooltip(StringHelper::Translate("If enabled, will hide area headers that have no locations matching filter").c_str())
                 .Color(THEME_COLOR)
                 .DefaultValue(true));
 
         ImGui::SeparatorText(StringHelper::Translate("Tracker Header Visibility").c_str());
-        UIWidgets::CVarCheckbox("Hidden Items Toggle", CVAR_TRACKER_CHECK("HiddenItemsToggleVisible"),
+        UIWidgets::CVarCheckbox(StringHelper::Translate("Hidden Items Toggle").c_str(), CVAR_TRACKER_CHECK("HiddenItemsToggleVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(true));
-        UIWidgets::CVarCheckbox("Available Checks Toggle", CVAR_TRACKER_CHECK("AvailableChecksToggleVisible"),
+        UIWidgets::CVarCheckbox(StringHelper::Translate("Available Checks Toggle").c_str(), CVAR_TRACKER_CHECK("AvailableChecksToggleVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(true));
-        UIWidgets::CVarCheckbox("Expand/Collapse Buttons", CVAR_TRACKER_CHECK("ExpandCollapseButtonsVisible"),
+        UIWidgets::CVarCheckbox(StringHelper::Translate("Expand/Collapse Buttons").c_str(), CVAR_TRACKER_CHECK("ExpandCollapseButtonsVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(false));
-        UIWidgets::CVarCheckbox("Search Input", CVAR_TRACKER_CHECK("SearchInputVisible"),
+        UIWidgets::CVarCheckbox(StringHelper::Translate("Search Input").c_str(), CVAR_TRACKER_CHECK("SearchInputVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(true));
-        UIWidgets::CVarCheckbox("Check Totals", CVAR_TRACKER_CHECK("CheckTotalsVisible"),
+        UIWidgets::CVarCheckbox(StringHelper::Translate("Check Totals").c_str(), CVAR_TRACKER_CHECK("CheckTotalsVisible"),
                                 UIWidgets::CheckboxOptions().Color(THEME_COLOR).DefaultValue(true));
 
         ImGui::TableNextColumn();

@@ -721,8 +721,8 @@ void EntranceTrackerSettingsWindow::DrawElement() {
     SohGui::GetSohMenu()->MenuDrawItem(windowTypeWidget, ImGui::GetContentRegionAvail().x, THEME_COLOR);
 
     if (CVarGetInteger(CVAR_TRACKER_ENTRANCE("WindowType"), TRACKER_WINDOW_WINDOW) == TRACKER_WINDOW_FLOATING) {
-        CVarCheckbox("Enable Dragging", CVAR_TRACKER_ENTRANCE("Draggable"), CheckboxOptions().Color(THEME_COLOR));
-        CVarCheckbox("Only Enable While Paused", CVAR_TRACKER_ENTRANCE("ShowOnlyPaused"),
+        CVarCheckbox(StringHelper::Translate("Enable Dragging").c_str(), CVAR_TRACKER_ENTRANCE("Draggable"), CheckboxOptions().Color(THEME_COLOR));
+        CVarCheckbox(StringHelper::Translate("Only Enable While Paused").c_str(), CVAR_TRACKER_ENTRANCE("ShowOnlyPaused"),
                      CheckboxOptions().Color(THEME_COLOR));
         CVarCombobox("Display Mode", CVAR_TRACKER_ENTRANCE("DisplayType"), showMode,
                      ComboboxOptions()
@@ -763,19 +763,19 @@ void EntranceTrackerSettingsWindow::DrawElement() {
             RadioButtonsOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("Sort entrances by the overrided destination").c_str()));
 
         ImGui::Text(StringHelper::Translate("List Items").c_str());
-        CVarCheckbox("Auto scroll", CVAR_TRACKER_ENTRANCE("AutoScroll"),
+        CVarCheckbox(StringHelper::Translate("Auto scroll").c_str(), CVAR_TRACKER_ENTRANCE("AutoScroll"),
                      CheckboxOptions()
                          .Tooltip(StringHelper::Translate("Automatically scroll to the first available entrance in the current scene").c_str())
                          .Color(THEME_COLOR));
         ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
         CVarCheckbox(
-            "Highlight previous", CVAR_TRACKER_ENTRANCE("HighlightPrevious"),
+            StringHelper::Translate("Highlight previous").c_str(), CVAR_TRACKER_ENTRANCE("HighlightPrevious"),
             CheckboxOptions().Tooltip(StringHelper::Translate("Highlight the previous entrance that Link came from").c_str()).Color(THEME_COLOR));
         CVarCheckbox(
-            "Highlight available", CVAR_TRACKER_ENTRANCE("HighlightAvailable"),
+            StringHelper::Translate("Highlight available").c_str(), CVAR_TRACKER_ENTRANCE("HighlightAvailable"),
             CheckboxOptions().Tooltip(StringHelper::Translate("Highlight available entrances in the current scene").c_str()).Color(THEME_COLOR));
         ImGui::EndDisabled();
-        CVarCheckbox("Hide undiscovered", CVAR_TRACKER_ENTRANCE("CollapseUndiscovered"),
+        CVarCheckbox(StringHelper::Translate("Hide undiscovered").c_str(), CVAR_TRACKER_ENTRANCE("CollapseUndiscovered"),
                      CheckboxOptions()
                          .Tooltip(StringHelper::Translate("Collapse undiscovered entrances towards the bottom of each group").c_str())
                          .Color(THEME_COLOR));
@@ -783,7 +783,7 @@ void EntranceTrackerSettingsWindow::DrawElement() {
             OTRGlobals::Instance->gRandomizer->GetRandoSettingValue(RSK_DECOUPLED_ENTRANCES) == RO_GENERIC_ON;
         static const char* disableHideReverseEntrancesText =
             "This option is disabled because \"Decouple Entrances\" is enabled.";
-        CVarCheckbox("Hide reverse", CVAR_TRACKER_ENTRANCE("HideReverseEntrances"),
+        CVarCheckbox(StringHelper::Translate("Hide reverse").c_str(), CVAR_TRACKER_ENTRANCE("HideReverseEntrances"),
                      CheckboxOptions({ { .disabled = disableHideReverseEntrances,
                                          .disabledTooltip = disableHideReverseEntrancesText } })
                          .Tooltip(StringHelper::Translate("Hide reverse entrance transitions when Decouple Entrances is off").c_str())
@@ -800,9 +800,9 @@ void EntranceTrackerSettingsWindow::DrawElement() {
 
         ImGui::Text(StringHelper::Translate("Spoiler Reveal").c_str());
         ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
-        CVarCheckbox("Show Source", CVAR_TRACKER_ENTRANCE("ShowFrom"),
+        CVarCheckbox(StringHelper::Translate("Show Source").c_str(), CVAR_TRACKER_ENTRANCE("ShowFrom"),
                      CheckboxOptions().Tooltip(StringHelper::Translate("Reveal the source for undiscovered entrances").c_str()).Color(THEME_COLOR));
-        CVarCheckbox("Show Destination", CVAR_TRACKER_ENTRANCE("ShowTo"),
+        CVarCheckbox(StringHelper::Translate("Show Destination").c_str(), CVAR_TRACKER_ENTRANCE("ShowTo"),
                      CheckboxOptions().Tooltip(StringHelper::Translate("Reveal the destination for undiscovered entrances").c_str()).Color(THEME_COLOR));
         ImGui::EndDisabled();
         ImGui::EndTable();

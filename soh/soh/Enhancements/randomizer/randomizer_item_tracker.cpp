@@ -2055,10 +2055,10 @@ void ItemTrackerSettingsWindow::DrawElement() {
         SohGui::mSohMenu->MenuDrawItem(windowTypeWidget, 250, THEME_COLOR);
 
         if (CVarGetInteger(CVAR_TRACKER_ITEM("WindowType"), TRACKER_WINDOW_FLOATING) == TRACKER_WINDOW_FLOATING) {
-            if (CVarCheckbox("Enable Dragging", CVAR_TRACKER_ITEM("Draggable"), CheckboxOptions().Color(THEME_COLOR))) {
+            if (CVarCheckbox(StringHelper::Translate("Enable Dragging").c_str(), CVAR_TRACKER_ITEM("Draggable"), CheckboxOptions().Color(THEME_COLOR))) {
                 shouldUpdateVectors = true;
             }
-            if (CVarCheckbox("Only Enable While Paused", CVAR_TRACKER_ITEM("ShowOnlyPaused"),
+            if (CVarCheckbox(StringHelper::Translate("Only Enable While Paused").c_str(), CVAR_TRACKER_ITEM("ShowOnlyPaused"),
                              CheckboxOptions().Color(THEME_COLOR))) {
                 shouldUpdateVectors = true;
             }
@@ -2104,7 +2104,7 @@ void ItemTrackerSettingsWindow::DrawElement() {
                 ITEM_TRACKER_NUMBER_CURRENT_CAPACITY_ONLY ||
             CVarGetInteger(CVAR_TRACKER_ITEM("ItemCountType"), ITEM_TRACKER_NUMBER_CURRENT_CAPACITY_ONLY) ==
                 ITEM_TRACKER_NUMBER_CURRENT_AMMO_ONLY) {
-            if (CVarCheckbox("Align count to left side", CVAR_TRACKER_ITEM("ItemCountAlignLeft"),
+            if (CVarCheckbox(StringHelper::Translate("Align count to left side").c_str(), CVAR_TRACKER_ITEM("ItemCountAlignLeft"),
                              CheckboxOptions().Color(THEME_COLOR))) {
                 shouldUpdateVectors = true;
             }
@@ -2149,7 +2149,7 @@ void ItemTrackerSettingsWindow::DrawElement() {
         }
         if (CVarGetInteger(CVAR_TRACKER_ITEM("DisplayType.DungeonRewards"), SECTION_DISPLAY_MAIN_WINDOW) ==
             SECTION_DISPLAY_SEPARATE) {
-            if (CVarCheckbox("Circle display", CVAR_TRACKER_ITEM("DungeonRewardsLayout"),
+            if (CVarCheckbox(StringHelper::Translate("Circle display").c_str(), CVAR_TRACKER_ITEM("DungeonRewardsLayout"),
                              CheckboxOptions().DefaultValue(false).Color(THEME_COLOR))) {
                 shouldUpdateVectors = true;
             }
@@ -2167,12 +2167,12 @@ void ItemTrackerSettingsWindow::DrawElement() {
             SECTION_DISPLAY_HIDDEN) {
             if (CVarGetInteger(CVAR_TRACKER_ITEM("DisplayType.DungeonItems"), SECTION_DISPLAY_HIDDEN) ==
                 SECTION_DISPLAY_SEPARATE) {
-                if (CVarCheckbox("Horizontal display", CVAR_TRACKER_ITEM("DungeonItems.Layout"),
+                if (CVarCheckbox(StringHelper::Translate("Horizontal display").c_str(), CVAR_TRACKER_ITEM("DungeonItems.Layout"),
                                  CheckboxOptions().DefaultValue(true).Color(THEME_COLOR))) {
                     shouldUpdateVectors = true;
                 }
             }
-            if (CVarCheckbox("Maps and compasses", CVAR_TRACKER_ITEM("DungeonItems.DisplayMaps"),
+            if (CVarCheckbox(StringHelper::Translate("Maps and compasses").c_str(), CVAR_TRACKER_ITEM("DungeonItems.DisplayMaps"),
                              CheckboxOptions().DefaultValue(true).Color(THEME_COLOR))) {
                 shouldUpdateVectors = true;
             }
