@@ -687,7 +687,7 @@ void GameplayStatsWindow::DrawElement() {
     UIWidgets::PopStyleTabs();
     ImGui::PopFont();
 
-    ImGui::Text("Note: Gameplay stats are saved to the current file and will be\nlost if you quit without saving.");
+    ImGui::Text(StringHelper::Translate("Note: Gameplay stats are saved to the current file and will be\nlost if you quit without saving.").c_str());
 }
 void InitStats(bool isDebug) {
     gSaveContext.ship.stats.heartPieces = isDebug ? 8 : 0;

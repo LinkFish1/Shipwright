@@ -799,7 +799,7 @@ void TimeSplitsDrawOptionsMenu() {
         windowColor = VecFromRGBA8(CVarGetColor(CVAR_ENHANCEMENT("TimeSplits.WindowColor.Value"), defaultColor));
     }
 
-    if (CVarSliderFloat("Window Scale", CVAR_ENHANCEMENT("TimeSplits.WindowScale"),
+    if (CVarSliderFloat(StringHelper::Translate("Window Scale").c_str(), CVAR_ENHANCEMENT("TimeSplits.WindowScale"),
                         FloatSliderOptions()
                             .Min(1.0f)
                             .Max(3.0f)
@@ -840,7 +840,7 @@ void TimeSplitsDrawOptionsMenu() {
         TimeSplitsFileManagement(SPLIT_ACTION_SAVE, keys[selectedItem].c_str(), splitList);
     }
     ImGui::SameLine();
-    if (Button("Delete List", ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
+    if (Button(StringHelper::Translate("Delete List").c_str(), ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
         TimeSplitsFileManagement(SPLIT_ACTION_DELETE, keys[selectedItem].c_str(), emptyList);
     }
     UIWidgets::Separator(true, true, ImGui::GetStyle().ItemSpacing.y, ImGui::GetStyle().ItemSpacing.y);
@@ -852,7 +852,7 @@ void TimeSplitsDrawOptionsMenu() {
         splitList[0].splitTimeStatus = SPLIT_STATUS_ACTIVE;
     }
     ImGui::SameLine();
-    if (Button("Update Splits", ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
+    if (Button(StringHelper::Translate("Update Splits").c_str(), ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
         TimeSplitsFileManagement(SPLIT_ACTION_UPDATE, keys[selectedItem].c_str(), splitList);
     }
 }

@@ -773,7 +773,7 @@ static void DrawFlagTableSearchResults(const FlagTable& flagTable, ImGuiTextFilt
 }
 
 void DrawFlagsTab() {
-    if (ImGui::TreeNode("Player State")) {
+    if (ImGui::TreeNode(StringHelper::Translate("Player State").c_str())) {
         if (gPlayState != nullptr) {
             Player* player = GET_PLAYER(gPlayState);
 
@@ -961,7 +961,7 @@ void DrawFlagsTab() {
         ImGui::TreePop();
     }
 
-    if (ImGui::TreeNode("Saved Scene Flags")) {
+    if (ImGui::TreeNode(StringHelper::Translate("Saved Scene Flags").c_str())) {
         static uint32_t selectedSceneFlagMap = 0;
         ImGui::AlignTextToFramePadding();
         ImGui::Text(StringHelper::Translate("Map").c_str());
@@ -1110,7 +1110,7 @@ void DrawFlagsTab() {
                 }
             }
         },
-        "Gold Skulltulas");
+        StringHelper::Translate("Gold Skulltulas").c_str());
 
     for (size_t i = 0; i < flagTables.size(); i++) {
         const FlagTable& flagTable = flagTables[i];
@@ -1118,7 +1118,7 @@ void DrawFlagsTab() {
             continue;
         }
 
-        if (ImGui::TreeNode(flagTable.name)) {
+        if (ImGui::TreeNode(StringHelper::Translate(flagTable.name).c_str())) {
             ImGui::PushID(flagTable.name);
             ImGuiTextFilter& flagFilter = flagTableFilters[flagTable.name];
             ImGui::SetNextItemWidth(ImGui::GetFontSize() * 16);
@@ -1158,7 +1158,7 @@ void DrawFlagsTab() {
                                     break;
                             }
                         },
-                        flagTable.name);
+                        StringHelper::Translate(flagTable.name).c_str());
                 }
             } else {
                 DrawFlagTableSearchResults(flagTable, flagFilter);
@@ -1715,28 +1715,28 @@ void DrawPlayerTab() {
             },
             "Link's Model Rotation");
 
-        ImGui::InputScalar("Linear Velocity", ImGuiDataType_Float, &player->linearVelocity);
+        ImGui::InputScalar(StringHelper::Translate("Linear Velocity").c_str(), ImGuiDataType_Float, &player->linearVelocity);
         InsertHelpHoverText("Link's speed along the XZ plane");
 
-        ImGui::InputScalar("Y Velocity", ImGuiDataType_Float, &player->actor.velocity.y);
+        ImGui::InputScalar(StringHelper::Translate("Y Velocity").c_str(), ImGuiDataType_Float, &player->actor.velocity.y);
         InsertHelpHoverText("Link's speed along the Y plane. Caps at -20");
 
-        ImGui::InputScalar("Wall Height", ImGuiDataType_Float, &player->yDistToLedge);
+        ImGui::InputScalar(StringHelper::Translate("Wall Height").c_str(), ImGuiDataType_Float, &player->yDistToLedge);
         InsertHelpHoverText("Height used to determine whether Link can climb or grab a ledge at the top");
 
         ImGui::InputScalar("Invincibility Timer", ImGuiDataType_S8, &player->invincibilityTimer);
         InsertHelpHoverText("Can't take damage while this is nonzero");
 
-        ImGui::InputScalar("Gravity", ImGuiDataType_Float, &player->actor.gravity);
+        ImGui::InputScalar(StringHelper::Translate("Gravity").c_str(), ImGuiDataType_Float, &player->actor.gravity);
         InsertHelpHoverText("Rate at which Link falls. Default -4.0f");
         PopStyleInput();
 
         PushStyleCombobox(THEME_COLOR);
-        if (ImGui::BeginCombo("Link Age on Load", gPlayState->linkAgeOnLoad == 0 ? "Adult" : "Child")) {
-            if (ImGui::Selectable("Adult")) {
+        if (ImGui::BeginCombo(StringHelper::Translate("Link Age on Load").c_str(), StringHelper::Translate(gPlayState->linkAgeOnLoad == 0 ? "Adult" : "Child").c_str())) {
+            if (ImGui::Selectable(StringHelper::Translate("Adult").c_str())) {
                 gPlayState->linkAgeOnLoad = 0;
             }
-            if (ImGui::Selectable("Child")) {
+            if (ImGui::Selectable(StringHelper::Translate("Child").c_str())) {
                 gPlayState->linkAgeOnLoad = 1;
             }
             ImGui::EndCombo();
@@ -1756,12 +1756,12 @@ void DrawPlayerTab() {
                         gSaveContext.equips.buttonItems[0] = ITEM_NONE;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_NONE);
                     }
-                    if (ImGui::Selectable("Kokiri Sword")) {
+                    if (ImGui::Selectable(StringHelper::Translate("Kokiri Sword").c_str())) {
                         player->currentSwordItemId = ITEM_SWORD_KOKIRI;
                         gSaveContext.equips.buttonItems[0] = ITEM_SWORD_KOKIRI;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_KOKIRI);
                     }
-                    if (ImGui::Selectable("Master Sword")) {
+                    if (ImGui::Selectable(StringHelper::Translate("Master Sword").c_str())) {
                         player->currentSwordItemId = ITEM_SWORD_MASTER;
                         gSaveContext.equips.buttonItems[0] = ITEM_SWORD_MASTER;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_MASTER);
@@ -1783,19 +1783,19 @@ void DrawPlayerTab() {
 
                         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_BIGGORON);
                     }
-                    if (ImGui::Selectable("Fishing Pole")) {
+                    if (ImGui::Selectable(StringHelper::Translate("Fishing Pole").c_str())) {
                         player->currentSwordItemId = ITEM_FISHING_POLE;
                         gSaveContext.equips.buttonItems[0] = ITEM_FISHING_POLE;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SWORD, EQUIP_VALUE_SWORD_MASTER);
                     }
                     ImGui::EndCombo();
                 }
-                if (ImGui::BeginCombo("Shield", curShield)) {
-                    if (ImGui::Selectable("None")) {
+                if (ImGui::BeginCombo(StringHelper::Translate("Shield").c_str(), StringHelper::Translate(curShield).c_str())) {
+                    if (ImGui::Selectable(StringHelper::Translate("None").c_str())) {
                         player->currentShield = PLAYER_SHIELD_NONE;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SHIELD, EQUIP_VALUE_SHIELD_NONE);
                     }
-                    if (ImGui::Selectable("Deku Shield")) {
+                    if (ImGui::Selectable(StringHelper::Translate("Deku Shield").c_str())) {
                         player->currentShield = PLAYER_SHIELD_DEKU;
                         Inventory_ChangeEquipment(EQUIP_TYPE_SHIELD, EQUIP_VALUE_SHIELD_DEKU);
                     }
@@ -1810,8 +1810,8 @@ void DrawPlayerTab() {
                     ImGui::EndCombo();
                 }
 
-                if (ImGui::BeginCombo("Tunic", curTunic)) {
-                    if (ImGui::Selectable("Kokiri Tunic")) {
+                if (ImGui::BeginCombo(StringHelper::Translate("Tunic").c_str(), StringHelper::Translate(curTunic).c_str())) {
+                    if (ImGui::Selectable(StringHelper::Translate("Kokiri Tunic").c_str())) {
                         player->currentTunic = PLAYER_TUNIC_KOKIRI;
                         Inventory_ChangeEquipment(EQUIP_TYPE_TUNIC, EQUIP_VALUE_TUNIC_KOKIRI);
                     }
@@ -1826,8 +1826,8 @@ void DrawPlayerTab() {
                     ImGui::EndCombo();
                 }
 
-                if (ImGui::BeginCombo("Boots", curBoots)) {
-                    if (ImGui::Selectable("Kokiri Boots")) {
+                if (ImGui::BeginCombo(StringHelper::Translate("Boots").c_str(), StringHelper::Translate(curBoots).c_str())) {
+                    if (ImGui::Selectable(StringHelper::Translate("Kokiri Boots").c_str())) {
                         player->currentBoots = PLAYER_BOOTS_KOKIRI;
                         Inventory_ChangeEquipment(EQUIP_TYPE_BOOTS, EQUIP_VALUE_BOOTS_KOKIRI);
                     }
@@ -1835,7 +1835,7 @@ void DrawPlayerTab() {
                         player->currentBoots = PLAYER_BOOTS_IRON;
                         Inventory_ChangeEquipment(EQUIP_TYPE_BOOTS, EQUIP_VALUE_BOOTS_IRON);
                     }
-                    if (ImGui::Selectable("Hover Boots")) {
+                    if (ImGui::Selectable(StringHelper::Translate("Hover Boots").c_str())) {
                         player->currentBoots = PLAYER_BOOTS_HOVER;
                         Inventory_ChangeEquipment(EQUIP_TYPE_BOOTS, EQUIP_VALUE_BOOTS_HOVER);
                     }
@@ -1904,7 +1904,7 @@ void DrawPlayerTab() {
         }
         DrawGroupWithBorder(
             [&]() {
-                ImGui::Text("Sword");
+                ImGui::Text(StringHelper::Translate("Sword").c_str());
                 ImGui::Text(StringHelper::Translate("  %d").c_str(), player->meleeWeaponState);
             },
             "Sword");

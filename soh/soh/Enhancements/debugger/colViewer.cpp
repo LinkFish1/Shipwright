@@ -60,7 +60,7 @@ void ColViewerWindow::DrawElement() {
     ImGui::BeginDisabled(CVarGetInteger(CVAR_SETTING("DisableChanges"), 0));
     CheckboxOptions checkOpt = CheckboxOptions().Color(THEME_COLOR);
     ComboboxOptions comboOpt = ComboboxOptions().Color(THEME_COLOR);
-    CVarCheckbox("Enabled", CVAR_DEVELOPER_TOOLS("ColViewer.Enabled"), checkOpt);
+    CVarCheckbox(StringHelper::Translate("Enabled").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.Enabled"), checkOpt);
 
     CVarCombobox("Scene", CVAR_DEVELOPER_TOOLS("ColViewer.Scene"), ColRenderSettingNames, comboOpt);
     CVarCombobox("Bg Actors", CVAR_DEVELOPER_TOOLS("ColViewer.BGActors"), ColRenderSettingNames, comboOpt);
@@ -68,73 +68,73 @@ void ColViewerWindow::DrawElement() {
     CVarCombobox("Waterbox", CVAR_DEVELOPER_TOOLS("ColViewer.Waterbox"), ColRenderSettingNames, comboOpt);
     CVarCombobox("Scarecrow Spawn", CVAR_DEVELOPER_TOOLS("ColViewer.ScarecrowSpawn"), ColRenderSettingNames, comboOpt);
 
-    CVarCheckbox("Apply as decal", CVAR_DEVELOPER_TOOLS("ColViewer.Decal"),
+    CVarCheckbox(StringHelper::Translate("Apply as decal").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.Decal"),
                  checkOpt.DefaultValue(true).Tooltip(
                      StringHelper::Translate("Applies the collision as a decal display. This can be useful if there is z-fighting occuring "
                      "with the scene geometry, but can cause other artifacts.").c_str()));
-    CVarCheckbox("Shaded", CVAR_DEVELOPER_TOOLS("ColViewer.Shaded"),
+    CVarCheckbox(StringHelper::Translate("Shaded").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.Shaded"),
                  checkOpt.DefaultValue(false).Tooltip(StringHelper::Translate("Applies the scene's shading to the collision display.").c_str()));
 
     // This has to be duplicated in both code paths due to the nature of ImGui::IsItemHovered()
     const std::string colorHelpText = "View and change the colors used for collision display.";
     PushStyleHeader(THEME_COLOR);
-    if (ImGui::TreeNode("Colors")) {
+    if (ImGui::TreeNode(StringHelper::Translate("Colors").c_str())) {
         UIWidgets::Tooltip(colorHelpText.c_str());
 
-        if (CVarColorPicker("Normal", CVAR_DEVELOPER_TOOLS("ColViewer.ColorNormal"), { 255, 255, 255, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Normal").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorNormal"), { 255, 255, 255, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             scene_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorNormal"), { 255, 255, 255, 255 }));
         }
-        if (CVarColorPicker("Hookshot", CVAR_DEVELOPER_TOOLS("ColViewer.ColorHookshot"), { 128, 128, 255, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Hookshot").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorHookshot"), { 128, 128, 255, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             hookshot_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorHookshot"), { 128, 128, 255, 255 }));
         }
-        if (CVarColorPicker("Entrance", CVAR_DEVELOPER_TOOLS("ColViewer.ColorEntrance"), { 0, 255, 0, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Entrance").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorEntrance"), { 0, 255, 0, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             entrance_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorEntrance"), { 0, 255, 0, 255 }));
         }
-        if (CVarColorPicker("Special Surface (Grass/Sand/Etc)", CVAR_DEVELOPER_TOOLS("ColViewer.ColorSpecialSurface"),
+        if (CVarColorPicker(StringHelper::Translate("Special Surface (Grass/Sand/Etc)").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorSpecialSurface"),
                             { 192, 255, 192, 255 }, false, ColorPickerResetButton | ColorPickerRandomButton,
                             THEME_COLOR)) {
             specialSurface_col = VecFromRGBA8(
                 CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorSpecialSurface"), { 192, 255, 192, 255 }));
         }
-        if (CVarColorPicker("Interactable (Vines/Crawlspace/Etc)", CVAR_DEVELOPER_TOOLS("ColViewer.ColorInteractable"),
+        if (CVarColorPicker(StringHelper::Translate("Interactable (Vines/Crawlspace/Etc)").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorInteractable"),
                             { 192, 0, 192, 255 }, false, ColorPickerResetButton | ColorPickerRandomButton,
                             THEME_COLOR)) {
             interactable_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorInteractable"), { 192, 0, 192, 255 }));
         }
-        if (CVarColorPicker("Slope", CVAR_DEVELOPER_TOOLS("ColViewer.ColorSlope"), { 255, 255, 128, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Slope").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorSlope"), { 255, 255, 128, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             slope_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorSlope"), { 255, 255, 128, 255 }));
         }
-        if (CVarColorPicker("Void", CVAR_DEVELOPER_TOOLS("ColViewer.ColorVoid"), { 255, 0, 0, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Void").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorVoid"), { 255, 0, 0, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             void_col = VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorVoid"), { 255, 0, 0, 255 }));
         }
-        if (CVarColorPicker("OC", CVAR_DEVELOPER_TOOLS("ColViewer.ColorOC"), { 255, 255, 255, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("OC").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorOC"), { 255, 255, 255, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             oc_col = VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorOC"), { 255, 255, 255, 255 }));
         }
-        if (CVarColorPicker("AC", CVAR_DEVELOPER_TOOLS("ColViewer.ColorAC"), { 0, 0, 255, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("AC").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorAC"), { 0, 0, 255, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             ac_col = VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorAC"), { 0, 0, 255, 255 }));
         }
-        if (CVarColorPicker("AT", CVAR_DEVELOPER_TOOLS("ColViewer.ColorAT"), { 255, 0, 0, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("AT").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorAT"), { 255, 0, 0, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             at_col = VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorAT"), { 255, 0, 0, 255 }));
         }
-        if (CVarColorPicker("Waterbox", CVAR_DEVELOPER_TOOLS("ColViewer.ColorWaterbox"), { 0, 0, 255, 255 }, false,
+        if (CVarColorPicker(StringHelper::Translate("Waterbox").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorWaterbox"), { 0, 0, 255, 255 }, false,
                             ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             waterbox_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorWaterbox"), { 0, 0, 255, 255 }));
         }
-        if (CVarColorPicker("Scarecrow Spawn", CVAR_DEVELOPER_TOOLS("ColViewer.ColorScarecrow"), { 255, 128, 0, 200 },
+        if (CVarColorPicker(StringHelper::Translate("Scarecrow Spawn").c_str(), CVAR_DEVELOPER_TOOLS("ColViewer.ColorScarecrow"), { 255, 128, 0, 200 },
                             false, ColorPickerResetButton | ColorPickerRandomButton, THEME_COLOR)) {
             scarecrow_col =
                 VecFromRGBA8(CVarGetColor(CVAR_DEVELOPER_TOOLS("ColViewer.ColorScarecrow"), { 255, 128, 0, 200 }));

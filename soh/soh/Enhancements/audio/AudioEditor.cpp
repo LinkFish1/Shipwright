@@ -705,7 +705,7 @@ void AudioEditor::DrawElement() {
 
             ImGui::TableNextColumn();
             ImGui::PushStyleColor(ImGuiCol_Header, GetSequenceTypeColor(SEQ_FANFARE));
-            ImGui::Selectable(GetSequenceTypeName(SEQ_FANFARE).c_str(), &showType[SEQ_FANFARE]);
+            ImGui::Selectable(StringHelper::Translate(GetSequenceTypeName(SEQ_FANFARE)).c_str(), &showType[SEQ_FANFARE]);
             ImGui::PopStyleColor(1);
 
             ImGui::TableNextColumn();
@@ -720,7 +720,7 @@ void AudioEditor::DrawElement() {
 
             ImGui::TableNextColumn();
             ImGui::PushStyleColor(ImGuiCol_Header, GetSequenceTypeColor(SEQ_INSTRUMENT));
-            ImGui::Selectable(GetSequenceTypeName(SEQ_INSTRUMENT).c_str(), &showType[SEQ_INSTRUMENT]);
+            ImGui::Selectable(StringHelper::Translate(GetSequenceTypeName(SEQ_INSTRUMENT)).c_str(), &showType[SEQ_INSTRUMENT]);
             ImGui::PopStyleColor(1);
 
             ImGui::TableNextColumn();
