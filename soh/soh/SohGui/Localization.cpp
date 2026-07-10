@@ -1635,6 +1635,8 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Set Defaults", "恢复默认" },
     { "Set defaults", "恢复默认" },
     { "Set Defaults for Keyboard", "键盘的默认设置" },
+    { "Link (P1)", "林克 (P1)" },
+    { "Ivan (P2)", "伊万 (P2)" },
     { "This will clear all existing mappings for\nKeyboard on port %d.\n\nContinue?",
       "这将清除端口 %d 上键盘的全部现有映射。\n\n继续？" },
 

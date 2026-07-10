@@ -1556,7 +1556,8 @@ void SohInputEditorWindow::DrawDeviceToggles(uint8_t portIndex) {
 
 void SohInputEditorWindow::DrawLinkTab() {
     uint8_t portIndex = 0;
-    if (ImGui::BeginTabItem(StringHelper::Sprintf("Link (P1)###port%d", portIndex).c_str())) {
+    if (ImGui::BeginTabItem(
+            StringHelper::Sprintf("%s###port%d", StringHelper::Translate("Link (P1)").c_str(), portIndex).c_str())) {
         DrawClearAllButton(portIndex);
         DrawSetDefaultsButton(portIndex);
         DrawDeviceToggles(portIndex);
@@ -1650,12 +1651,13 @@ void SohInputEditorWindow::DrawLinkTab() {
 
 void SohInputEditorWindow::DrawIvanTab() {
     if (CVarGetInteger(CVAR_DEVELOPER_TOOLS("DebugEnabled"), 0)) {
-        DrawDebugPortTab(1, "Ivan (P2)");
+        DrawDebugPortTab(1, StringHelper::Translate("Ivan (P2)").c_str());
         return;
     }
 
     uint8_t portIndex = 1;
-    if (ImGui::BeginTabItem(StringHelper::Sprintf("Ivan (P2)###port%d", portIndex).c_str())) {
+    if (ImGui::BeginTabItem(
+            StringHelper::Sprintf("%s###port%d", StringHelper::Translate("Ivan (P2)").c_str(), portIndex).c_str())) {
         DrawClearAllButton(portIndex);
         DrawSetDefaultsButton(portIndex);
         DrawDeviceToggles(portIndex);
@@ -1771,7 +1773,7 @@ void SohInputEditorWindow::DrawSetDefaultsButton(uint8_t portIndex) {
     ImGui::SameLine();
     auto popupId = StringHelper::Sprintf("setDefaultsPopup##%d", portIndex);
     PushStyleButton(THEME_COLOR);
-    if (ImGui::Button(StringHelper::Sprintf("Set Defaults##%d", portIndex).c_str(),
+    if (ImGui::Button(StringHelper::Sprintf("%s##%d", StringHelper::Translate("Set Defaults").c_str(), portIndex).c_str(),
                       ImVec2(ImGui::CalcTextSize(StringHelper::Translate("Set Defaults").c_str()) * 2))) {
         ImGui::OpenPopup(popupId.c_str());
     }
