@@ -523,6 +523,11 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Heart Containers", "心之容器" },
     { "Helps FW persist between ages, gives Child and Adult separate FW points, and can ", "帮助法拉薇之风在年龄间持续，为儿童和成人提供独立的 FW 点，并可" },
     { "Hidden", "隐藏" },
+    { "Hearts counts use margins", "心数计数使用边距" },
+    { "Original position", "原始位置" },
+    { "Anchor to the left", "锚定到左侧" },
+    { "Anchor to the right", "锚定到右侧" },
+    { "No anchors", "无锚定" },
     { "Area Incomplete", "区域未完成" },
     { "Area Complete", "区域已完成" },
     { "Unchecked", "未检查" },
@@ -3024,11 +3029,11 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Prevents integer scaling factor from exceeding screen bounds.\n\n"
       "Enabled: Will clamp the scaling factor and display a gentle warning in the resolution editor.\n"
       "Disabled: Will allow scaling to exceed screen bounds, for users who want to crop overscan.\n\n"
-      "Please note that exceeding screen bounds may show a scroll bar on-screen.",
+      " \xef\x81\x9a Please note that exceeding screen bounds may show a scroll bar on-screen.",
       "防止整数缩放系数超出屏幕边界。\n\n"
       "启用：将限制缩放系数，并在分辨率编辑器中显示温和警告。\n"
       "禁用：允许缩放超出屏幕边界，供需要裁切过扫描的用户使用。\n\n"
-      "请注意，超出屏幕边界可能会在屏幕上显示滚动条。" },
+      " \xef\x81\x9a 请注意，超出屏幕边界可能会在屏幕上显示滚动条。" },
 
     { "Message", "消息" },
     { "HUD", "HUD" },

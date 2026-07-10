@@ -1539,7 +1539,7 @@ void Table_InitHeader(bool has_header = true) {
 void DrawUseMarginsSlider(const std::string ElementName, const std::string CvarName) {
     std::string CvarLabel = CvarName + ".UseMargins";
     std::string Label = ElementName + " use margins";
-    UIWidgets::CVarCheckbox(Label.c_str(), CvarLabel.c_str(),
+    UIWidgets::CVarCheckbox(StringHelper::Translate(Label).c_str(), CvarLabel.c_str(),
                             UIWidgets::CheckboxOptions()
                                 .Color(THEME_COLOR)
                                 .Tooltip(StringHelper::Translate("Using this allow you move the element with General margins sliders").c_str()));
