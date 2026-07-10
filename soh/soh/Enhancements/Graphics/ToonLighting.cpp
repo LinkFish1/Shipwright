@@ -577,7 +577,7 @@ static void HandleActorDraw(void* actorPtr) {
         return;
     }
 
-    bool celEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 1);
+    bool celEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 0);
     bool shadowsEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldShadows.Enabled"), 0);
 
     // Blacklist (doors/trees/water): excluded actors get neither cel relight nor a shadow. When cel shading
@@ -735,7 +735,7 @@ static void HandleActorDestroy(void* actorPtr) {
 // to C via ToonLighting_IsShadowReceiver.
 
 void RegisterToonLighting() {
-    bool celEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 1);
+    bool celEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 0);
     bool shadowsEnabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldShadows.Enabled"), 0);
     // The hooks drive BOTH the cel relight and the actor shadow (the shadow reuses the per-actor key this
     // module computes), so run them while EITHER feature is on. HandleActorDraw internally gates the relight

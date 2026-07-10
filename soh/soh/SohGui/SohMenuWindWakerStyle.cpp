@@ -18,7 +18,7 @@ void SohMenu::AddMenuWindWakerStyle() {
     // Cel Shading — relights actors/objects with a single dominant light and a soft toon ramp.
     // ===========================================================================================
     auto hideUnlessCelEnabled = [](WidgetInfo& info) {
-        info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 1);
+        info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"), 0);
     };
     WidgetPath path = { "Wind Waker Style", "Cel Shading", SECTION_COLUMN_1 };
     // 3 columns with the controls kept in column 1 (like the Audio page) so the sliders sit in a narrow
@@ -27,7 +27,7 @@ void SohMenu::AddMenuWindWakerStyle() {
     AddWidget(path, "Enable Cel Shading", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENHANCEMENT("Graphics.ToonLighting.Enabled"))
         .RaceDisable(false)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Re-lights actors and objects with a single dominant light and a soft Wind Waker-style ramp. "
             "Only affects objects, not the static scene. Pairs well with cel-shaded texture packs.").c_str()));
     AddWidget(path, "Options", WIDGET_SEPARATOR_TEXT).PreFunc(hideUnlessCelEnabled);
@@ -174,13 +174,13 @@ void SohMenu::AddMenuWindWakerStyle() {
     AddWidget(path, "Hide Vanilla Torch Glow", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldLighting.HideVanillaGlow"))
         .RaceDisable(false)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Hides the original flat, billboarded, flickering glow circle the game draws over torches and "
             "other glow lights (it clashes with the cast pools). Applies while Light Casting is on.").c_str()));
     AddWidget(path, "Improve Flame Flicker", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldLighting.ImproveFlameFlicker"))
         .RaceDisable(false)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Replaces the game's fast, jagged per-frame torch/flame flicker with a slow, organic Wind Waker "
             "flicker. Applied at the source, so it affects the vanilla scene lighting and Cel Shading even "
             "when Light Casting is off.").c_str()));
@@ -189,7 +189,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             info.options->disabled =
-                !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.ImproveFlameFlicker"), 1);
+                !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.ImproveFlameFlicker"), 0);
             info.options->disabledTooltip = "Enable \"Improve Flame Flicker\" to adjust this.";
         })
         .Options(FloatSliderOptions()
@@ -353,7 +353,7 @@ void SohMenu::AddMenuWindWakerStyle() {
     AddWidget(path, "Enable Deku Stick Light Casting", WIDGET_CVAR_CHECKBOX)
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldLighting.DekuStickLight"))
         .RaceDisable(false)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Makes a lit, held Deku stick a real light source at its burning tip (it isn't in vanilla). Like a "
             "torch it lights nearby objects via Cel Shading and casts their shadows, and — with Light Casting "
             "on — casts its own pool on the world. This one toggle controls all three.").c_str()));

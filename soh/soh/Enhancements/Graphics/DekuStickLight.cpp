@@ -194,7 +194,7 @@ void* DekuStickLight_GetActiveLightInfo() {
 }
 
 void RegisterDekuStickLight() {
-    bool enabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.DekuStickLight"), 1);
+    bool enabled = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.DekuStickLight"), 0);
     COND_HOOK(OnPlayerUpdate, enabled, UpdateDekuStickLight);
     COND_HOOK(OnSceneInit, enabled, OnSceneInitResetLight);
     // Turned off mid-game: drop our light so it doesn't linger in the current scene.

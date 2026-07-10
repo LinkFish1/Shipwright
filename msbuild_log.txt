@@ -1,0 +1,15 @@
+
+  ImGui.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\build\x64\libultraship\Release\ImGui.lib
+  libgfxd.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\build\x64\libultraship\Release\libgfxd.lib
+  prism.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\build\x64\_deps\prism-build\Release\prism.lib
+  stb.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\build\x64\libultraship\Release\stb.lib
+  storm.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\build\x64\_deps\stormlib-build\Release\StormLib.lib
+  libultraship.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\x64\Release\libultraship.lib
+  OTRExporter.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\x64\Release\OTRExporter.lib
+  ZAPDLib.vcxproj -> E:\Shipwright-wind-waker-style-cel-shading\x64\Release\ZAPDLib.lib
+  SohMenuWindWakerStyle.cpp
+  正在生成代码
+  3 of 121935 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    682 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成

@@ -1547,7 +1547,7 @@ void DrawUseMarginsSlider(const std::string ElementName, const std::string CvarN
 
 void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = true) {
     std::string CvarLabel = CvarName + ".PosType";
-    UIWidgets::CVarRadioButton("Original position", CvarLabel.c_str(), 0,
+    UIWidgets::CVarRadioButton(StringHelper::Translate("Original position").c_str(), CvarLabel.c_str(), 0,
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
                                    .Tooltip(StringHelper::Translate("This will use original intended elements position").c_str()));
@@ -1555,7 +1555,7 @@ void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = 
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
                                    .Tooltip(StringHelper::Translate("This will make your elements follow the left side of your game window").c_str()));
-    UIWidgets::CVarRadioButton("Anchor to the right", CvarLabel.c_str(), 2,
+    UIWidgets::CVarRadioButton(StringHelper::Translate("Anchor to the right").c_str(), CvarLabel.c_str(), 2,
                                UIWidgets::RadioButtonsOptions()
                                    .Color(THEME_COLOR)
                                    .Tooltip(StringHelper::Translate("This will make your elements follow the right side of your game window").c_str()));
@@ -1567,7 +1567,7 @@ void DrawPositionsRadioBoxes(const std::string CvarName, bool NoAnchorEnabled = 
                 .Tooltip("This will make your elements to not follow any side\nBetter used for center elements"));
     }
     UIWidgets::CVarRadioButton(
-        "Hidden", CvarLabel.c_str(), 4,
+        StringHelper::Translate("Hidden").c_str(), CvarLabel.c_str(), 4,
         UIWidgets::RadioButtonsOptions().Color(THEME_COLOR).Tooltip(StringHelper::Translate("This will make your elements hidden").c_str()));
 }
 
