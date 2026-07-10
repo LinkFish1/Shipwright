@@ -3203,6 +3203,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Closed Forest", "封闭森林" },
     { "Dungeon Entrances", "地牢入口" },
     { "Logic", "逻辑" },
+    { "Logic/Access", "逻辑/访问" },
     { "Glitchless", "无故障" },
     { "All Locations Reachable", "所有地点可达" },
     { "Kakariko Gate", "卡卡利科城门" },
@@ -3240,6 +3241,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Ganon's Trials Count", "加农试炼次数" },
     { "Skip Scarecrow's Song", "跳过稻草人之歌" },
     { "Shuffle Items", "打乱物品" },
+    { "Shuffles", "打乱" },
     { "Shuffle Shops & Merchants", "打乱商店与商人" },
     { "Additional Items", "额外物品" },
     { "Shuffle Songs", "打乱歌曲" },
@@ -3282,6 +3284,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Shuffle Crates", "打乱木箱" },
     { "Infinite Upgrades", "无限升级" },
     { "Hints", "提示" },
+    { "Hints/Traps", "提示/陷阱" },
     { "Static Hints", "静态提示" },
     { "Gossip Stone Hints", "闲话石提示" },
     { "ToT Altar Hint", "时之殿祭坛提示" },
@@ -3335,6 +3338,7 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Start with Magic Beans", "初始携带魔法豆" },
     { "Start with Prelude of Light", "初始携带光之前奏曲" },
     { "Starting Hearts", "起始心数" },
+    { "Starting Items", "初始物品" },
 
     // ---- reported untranslated batch 3: tricks / item tracker / plandomizer / spoiler viewer ----
     // Trick difficulty tags (tricks.cpp)
