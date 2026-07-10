@@ -424,7 +424,7 @@ void DrawInfoTab() {
 
     if (ImGui::TreeNode(StringHelper::Translate("Minigames").c_str())) {
         for (int i = 0; i < 7; i++) {
-            if (i == 2 && ImGui::TreeNode("Fishing")) { // fishing has a few more flags to it
+            if (i == 2 && ImGui::TreeNode(StringHelper::Translate("Fishing").c_str())) { // fishing has a few more flags to it
                 u8 fishSize = gSaveContext.highScores[i] & 0x7F;
                 PushStyleInput(THEME_COLOR);
                 if (ImGui::InputScalar("Child Size Record", ImGuiDataType_U8, &fishSize)) {
@@ -505,7 +505,7 @@ void DrawInfoTab() {
             if (i == 5 || i == 2) { // HS_UNK_05 is unused
                 continue;
             }
-            std::string minigameLbl = minigameHS[i];
+            std::string minigameLbl = StringHelper::Translate(minigameHS[i]);
             PushStyleInput(THEME_COLOR);
             ImGui::InputScalar(minigameLbl.c_str(), ImGuiDataType_S32, &gSaveContext.highScores[i], &one, NULL);
             PopStyleInput();

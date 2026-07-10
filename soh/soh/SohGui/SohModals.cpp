@@ -34,8 +34,9 @@ void SohModalWindow::Draw() {
 void SohModalWindow::DrawElement() {
     if (modals.size() > 0) {
         SohModal curModal = modals.at(0);
-        if (!ImGui::IsPopupOpen(curModal.title_.c_str())) {
-            ImGui::OpenPopup(curModal.title_.c_str());
+        std::string title = StringHelper::Translate(curModal.title_.c_str());
+        if (!ImGui::IsPopupOpen(title.c_str())) {
+            ImGui::OpenPopup(title.c_str());
         }
         if (closePopup) {
             ImGui::CloseCurrentPopup();
@@ -43,13 +44,13 @@ void SohModalWindow::DrawElement() {
             closePopup = false;
         }
         ImGui::SetNextWindowPos(ImGui::GetMainViewport()->GetCenter(), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-        if (ImGui::BeginPopupModal(curModal.title_.c_str(), NULL,
+        if (ImGui::BeginPopupModal(title.c_str(), NULL,
                                    ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |
                                        ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
                                        ImGuiWindowFlags_NoSavedSettings)) {
-            ImGui::Text(StringHelper::Translate("%s").c_str(), curModal.message_.c_str());
+            ImGui::Text("%s", StringHelper::Translate(curModal.message_.c_str()).c_str());
             UIWidgets::PushStyleButton(THEME_COLOR);
-            if (ImGui::Button(curModal.button1_.c_str())) {
+            if (ImGui::Button(StringHelper::Translate(curModal.button1_.c_str()).c_str())) {
                 if (curModal.button1callback_ != nullptr) {
                     curModal.button1callback_();
                 }
@@ -60,7 +61,7 @@ void SohModalWindow::DrawElement() {
             if (curModal.button2_ != "") {
                 ImGui::SameLine();
                 UIWidgets::PushStyleButton(THEME_COLOR);
-                if (ImGui::Button(curModal.button2_.c_str())) {
+                if (ImGui::Button(StringHelper::Translate(curModal.button2_.c_str()).c_str())) {
                     if (curModal.button2callback_ != nullptr) {
                         curModal.button2callback_();
                     }

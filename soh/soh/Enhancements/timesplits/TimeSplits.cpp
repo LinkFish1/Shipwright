@@ -775,7 +775,7 @@ void TimeSplitsDrawItemList(uint32_t type) {
                 ImGui::TableNextColumn();
                 ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 7.0f));
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text(StringHelper::Translate("%s").c_str(), split.splitName.c_str());
+                ImGui::Text(StringHelper::Translate("%s").c_str(), StringHelper::Translate(split.splitName).c_str());
                 ImGui::PopStyleVar(1);
             }
         }
@@ -794,7 +794,7 @@ void TimeSplitsUpdateWindowSize() {
 void TimeSplitsDrawOptionsMenu() {
     ImGui::SeparatorText(StringHelper::Translate("Window Options").c_str());
     Color_RGBA8 defaultColor = { 0, 0, 0, 255 };
-    if (CVarColorPicker("Background Color", CVAR_ENHANCEMENT("TimeSplits.WindowColor"), defaultColor, true, 0,
+    if (CVarColorPicker(StringHelper::Translate("Background Color").c_str(), CVAR_ENHANCEMENT("TimeSplits.WindowColor"), defaultColor, true, 0,
                         THEME_COLOR)) {
         windowColor = VecFromRGBA8(CVarGetColor(CVAR_ENHANCEMENT("TimeSplits.WindowColor.Value"), defaultColor));
     }
@@ -836,7 +836,7 @@ void TimeSplitsDrawOptionsMenu() {
         TimeSplitsFileManagement(SPLIT_ACTION_LOAD, keys[selectedItem].c_str(), emptyList);
     }
     ImGui::SameLine();
-    if (Button("Save List", ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
+    if (Button(StringHelper::Translate("Save List").c_str(), ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
         TimeSplitsFileManagement(SPLIT_ACTION_SAVE, keys[selectedItem].c_str(), splitList);
     }
     ImGui::SameLine();
@@ -845,7 +845,7 @@ void TimeSplitsDrawOptionsMenu() {
     }
     UIWidgets::Separator(true, true, ImGui::GetStyle().ItemSpacing.y, ImGui::GetStyle().ItemSpacing.y);
 
-    if (Button("New Attempt", ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
+    if (Button(StringHelper::Translate("New Attempt").c_str(), ButtonOptions().Color(THEME_COLOR).Size(Sizes::Inline))) {
         for (auto& data : splitList) {
             data.splitTimeStatus = SPLIT_STATUS_INACTIVE;
         }
@@ -910,11 +910,11 @@ void TimeSplitsDrawManageList() {
         ImGui::PopStyleColor(3);
         ImGui::TableNextColumn();
         ImGui::BeginTabBar("List Options");
-        if (ImGui::BeginTabItem("Equipment")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Equipment").c_str())) {
             TimeSplitsDrawItemList(SPLIT_TYPE_EQUIPMENT);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Inventory")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Inventory").c_str())) {
             TimeSplitsDrawItemList(SPLIT_TYPE_ITEM);
             ImGui::EndTabItem();
         }
@@ -930,7 +930,7 @@ void TimeSplitsDrawManageList() {
             TimeSplitsDrawItemList(SPLIT_TYPE_BOSS);
             ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Miscellaneous")) {
+        if (ImGui::BeginTabItem(StringHelper::Translate("Miscellaneous").c_str())) {
             TimeSplitsDrawItemList(SPLIT_TYPE_MISC);
             ImGui::EndTabItem();
         }

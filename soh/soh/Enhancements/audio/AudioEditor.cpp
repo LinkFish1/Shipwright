@@ -342,7 +342,7 @@ void Draw_SfxTab(const std::string& tabId, SeqType type, const std::string& tabN
             ImGui::TextColored(UIWidgets::ColorValues.at(UIWidgets::Colors::Yellow), "%s %s", ICON_FA_PLAY,
                                StringHelper::Translate(seqData.label).c_str());
         } else {
-            ImGui::Text(StringHelper::Translate("%s").c_str(), seqData.label.c_str());
+            ImGui::Text("%s", StringHelper::Translate(seqData.label).c_str());
         }
         ImGui::TableNextColumn();
         ImGui::PushItemWidth(-FLT_MIN);

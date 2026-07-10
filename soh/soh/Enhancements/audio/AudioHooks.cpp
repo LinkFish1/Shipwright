@@ -3,6 +3,7 @@
 #include "AudioCollection.h"
 #include <soh/Notification/Notification.h>
 #include <soh/SohGui/ImGuiUtils.h>
+#include <ship/utils/StringHelper.h>
 
 extern "C" {
 #include "variables.h"
@@ -28,7 +29,7 @@ void NotifySequenceName(int32_t playerIdx, int32_t seqId) {
         const char* sequenceName = AudioCollection::Instance->GetSequenceName(seqId);
         if (sequenceName != NULL) {
             Notification::Emit({
-                .message = ICON_FA_MUSIC " " + std::string(sequenceName),
+                .message = ICON_FA_MUSIC " " + StringHelper::Translate(sequenceName),
                 .remainingTime = static_cast<float>(CVarGetInteger(CVAR_AUDIO("SeqNameNotificationDuration"), 10)),
                 .mute = true,
             });
