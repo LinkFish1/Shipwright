@@ -647,8 +647,8 @@ void OTRGlobals::RunExtract(int argc, char* argv[]) {
                         if (!args.empty()) {
                             promptStep = PS_WAIT;
                             SohGui::RegisterPopup(
-                                "ROMs found", "ROMs found in application directory. Would you like to process them?",
-                                "Yes", "No", [&]() { extractStep = ES_EXTRACT_ARGS; },
+                                StringHelper::Translate("ROMs found"), StringHelper::Translate("ROMs found in application directory. Would you like to process them?"),
+                                StringHelper::Translate("Yes"), StringHelper::Translate("No"), [&]() { extractStep = ES_EXTRACT_ARGS; },
                                 [&]() { promptStep = PS_FIRST; });
                         } else {
                             promptStep = PS_FIRST;

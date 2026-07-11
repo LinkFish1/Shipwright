@@ -236,7 +236,7 @@ extern "C" void WWSky_DrawFileSelect(GraphicsContext* gfxCtx, View* view) {
     }
 
     // Gradient dome fixed to WW's night palette (the file-select screen has no time of day of its own).
-    if (CVarGetInteger(CVAR_SKYGRAD_ENABLED, 1)) {
+    if (CVarGetInteger(CVAR_SKYGRAD_ENABLED, 0)) {
         if (!sDomeBuilt) {
             BuildDome();
         }
@@ -255,7 +255,7 @@ extern "C" void WWSky_DrawFileSelect(GraphicsContext* gfxCtx, View* view) {
 // ---------------------------------------------------------------------------------------------------
 
 void RegisterWWSkyGradient() {
-    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_SKYGRAD_ENABLED, 1);
+    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_SKYGRAD_ENABLED, 0);
     COND_HOOK(OnPlayDrawSkyGradient, enabled, DrawSkyGradient);
 }
 

@@ -677,7 +677,7 @@ static void DrawClouds(void* playPtr) {
 }
 
 void RegisterWWClouds() {
-    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_CLOUDS_ENABLED, 1);
+    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_CLOUDS_ENABLED, 0);
     COND_HOOK(OnPlayDrawSkyClouds, enabled, DrawClouds);
 }
 

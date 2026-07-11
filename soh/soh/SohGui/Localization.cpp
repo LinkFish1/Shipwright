@@ -4824,7 +4824,7 @@ static std::string TranslateImpl(const std::string& text) {
         return text;
     }
     // The Interface Language combo box stores an integer key (0 = English, 1 = Simplified Chinese).
-    int32_t lang = CVarGetInteger(CVAR_SETTING("Menu.InterfaceLanguage"), 0);
+    int32_t lang = CVarGetInteger(CVAR_SETTING("Menu.InterfaceLanguage"), 1);
     if (lang == 1) {
         auto it = gChineseTable.find(text);
         if (it != gChineseTable.end()) {

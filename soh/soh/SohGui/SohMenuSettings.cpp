@@ -143,7 +143,7 @@ void SohMenu::AddMenuSettings() {
         .Options(ComboboxOptions()
                      .Tooltip("Select the display language for the menu interface.")
                      .ComboMap(interfaceLanguageOptions)
-                     .DefaultIndex(0));
+                     .DefaultIndex(1));
     AddWidget(path, "Menu Theme", WIDGET_CVAR_COMBOBOX)
         .CVar(CVAR_SETTING("Menu.Theme"))
         .RaceDisable(false)
@@ -245,7 +245,7 @@ void SohMenu::AddMenuSettings() {
                      .LabelPosition(LabelPositions::Far)
                      .ComponentAlignment(ComponentAlignments::Right)
                      .ComboMap(languages)
-                     .DefaultIndex(LANGUAGE_ENG));
+                     .DefaultIndex(LANGUAGE_CHI));
     AddWidget(path, "Accessibility", WIDGET_SEPARATOR_TEXT);
 #if defined(_WIN32) || defined(__APPLE__) || defined(ESPEAK)
     AddWidget(path, "Text to Speech", WIDGET_CVAR_CHECKBOX)

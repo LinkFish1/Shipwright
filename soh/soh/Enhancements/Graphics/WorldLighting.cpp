@@ -465,7 +465,7 @@ static void DrawWorldLights(void* playPtr) {
     f32 sizeMult = CVarGetFloat(CVAR_ENHANCEMENT("Graphics.WorldLighting.SphereSize"), kDefaultSphereSize);
     // "Use Wind Waker default movement" pins the tumble + size pulse to the authentic 1x (and the GUI
     // disables those two sliders); otherwise the sliders drive them.
-    bool wwMovement = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.WWDefaultMovement"), 1);
+    bool wwMovement = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.WWDefaultMovement"), 0);
     f32 rotSpeed =
         wwMovement ? 1.0f : CVarGetFloat(CVAR_ENHANCEMENT("Graphics.WorldLighting.RotationSpeed"), kDefaultRotationSpeed);
     f32 sizeFlicker =
@@ -488,7 +488,7 @@ static void DrawWorldLights(void* playPtr) {
     // Navi's light (Link's fairy) bounces fast, so its pool pops; let players exclude it and size it
     // separately from torches. Identify Navi via the player's navi actor (En_Elf with FAIRY_NAVI params)
     // and match its two LightInfos by address.
-    bool useNavi = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.UseNaviLight"), 1);
+    bool useNavi = CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.UseNaviLight"), 0);
     f32 naviSize = CVarGetFloat(CVAR_ENHANCEMENT("Graphics.WorldLighting.NaviSphereSize"), kDefaultNaviSphereSize);
     // Identify Navi's two lights by address so her pool can be sized/brightened separately. Her colour is
     // tinted at the source (EnElf_UpdateLights), so the pool's live colour already carries the Navi tint.

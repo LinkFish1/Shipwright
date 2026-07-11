@@ -385,7 +385,7 @@ void WWNightSky_DrawFileSelectStars(void* gfxCtxV, void* viewV) {
 
 void RegisterWWNightSky() {
     // Only hook while enabled, so a disabled feature adds no per-frame work. Off by default — opt-in.
-    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_NIGHTSKY_ENABLED, 1);
+    bool enabled = CVarGetInteger(CVAR_WWSKY_ENABLED, 0) && CVarGetInteger(CVAR_NIGHTSKY_ENABLED, 0);
     COND_HOOK(OnPlayDrawSky, enabled, DrawNightSky);
 }
 

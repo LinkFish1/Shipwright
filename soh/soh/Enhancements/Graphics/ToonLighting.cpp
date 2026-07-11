@@ -327,7 +327,7 @@ static bool ToonClosestPointLight(PlayState* play, Actor* actor, f32 pointRange,
     // the light-casting feature uses (player->naviActor, an En_Elf with FAIRY_NAVI params).
     LightInfo* naviGlow = NULL;
     LightInfo* naviNoGlow = NULL;
-    if (!CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.UseNaviLight"), 1)) {
+    if (!CVarGetInteger(CVAR_ENHANCEMENT("Graphics.ToonLighting.UseNaviLight"), 0)) {
         Player* player = GET_PLAYER(play);
         if ((player != NULL) && (player->naviActor != NULL) && (player->naviActor->id == ACTOR_EN_ELF) &&
             (player->naviActor->params == FAIRY_NAVI)) {

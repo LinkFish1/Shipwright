@@ -79,7 +79,7 @@ std::string GetParameritizedText(std::string key, TextBank bank, const char* arg
 }
 
 const char* GetLanguageCode() {
-    switch (CVarGetInteger(CVAR_SETTING("Languages"), 0)) {
+    switch (CVarGetInteger(CVAR_SETTING("Languages"), LANGUAGE_CHI)) {
         case LANGUAGE_FRA:
             return "fr-FR";
         case LANGUAGE_GER:
@@ -1110,7 +1110,7 @@ void RegisterOnDialogMessageHook() {
 
 void InitTTSBank() {
     std::string languageSuffix = "_eng.json";
-    switch (CVarGetInteger(CVAR_SETTING("Languages"), 0)) {
+    switch (CVarGetInteger(CVAR_SETTING("Languages"), LANGUAGE_CHI)) {
         case LANGUAGE_FRA:
             languageSuffix = "_fra.json";
             break;
@@ -1150,7 +1150,7 @@ void RegisterOnSetGameLanguageHook() {
 void RegisterOnSetDoAction() {
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnSetDoAction>([](uint16_t action) {
         if (CVarGetInteger(CVAR_SETTING("A11yTTS"), 0)) {
-            uint8_t language = CVarGetInteger(CVAR_SETTING("Languages"), 0);
+            uint8_t language = CVarGetInteger(CVAR_SETTING("Languages"), LANGUAGE_CHI);
             const char* text;
             switch (action) {
                 case DO_ACTION_CHECK:

@@ -106,7 +106,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.ToonLighting.UseNaviLight"))
         .RaceDisable(false)
         .PreFunc(hideUnlessCelEnabled)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Let Navi count as a candidate key light for cel shading. Navi blinks on/off and orbits Link, so "
             "leaving this on makes the lighting on nearby objects shift around with her. Turn it off to ignore "
             "Navi and keep the key light steady (the sun/moon or a torch wins instead).").c_str()));
@@ -147,7 +147,7 @@ void SohMenu::AddMenuWindWakerStyle() {
     // Navi's pool sliders need both Light Casting and Navi Light Casting on.
     auto hideUnlessNaviCast = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.Enabled"), 0) ||
-                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.UseNaviLight"), 1);
+                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.UseNaviLight"), 0);
     };
     // Wild-fairy pool sliders need Light Casting and the Wild Fairies toggle on.
     auto hideUnlessWildFairyCast = [](WidgetInfo& info) {
@@ -157,13 +157,13 @@ void SohMenu::AddMenuWindWakerStyle() {
     // The Deku stick's cast-size slider needs Light Casting and the Deku Stick toggle on.
     auto hideUnlessDekuStickCast = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.Enabled"), 0) ||
-                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.DekuStickLight"), 1);
+                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.DekuStickLight"), 0);
     };
     // Rotation Speed / Size Flicker sit with the cast-pool controls, but hide entirely while "Use Wind Waker
     // default movement" is on (the renderer pins them to the authentic 1x).
     auto hideUnlessCustomMovement = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.Enabled"), 0) ||
-                        CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.WWDefaultMovement"), 1);
+                        CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WorldLighting.WWDefaultMovement"), 0);
     };
     path.sidebarName = "Lights";
     AddSidebarEntry("Wind Waker Style", "Lights", 2); // Light Casting in column 1, Misc in column 2
@@ -268,7 +268,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldLighting.WWDefaultMovement"))
         .RaceDisable(false)
         .PreFunc(hideUnlessLightCastEnabled)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Pins the pool's tumble and size pulse to the authentic Wind Waker rates. Turn off to reveal and "
             "set Rotation Speed and Size Flicker yourself.").c_str()));
     AddWidget(path, "Rotation Speed", WIDGET_CVAR_SLIDER_FLOAT)
@@ -307,7 +307,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldLighting.UseNaviLight"))
         .RaceDisable(false)
         .PreFunc(hideUnlessLightCastEnabled)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             "Also cast a pool from Link's fairy (Navi). Navi darts around quickly, so her pool moves a lot."));
     addSliderWithReset("Navi Cast Size", CVAR_ENHANCEMENT("Graphics.WorldLighting.NaviSphereSize"), 0.1f, 4.0f,
                        0.75f, "%.2fx", false, hideUnlessNaviCast,
@@ -385,7 +385,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldShadows.SuppressVanillaShadows"))
         .RaceDisable(false)
         .PreFunc(hideUnlessShadowsEnabled)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Hide the original game's actor shadows (Link's feet, the NPC/enemy circles, the horse shadow, "
             "the sign and snake-statue texture shadows) so only the new shape shadows show. Turn off to draw "
             "both.").c_str()));
@@ -393,7 +393,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WorldShadows.ReceiverActors"))
         .RaceDisable(false)
         .PreFunc(hideUnlessShadowsEnabled)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             "Let shadows fall on a few \"floors\" that the game spawns as actors instead of room geometry — the "
             "castle-town drawbridge, the Gerudo Valley bridge, and some dungeon platforms. They are drawn just "
             "before the shadows so the shadows land on them like normal ground. Off = those surfaces show no "
@@ -492,11 +492,11 @@ void SohMenu::AddMenuWindWakerStyle() {
     };
     auto hideUnlessSkyGradient = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSky.Enabled"), 0) ||
-                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSkyGradient.Enabled"), 1);
+                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSkyGradient.Enabled"), 0);
     };
     auto hideUnlessSkyClouds = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSky.Enabled"), 0) ||
-                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWClouds.Enabled"), 1);
+                        !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWClouds.Enabled"), 0);
     };
     auto hideUnlessSkyStars = [](WidgetInfo& info) {
         info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSky.Enabled"), 0) ||
@@ -543,7 +543,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WWSkyGradient.Enabled"))
         .RaceDisable(false)
         .PreFunc(hideUnlessSky)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Replaces the sky texture with a smooth Wind Waker-style gradient, fading from a hazy horizon "
             "up to a deeper sky. The colours shift with the time of day through dawn, dusk and night.").c_str()));
     AddWidget(path, "Gradient Brightness", WIDGET_CVAR_SLIDER_FLOAT)
@@ -563,7 +563,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WWClouds.Enabled"))
         .RaceDisable(false)
         .PreFunc(hideUnlessSky)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Drifting Wind Waker-style puffy clouds across the sky, plus the wispy cloud band around the "
             "horizon, both riding the wind.").c_str()));
     AddWidget(path, "Opacity", WIDGET_CVAR_SLIDER_FLOAT)
@@ -604,7 +604,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WWNightSky.Enabled"))
         .RaceDisable(false)
         .PreFunc(hideUnlessSky)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("A Wind Waker-style twinkling starfield over the night sky: a fixed bright constellation plus "
             "hundreds of small stars that shimmer, fading in at dusk and out at dawn.").c_str()));
     AddWidget(path, "Star Count", WIDGET_CVAR_SLIDER_INT)
@@ -646,7 +646,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .CVar(CVAR_ENHANCEMENT("Graphics.WWWindWisps.Enabled"))
         .RaceDisable(false)
         .PreFunc(hideUnlessSky)
-        .Options(CheckboxOptions().DefaultValue(true).Tooltip(
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             StringHelper::Translate("Wind Waker's white wind streaks curling through the sky — occasionally pulling a full "
             "loop-de-loop. Their number follows the wind's strength.").c_str()));
     AddWidget(path, "Wisp Amount", WIDGET_CVAR_SLIDER_FLOAT)
@@ -654,7 +654,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSky.Enabled"), 0) ||
-                            !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWWindWisps.Enabled"), 1);
+                            !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWWindWisps.Enabled"), 0);
         })
         .Options(FloatSliderOptions()
                      .Tooltip(StringHelper::Translate("How many wisps ride the wind (their number also rises and falls with the "
@@ -668,7 +668,7 @@ void SohMenu::AddMenuWindWakerStyle() {
         .RaceDisable(false)
         .PreFunc([](WidgetInfo& info) {
             info.isHidden = !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWSky.Enabled"), 0) ||
-                            !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWWindWisps.Enabled"), 1);
+                            !CVarGetInteger(CVAR_ENHANCEMENT("Graphics.WWWindWisps.Enabled"), 0);
         })
         .Options(FloatSliderOptions()
                      .Tooltip(StringHelper::Translate("How fast the wisps fly. 1x is Wind Waker's own speed. The whole flight "
