@@ -2367,6 +2367,8 @@ static const std::unordered_map<std::string, std::string> gChineseTable = {
     { "Extraction Crashed", "提取崩溃" },
     { "Extractor assets not found", "未找到提取器资源" },
     { "Confirm Re-extract", "确认重新提取" },
+    { "Archive for current ROM, oot.o2r, already exists.\nExtract again?", "当前 ROM 的归档 oot.o2r 已存在。\n重新提取？" },
+    { "Archive for current ROM, oot-mq.o2r, already exists.\nExtract again?", "当前 ROM 的归档 oot-mq.o2r 已存在。\n重新提取？" },
     { "Menu Moved", "菜单已移动" },
     { "Loading old file", "正在载入旧文件" },
     { "Error loading save file", "载入存档文件出错" },
